@@ -229,7 +229,7 @@
   }
 
   .ticket-footer{
-    display:flex; gap:12px; margin-top:8px;
+    display:flex; gap:12px; margin-top:8px; flex-wrap:wrap;
   }
   .link-btn{
     background:none; border:none; padding:0; cursor:pointer;
@@ -355,6 +355,7 @@
     border:none; padding:10px; font-size:13.5px; cursor:pointer; text-decoration:underline;
     font-family:'Libre Franklin', sans-serif;
   }
+  .hp-wrap{position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;}
 
   /* ---------- Import ---------- */
   .drop-zone{
@@ -469,12 +470,12 @@
 
     <div class="field" id="f_student">
       <label for="in_student">Student's name</label>
-      <input type="text" id="in_student" placeholder="e.g. Beth Elliot">
+      <input type="text" id="in_student" placeholder="e.g. Beth Elliot" maxlength="80">
       <div class="field-err">Add the student's name so people know who to cheer for.</div>
     </div>
     <div class="field" id="f_event">
       <label for="in_event">Event name</label>
-      <input type="text" id="in_event" placeholder="e.g. Varsity Soccer vs. Wayne Memorial">
+      <input type="text" id="in_event" placeholder="e.g. Varsity Soccer vs. Wayne Memorial" maxlength="140">
       <div class="field-err">Give the event a name.</div>
     </div>
     <div class="field" id="f_level">
@@ -498,18 +499,22 @@
     </div>
     <div class="field" id="f_location">
       <label for="in_location">Location</label>
-      <input type="text" id="in_location" placeholder="e.g. Canton High School">
+      <input type="text" id="in_location" placeholder="e.g. Canton High School" maxlength="140">
     </div>
     <div class="field" id="f_link">
       <label for="in_link">Link to event details or tickets</label>
-      <input type="text" id="in_link" placeholder="cbcjoy.org/">
+      <input type="text" id="in_link" placeholder="cbcjoy.org/" maxlength="300">
     </div>
     <div class="field" id="f_notes">
       <label for="in_notes">Notes</label>
-      <textarea id="in_notes" placeholder="Anything else people should know — parking, arrival time, cost…"></textarea>
+      <textarea id="in_notes" placeholder="Anything else people should know — parking, arrival time, cost…" maxlength="600"></textarea>
     </div>
 
     <button class="btn-primary" id="saveEventBtn" type="button">Add to the board</button>
+    <div class="hp-wrap" aria-hidden="true">
+      <label for="hp_field">Leave this field blank</label>
+      <input type="text" id="hp_field" name="website" tabindex="-1" autocomplete="off">
+    </div>
     <button class="btn-secondary" id="cancelEventBtn" type="button">Cancel</button>
   </div>
 </div>
@@ -655,6 +660,86 @@ function formatTime12(t){
   return `${h12}:${pad(m)}${ampm}`;
 }
 
+/* =========================================================
+   Calendar export (.ics)
+   ========================================================= */
+function icsEscape(str){
+  if(!str) return '';
+  return String(str).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+}
+
+function icsDateRange(dateStr, timeStr){
+  const [y,m,d] = dateStr.split('-').map(Number);
+  if(timeStr){
+    const [hh,mm] = timeStr.split(':').map(Number);
+    const start = new Date(y, m-1, d, hh, mm);
+    const end = new Date(start.getTime() + 2*60*60*1000); // default 2-hour block
+    const fmt = dt => `${dt.getFullYear()}${pad(dt.getMonth()+1)}${pad(dt.getDate())}T${pad(dt.getHours())}${pad(dt.getMinutes())}00`;
+    return { allDay:false, dtstart: fmt(start), dtend: fmt(end) };
+  }
+  const start = new Date(y, m-1, d);
+  const end = new Date(start.getTime() + 24*60*60*1000);
+  const fmtDate = dt => `${dt.getFullYear()}${pad(dt.getMonth()+1)}${pad(dt.getDate())}`;
+  return { allDay:true, dtstart: fmtDate(start), dtend: fmtDate(end) };
+}
+
+function eventToVEVENT(e){
+  const dt = icsDateRange(e.dateStr, e.time);
+  const uid = `${e.id || uuid()}@cbcjoy-betheresite`;
+  const now = new Date();
+  const stamp = `${now.getUTCFullYear()}${pad(now.getUTCMonth()+1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}${pad(now.getUTCSeconds())}Z`;
+  const lines = ['BEGIN:VEVENT', `UID:${uid}`, `DTSTAMP:${stamp}`];
+  if(dt.allDay){
+    lines.push(`DTSTART;VALUE=DATE:${dt.dtstart}`);
+    lines.push(`DTEND;VALUE=DATE:${dt.dtend}`);
+  } else {
+    lines.push(`DTSTART:${dt.dtstart}`);
+    lines.push(`DTEND:${dt.dtend}`);
+  }
+  const summary = e.student ? `${e.student} — ${e.eventName}` : e.eventName;
+  lines.push(`SUMMARY:${icsEscape(summary)}`);
+  if(e.location) lines.push(`LOCATION:${icsEscape(e.location)}`);
+  const descBits = [];
+  if(e.notes) descBits.push(e.notes);
+  if(e.link) descBits.push(e.link);
+  if(descBits.length) lines.push(`DESCRIPTION:${icsEscape(descBits.join(' — '))}`);
+  if(e.link) lines.push(`URL:${icsEscape(e.link)}`);
+  lines.push('END:VEVENT');
+  return lines.join('\r\n');
+}
+
+function buildICS(events){
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Calvary Students//Be There//EN',
+    'CALSCALE:GREGORIAN',
+    'X-WR-CALNAME:Calvary Students Be There',
+    'X-WR-TIMEZONE:America/Detroit',
+    events.map(eventToVEVENT).join('\r\n'),
+    'END:VCALENDAR'
+  ].join('\r\n');
+}
+
+function slugify(str){
+  return (str||'event').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'').slice(0,60) || 'event';
+}
+
+function downloadICS(filename, icsText){
+  const blob = new Blob([icsText], {type:'text/calendar;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+}
+
+function allUpcomingEvents(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  return allEvents.filter(e => parseDateStr(e.dateStr) >= today)
+    .sort((a,b) => (a.dateStr+(a.time||'99:99')).localeCompare(b.dateStr+(b.time||'99:99')));
+}
+
 const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
 const MON = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 const MON_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -739,11 +824,15 @@ function renderTicket(e){
       </div>
       ${metaBits.length ? `<div class="meta-row">${metaBits.join('')}</div>` : ''}
       ${e.notes ? `<div class="notes">${escapeHtml(e.notes)}</div>` : ''}
-      ${canEdit ? `
-        <div class="ticket-footer">
+      <div class="ticket-footer">
+        <button class="link-btn" data-id="${e.id}" data-action="addcal">📅 Add to my calendar</button>
+        <button class="link-btn" data-id="${e.id}" data-action="share">↗ Share</button>
+        ${canEdit ? `
           <button class="link-btn" data-id="${e.id}" data-action="edit">Edit</button>
+          <button class="link-btn" data-id="${e.id}" data-action="duplicate">Duplicate</button>
           <button class="link-btn danger" data-id="${e.id}" data-action="delete">Remove</button>
-        </div>` : ''}
+        ` : ''}
+      </div>
     </div>
   `;
   return el;
@@ -786,10 +875,34 @@ document.addEventListener('click', e => {
 
   if(action === 'edit'){
     openEventSheet(ev);
+  } else if(action === 'duplicate'){
+    openEventSheet(ev, { duplicate:true });
   } else if(action === 'delete'){
     if(confirm(`Remove "${ev.eventName}" from the board?`)){
       eventsRef.doc(id).delete();
       showToast('Removed from the board');
+    }
+  } else if(action === 'addcal'){
+    downloadICS(`${slugify(ev.eventName)}.ics`, buildICS([ev]));
+    showToast('Downloaded — open the file to add it to your calendar');
+  } else if(action === 'share'){
+    const bits = [];
+    if(ev.student) bits.push(ev.student);
+    bits.push(ev.eventName);
+    let when = dateHeadingLabel(ev.dateStr);
+    if(ev.time) when += ` at ${formatTime12(ev.time)}`;
+    bits.push(when);
+    if(ev.location) bits.push(ev.location);
+    if(ev.link) bits.push(ev.link);
+    const text = bits.join(' — ');
+    if(navigator.share){
+      navigator.share({ title: ev.eventName, text }).catch(()=>{});
+    } else if(navigator.clipboard){
+      navigator.clipboard.writeText(text)
+        .then(()=>showToast('Copied — paste it anywhere'))
+        .catch(()=>showToast("Couldn't copy — try again"));
+    } else {
+      showToast("Sharing isn't supported on this browser");
     }
   }
 });
@@ -882,10 +995,12 @@ $('#searchInput').addEventListener('input', () => { if(currentView==='list') ren
 /* =========================================================
    Add / Edit sheet
    ========================================================= */
-function openEventSheet(ev){
-  editingId = ev ? ev.id : null;
-  $('#eventSheetTitle').textContent = ev ? 'Edit event' : 'Add an event';
-  $('#saveEventBtn').textContent = ev ? 'Save changes' : 'Add to the board';
+function openEventSheet(ev, opts){
+  opts = opts || {};
+  const isDup = !!opts.duplicate;
+  editingId = (ev && !isDup) ? ev.id : null;
+  $('#eventSheetTitle').textContent = isDup ? 'Duplicate event' : (editingId ? 'Edit event' : 'Add an event');
+  $('#saveEventBtn').textContent = editingId ? 'Save changes' : 'Add to the board';
   $('#in_student').value = ev ? ev.student : '';
   $('#in_event').value = ev ? ev.eventName : '';
   $('#in_date').value = ev ? ev.dateStr : '';
@@ -902,6 +1017,7 @@ function openEventSheet(ev){
   }
   $('#f_level .level-field-err').classList.remove('show');
   $$('.field').forEach(f => f.classList.remove('err'));
+  $('#hp_field').value = '';
   $('#eventScrim').classList.add('open');
   setTimeout(()=>$('#in_student').focus(), 50);
 }
@@ -915,7 +1031,15 @@ $('#cancelEventBtn').onclick = closeEventSheet;
 $('#closeEventBtn').onclick = closeEventSheet;
 $('#eventScrim').addEventListener('click', e => { if(e.target.id==='eventScrim') closeEventSheet(); });
 
+let isSavingEvent = false;
 $('#saveEventBtn').onclick = () => {
+  if(isSavingEvent) return;
+  if($('#hp_field').value.trim()){
+    // honeypot tripped — silently drop, no error shown to whatever filled it
+    closeEventSheet();
+    showToast('Added to the board 🎟️');
+    return;
+  }
   const student = $('#in_student').value.trim();
   const eventName = $('#in_event').value.trim();
   const dateStr = $('#in_date').value;
@@ -935,12 +1059,19 @@ $('#saveEventBtn').onclick = () => {
     notes: $('#in_notes').value.trim(),
   };
 
+  isSavingEvent = true;
+  $('#saveEventBtn').disabled = true;
+  const finish = () => {
+    isSavingEvent = false;
+    $('#saveEventBtn').disabled = false;
+  };
+
   if(editingId){
-    eventsRef.doc(editingId).update(payload).then(()=>showToast('Changes saved'));
+    eventsRef.doc(editingId).update(payload).then(()=>showToast('Changes saved')).finally(finish);
   } else {
     payload.ownerId = deviceId;
     payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-    eventsRef.add(payload).then(()=>showToast('Added to the board 🎟️'));
+    eventsRef.add(payload).then(()=>showToast('Added to the board 🎟️')).finally(finish);
   }
   closeEventSheet();
 };
