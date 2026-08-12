@@ -220,7 +220,11 @@
   }
   .meta-row span{display:inline-flex; align-items:center; gap:4px;}
   .meta-row .mono{font-family:'Space Mono', monospace;}
-  .event-link{color:var(--gold-solid); text-decoration:underline; text-underline-offset:2px; font-weight:600;}
+  .icon{width:13px; height:13px; flex-shrink:0;}
+  .event-link{
+    color:var(--gold-solid); text-decoration:underline; text-underline-offset:2px; font-weight:600;
+    display:inline-flex; align-items:center; gap:4px;
+  }
   .event-link:hover{color:var(--gold);}
   .notes{
     font-size:13px; color:var(--ink-soft);
@@ -235,6 +239,7 @@
     background:none; border:none; padding:0; cursor:pointer;
     font-family:'Libre Franklin', sans-serif; font-weight:600; font-size:12.5px;
     color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px;
+    display:inline-flex; align-items:center; gap:4px;
   }
   .link-btn.danger{color:var(--crimson);}
 
@@ -797,6 +802,17 @@ function renderList(){
   });
 }
 
+const ICONS = {
+  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.2v5l3.3 2"/>',
+  pin: '<path d="M12 21s7-7.2 7-12.5A7 7 0 0 0 5 8.5C5 13.8 12 21 12 21z"/><circle cx="12" cy="8.5" r="2.3"/>',
+  link: '<path d="M9.3 14.7l5.4-5.4"/><path d="M7.8 12.6a3.6 3.6 0 0 1 0-5.1l2-2a3.6 3.6 0 1 1 5.1 5.1l-.9.9"/><path d="M16.2 11.4a3.6 3.6 0 0 1 0 5.1l-2 2a3.6 3.6 0 1 1-5.1-5.1l.9-.9"/>',
+  calendar: '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M16 3v4M8 3v4M3.5 9.7h17"/>',
+  share: '<circle cx="18" cy="5.5" r="2.1"/><circle cx="6" cy="12" r="2.1"/><circle cx="18" cy="18.5" r="2.1"/><path d="M8 10.8l7.7-4.2M8 13.2l7.7 4.2"/>'
+};
+function icon(name){
+  return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
+}
+
 function renderTicket(e){
   const d = parseDateStr(e.dateStr);
   const canEdit = isAdmin || e.ownerId === deviceId;
@@ -804,9 +820,9 @@ function renderTicket(e){
   el.className = 'ticket';
 
   const metaBits = [];
-  if(e.time) metaBits.push(`<span class="mono">🕓 ${formatTime12(e.time)}</span>`);
-  if(e.location) metaBits.push(`<span>📍 ${escapeHtml(e.location)}</span>`);
-  if(e.link) metaBits.push(`<span><a class="event-link" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">🔗 Details / tickets</a></span>`);
+  if(e.time) metaBits.push(`<span class="mono">${icon('clock')} ${formatTime12(e.time)}</span>`);
+  if(e.location) metaBits.push(`<span>${icon('pin')} ${escapeHtml(e.location)}</span>`);
+  if(e.link) metaBits.push(`<span><a class="event-link" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">${icon('link')} Details / tickets</a></span>`);
 
   el.innerHTML = `
     <div class="ticket-date${e.level==='ms' ? ' level-ms' : ''}">
@@ -825,8 +841,8 @@ function renderTicket(e){
       ${metaBits.length ? `<div class="meta-row">${metaBits.join('')}</div>` : ''}
       ${e.notes ? `<div class="notes">${escapeHtml(e.notes)}</div>` : ''}
       <div class="ticket-footer">
-        <button class="link-btn" data-id="${e.id}" data-action="addcal">📅 Add to my calendar</button>
-        <button class="link-btn" data-id="${e.id}" data-action="share">↗ Share</button>
+        <button class="link-btn" data-id="${e.id}" data-action="addcal">${icon('calendar')} Add to my calendar</button>
+        <button class="link-btn" data-id="${e.id}" data-action="share">${icon('share')} Share</button>
         ${canEdit ? `
           <button class="link-btn" data-id="${e.id}" data-action="edit">Edit</button>
           <button class="link-btn" data-id="${e.id}" data-action="duplicate">Duplicate</button>
