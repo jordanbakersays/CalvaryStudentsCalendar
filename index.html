@@ -85,6 +85,15 @@
     line-height:1.5;
     margin:0;
   }
+  header .verse{
+    font-size:12.5px;
+    font-style:italic;
+    color:var(--ink-soft);
+    max-width:44ch;
+    line-height:1.5;
+    margin:8px 0 0;
+    opacity:0.8;
+  }
   .header-actions{
     display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;
     justify-content:center;
@@ -162,6 +171,7 @@
     padding:10px 4px;
     position:relative;
   }
+  .ticket-date.level-ms{background:var(--gold); color:#000;}
   .ticket-date .dow{font-size:11px; letter-spacing:0.08em; opacity:0.85; text-transform:uppercase;}
   .ticket-date .day{font-size:26px; font-weight:700; line-height:1.1;}
   .ticket-date .mon{font-size:11px; letter-spacing:0.08em; text-transform:uppercase; opacity:0.85;}
@@ -291,6 +301,26 @@
   .field.err input, .field.err textarea{border-color:var(--crimson);}
   .field.err .field-err{display:block;}
 
+  .level-toggle{
+    display:flex; gap:8px;
+  }
+  .level-btn{
+    flex:1;
+    font-family:'Libre Franklin', sans-serif; font-weight:700; font-size:14px;
+    padding:12px 10px; border-radius:10px; border:1.5px solid var(--rule);
+    background:var(--white); color:var(--ink-soft);
+    cursor:pointer; text-align:center;
+    transition:border-color .15s, color .15s, background .15s;
+  }
+  .level-btn .dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle;}
+  .level-btn[data-level="hs"] .dot{background:var(--crimson);}
+  .level-btn[data-level="ms"] .dot{background:var(--gold);}
+  .level-btn.selected{color:var(--ink); border-color:currentColor;}
+  .level-btn[data-level="hs"].selected{border-color:var(--crimson); background:rgba(232,67,63,0.1);}
+  .level-btn[data-level="ms"].selected{border-color:var(--gold); background:rgba(242,194,48,0.1);}
+  .level-field-err{color:var(--crimson); font-size:12.5px; margin-top:5px; display:none;}
+  .level-field-err.show{display:block;}
+
   .btn-primary{
     width:100%; background:var(--gold); color:#000;
     border:none; padding:14px; border-radius:10px; font-weight:700; font-size:15.5px;
@@ -373,7 +403,8 @@
   <button class="admin-link" id="adminToggle" type="button">Admin</button>
   <p class="eyebrow">Calvary Students</p>
   <h1 class="wordmark">What's Coming Up</h1>
-  <p class="sub">Games, plays, recitals — one board, so leaders and students can show up for each other.</p>
+  <p class="sub">Games, plays, recitals, and more, all in one place. Let's support each other!</p>
+  <p class="verse">"By this everyone will know that you are my disciples, if you love one another."</p>
   <div class="header-actions">
     <button class="pill-btn" id="addEventTopBtn" type="button">+ Add event</button>
     <button class="pill-btn" id="importBtn" type="button">⇪ Import a season</button>
@@ -420,6 +451,14 @@
       <input type="text" id="in_event" placeholder="e.g. Varsity Soccer vs. Wayne Memorial">
       <div class="field-err">Give the event a name.</div>
     </div>
+    <div class="field" id="f_level">
+      <label>High school or middle school?</label>
+      <div class="level-toggle" id="levelToggle">
+        <button type="button" class="level-btn" data-level="hs"><span class="dot"></span>High School</button>
+        <button type="button" class="level-btn" data-level="ms"><span class="dot"></span>Middle School</button>
+      </div>
+      <div class="level-field-err">Pick one so the board can tell them apart.</div>
+    </div>
     <div class="field-row">
       <div class="field" id="f_date">
         <label for="in_date">Date</label>
@@ -456,6 +495,14 @@
       <div class="field">
         <label for="in_bulk_student">Whose season is this?</label>
         <input type="text" id="in_bulk_student" placeholder="e.g. Maya Thompson">
+      </div>
+      <div class="field" id="f_bulk_level">
+        <label>High school or middle school?</label>
+        <div class="level-toggle" id="bulkLevelToggle">
+          <button type="button" class="level-btn" data-level="hs"><span class="dot"></span>High School</button>
+          <button type="button" class="level-btn" data-level="ms"><span class="dot"></span>Middle School</button>
+        </div>
+        <div class="level-field-err">Pick one — it applies to every event in this file.</div>
       </div>
       <div class="drop-zone" id="dropZone" tabindex="0">
         <span class="ic">📄</span>
@@ -635,7 +682,7 @@ function renderTicket(e){
   if(e.location) metaBits.push(`<span>📍 ${escapeHtml(e.location)}</span>`);
 
   el.innerHTML = `
-    <div class="ticket-date">
+    <div class="ticket-date${e.level==='ms' ? ' level-ms' : ''}">
       <span class="dow">${DOW[d.getDay()]}</span>
       <span class="day">${d.getDate()}</span>
       <span class="mon">${MON[d.getMonth()]}</span>
@@ -663,6 +710,22 @@ function renderTicket(e){
 function escapeHtml(str){
   if(!str) return '';
   return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+document.addEventListener('click', e => {
+  const lbtn = e.target.closest('.level-btn');
+  if(lbtn){
+    const group = lbtn.closest('.level-toggle');
+    group.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+    lbtn.classList.add('selected');
+    group.dataset.selected = lbtn.dataset.level;
+    const errEl = group.parentElement.querySelector('.level-field-err');
+    if(errEl) errEl.classList.remove('show');
+  }
+});
+
+function levelLabel(level){
+  return level === 'ms' ? 'Middle School' : 'High School';
 }
 
 document.addEventListener('click', e => {
@@ -781,6 +844,14 @@ function openEventSheet(ev){
   $('#in_time').value = ev ? (ev.time||'') : '';
   $('#in_location').value = ev ? (ev.location||'') : '';
   $('#in_notes').value = ev ? (ev.notes||'') : '';
+  const levelGroup = $('#levelToggle');
+  levelGroup.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+  levelGroup.dataset.selected = '';
+  if(ev && ev.level){
+    const match = levelGroup.querySelector(`[data-level="${ev.level}"]`);
+    if(match){ match.classList.add('selected'); levelGroup.dataset.selected = ev.level; }
+  }
+  $('#f_level .level-field-err').classList.remove('show');
   $$('.field').forEach(f => f.classList.remove('err'));
   $('#eventScrim').classList.add('open');
   setTimeout(()=>$('#in_student').focus(), 50);
@@ -798,14 +869,16 @@ $('#saveEventBtn').onclick = () => {
   const student = $('#in_student').value.trim();
   const eventName = $('#in_event').value.trim();
   const dateStr = $('#in_date').value;
+  const level = $('#levelToggle').dataset.selected;
   let ok = true;
   $('#f_student').classList.toggle('err', !student); if(!student) ok=false;
   $('#f_event').classList.toggle('err', !eventName); if(!eventName) ok=false;
   $('#f_date').classList.toggle('err', !dateStr); if(!dateStr) ok=false;
+  $('#f_level .level-field-err').classList.toggle('show', !level); if(!level) ok=false;
   if(!ok) return;
 
   const payload = {
-    student, eventName, dateStr,
+    student, eventName, dateStr, level,
     time: $('#in_time').value || '',
     location: $('#in_location').value.trim(),
     notes: $('#in_notes').value.trim(),
@@ -850,6 +923,10 @@ $('#importBtn').onclick = () => {
   $('#importStep2').style.display = 'none';
   $('#in_bulk_student').value = '';
   $('#fileInput').value = '';
+  const bulkGroup = $('#bulkLevelToggle');
+  bulkGroup.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+  bulkGroup.dataset.selected = '';
+  $('#f_bulk_level .level-field-err').classList.remove('show');
   $('#importScrim').classList.add('open');
 };
 $('#cancelImportBtn').onclick = () => $('#importScrim').classList.remove('open');
@@ -874,6 +951,12 @@ $('#fileInput').addEventListener('change', e => {
 });
 
 function handleImportFile(file){
+  const bulkLevel = $('#bulkLevelToggle').dataset.selected;
+  if(!bulkLevel){
+    $('#f_bulk_level .level-field-err').classList.add('show');
+    showToast('Pick High School or Middle School first');
+    return;
+  }
   const reader = new FileReader();
   reader.onload = () => {
     const text = reader.result;
@@ -881,9 +964,9 @@ function handleImportFile(file){
     let rows = [];
     try{
       if(file.name.toLowerCase().endsWith('.ics') || text.includes('BEGIN:VCALENDAR')){
-        rows = parseICS(text, bulkStudent);
+        rows = parseICS(text, bulkStudent, bulkLevel);
       } else {
-        rows = parseCSV(text, bulkStudent);
+        rows = parseCSV(text, bulkStudent, bulkLevel);
       }
     }catch(err){
       console.error(err);
@@ -900,7 +983,7 @@ function handleImportFile(file){
   reader.readAsText(file);
 }
 
-function parseICS(text, bulkStudent){
+function parseICS(text, bulkStudent, bulkLevel){
   const lines = text.split(/\r\n|\n|\r/);
   const events = [];
   let cur = null;
@@ -927,6 +1010,7 @@ function parseICS(text, bulkStudent){
     time: e.time || '',
     location: e.location || '',
     notes: e.description || '',
+    level: bulkLevel,
     include: !!e.dateStr,
   })).filter(e => e.dateStr);
 }
@@ -940,7 +1024,7 @@ function parseICSDate(val){
   return { dateStr, time };
 }
 
-function parseCSV(text, bulkStudent){
+function parseCSV(text, bulkStudent, bulkLevel){
   const lines = text.split(/\r\n|\n|\r/).filter(l => l.trim().length);
   if(!lines.length) return [];
   const splitLine = l => {
@@ -974,6 +1058,7 @@ function parseCSV(text, bulkStudent){
       time: iTime>=0 ? normalizeCSVTime(cols[iTime]) : '',
       location: iLoc>=0 ? cols[iLoc] : '',
       notes: iNotes>=0 ? cols[iNotes] : '',
+      level: bulkLevel,
       include: true,
     };
   }).filter(r => r.eventName && r.dateStr);
@@ -1027,7 +1112,7 @@ function renderPreviewList(){
       <input type="checkbox" ${row.include?'checked':''} data-i="${i}" data-role="inc">
       <div class="pr-main">
         <div class="pr-title">${escapeHtml(row.eventName)}</div>
-        <div class="pr-meta">${dateLabel}${row.time?' · '+formatTime12(row.time):''}${row.location?' · '+escapeHtml(row.location):''}</div>
+        <div class="pr-meta">${dateLabel}${row.time?' · '+formatTime12(row.time):''}${row.location?' · '+escapeHtml(row.location):''} · ${levelLabel(row.level)}</div>
       </div>
     `;
     container.appendChild(el);
@@ -1055,6 +1140,7 @@ $('#confirmImportBtn').onclick = async () => {
         time: row.time || '',
         location: row.location || '',
         notes: row.notes || '',
+        level: row.level,
         ownerId: deviceId,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
