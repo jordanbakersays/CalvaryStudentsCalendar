@@ -271,9 +271,10 @@
   .sheet{
     background:var(--paper); width:100%; max-width:520px;
     border-radius:20px 20px 0 0;
-    max-height:92vh; overflow-y:auto;
+    max-height:92vh; overflow-y:auto; overflow-x:hidden;
     padding:18px 18px 24px;
     animation:slideup .22s ease-out;
+    box-sizing:border-box;
   }
   @media (min-width:640px){ .sheet{border-radius:16px; margin-bottom:20px;} }
   @keyframes slideup{ from{transform:translateY(16px); opacity:0;} to{transform:translateY(0); opacity:1;} }
@@ -297,6 +298,10 @@
     padding:11px 12px; border-radius:10px; border:1.5px solid var(--rule);
     background:var(--white); color:var(--ink);
     color-scheme: dark;
+  }
+  .field input[type=date], .field input[type=time]{
+    min-width:0; max-width:100%;
+    -webkit-appearance:none; appearance:none;
   }
   .field input::placeholder, .field textarea::placeholder{color:var(--ink-soft);}
   .field input:focus, .field textarea:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
