@@ -748,6 +748,12 @@ function levelLabel(level){
 }
 
 document.addEventListener('click', e => {
+  const link = e.target.closest('.event-link');
+  if(link){
+    e.preventDefault();
+    window.open(link.getAttribute('href'), '_blank', 'noopener,noreferrer');
+    return;
+  }
   const btn = e.target.closest('[data-action]');
   if(!btn) return;
   const id = btn.dataset.id;
