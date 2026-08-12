@@ -196,7 +196,7 @@
   .ticket-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
   .who{
     font-family:'Space Mono', monospace;
-    font-size:11px;
+    font-size:13px;
     text-transform:uppercase;
     letter-spacing:0.06em;
     color:var(--ink-soft);
@@ -302,6 +302,7 @@
   .field-err{color:var(--crimson); font-size:12.5px; margin-top:5px; display:none;}
   .field.err input, .field.err textarea{border-color:var(--crimson);}
   .field.err .field-err{display:block;}
+  .field-hint{color:var(--ink-soft); font-size:12px; margin-top:5px; line-height:1.4;}
 
   .level-toggle{
     display:flex; gap:8px;
@@ -478,7 +479,7 @@
     </div>
     <div class="field" id="f_link">
       <label for="in_link">Link to event details or tickets</label>
-      <input type="text" id="in_link" placeholder="e.g. cbcjoy.org/events/...">
+      <input type="text" id="in_link" placeholder="cbcjoy.org/">
     </div>
     <div class="field" id="f_notes">
       <label for="in_notes">Notes</label>
@@ -504,7 +505,8 @@
       </div>
       <div class="field">
         <label for="in_bulk_link">Link to details or tickets (optional)</label>
-        <input type="text" id="in_bulk_link" placeholder="e.g. https://gofan.co/... — applies to all, unless the file has its own">
+        <input type="text" id="in_bulk_link" placeholder="cbcjoy.org/">
+        <div class="field-hint">Applies to all events in this file, unless the file has its own links.</div>
       </div>
       <div class="field" id="f_bulk_level">
         <label>High school or middle school?</label>
@@ -860,7 +862,7 @@ function openEventSheet(ev){
   $('#in_date').value = ev ? ev.dateStr : '';
   $('#in_time').value = ev ? (ev.time||'') : '';
   $('#in_location').value = ev ? (ev.location||'') : '';
-  $('#in_link').value = ev ? (ev.link||'') : 'cbcjoy.org/';
+  $('#in_link').value = ev ? (ev.link||'') : '';
   $('#in_notes').value = ev ? (ev.notes||'') : '';
   const levelGroup = $('#levelToggle');
   levelGroup.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
@@ -899,7 +901,7 @@ $('#saveEventBtn').onclick = () => {
     student, eventName, dateStr, level,
     time: $('#in_time').value || '',
     location: $('#in_location').value.trim(),
-    link: normalizeUrl($('#in_link').value.trim() === 'cbcjoy.org/' ? '' : $('#in_link').value.trim()),
+    link: normalizeUrl($('#in_link').value.trim()),
     notes: $('#in_notes').value.trim(),
   };
 
