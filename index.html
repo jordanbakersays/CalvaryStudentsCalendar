@@ -209,10 +209,11 @@
   .ticket-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
   .who{
     font-family:'Space Mono', monospace;
-    font-size:13px;
+    font-size:15px;
+    font-weight:700;
     text-transform:uppercase;
     letter-spacing:0.06em;
-    color:var(--ink-soft);
+    color:var(--ink);
     margin:0 0 3px;
   }
   .what{
@@ -553,7 +554,7 @@
     </div>
     <div class="field" id="f_link">
       <label for="in_link">Link to event details or tickets</label>
-      <input type="text" id="in_link" placeholder="cbcjoy.org/" maxlength="300">
+      <input type="text" id="in_link" placeholder="e.g. cbcjoy.org/" maxlength="300">
     </div>
     <div class="field" id="f_notes">
       <label for="in_notes">Notes</label>
@@ -583,7 +584,7 @@
       </div>
       <div class="field">
         <label for="in_bulk_link">Link to details or tickets (optional)</label>
-        <input type="text" id="in_bulk_link" placeholder="cbcjoy.org/">
+        <input type="text" id="in_bulk_link" placeholder="e.g. cbcjoy.org/">
         <div class="field-hint">Applies to all events in this file, unless the file has its own links.</div>
       </div>
       <div class="field" id="f_bulk_level">
