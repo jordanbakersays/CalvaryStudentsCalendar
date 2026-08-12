@@ -282,10 +282,20 @@
   .sheet-handle{width:40px; height:4px; background:var(--rule); border-radius:2px; margin:0 auto 14px;}
   @media (min-width:640px){ .sheet-handle{display:none;} }
 
+  .sheet-top{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
   .sheet h2{
     font-family:'Anton', sans-serif; font-weight:400; text-transform:uppercase;
     font-size:22px; margin:0 0 4px; letter-spacing:0.01em;
   }
+  .sheet-close{
+    flex-shrink:0;
+    width:32px; height:32px; border-radius:50%;
+    background:var(--paper-soft); border:1.5px solid var(--rule);
+    color:var(--ink-soft); font-size:15px; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; margin-top:2px;
+  }
+  .sheet-close:hover{color:var(--ink); border-color:var(--ink-soft);}
   .sheet .sheet-sub{font-size:13px; color:var(--ink-soft); margin:0 0 18px;}
 
   .field{margin-bottom:14px;}
@@ -451,7 +461,10 @@
 <div class="scrim" id="eventScrim">
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="eventSheetTitle">
     <div class="sheet-handle"></div>
-    <h2 id="eventSheetTitle">Add an event</h2>
+    <div class="sheet-top">
+      <h2 id="eventSheetTitle">Add an event</h2>
+      <button class="sheet-close" id="closeEventBtn" type="button" aria-label="Close">✕</button>
+    </div>
     <p class="sheet-sub">Fill in what you know — location and notes are optional.</p>
 
     <div class="field" id="f_student">
@@ -899,6 +912,7 @@ function closeEventSheet(){
 $('#fabAdd').onclick = () => openEventSheet(null);
 $('#addEventTopBtn').onclick = () => openEventSheet(null);
 $('#cancelEventBtn').onclick = closeEventSheet;
+$('#closeEventBtn').onclick = closeEventSheet;
 $('#eventScrim').addEventListener('click', e => { if(e.target.id==='eventScrim') closeEventSheet(); });
 
 $('#saveEventBtn').onclick = () => {
