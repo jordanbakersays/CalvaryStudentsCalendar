@@ -14,26 +14,26 @@
 
 <style>
   :root{
-    --paper:#F2EEDF;
-    --paper-soft:#EAE4CE;
-    --ink:#1E2A3D;
-    --ink-soft:#4B5A70;
-    --gold:#D6A431;
-    --gold-deep:#B5872272;
-    --gold-solid:#B58722;
-    --crimson:#A3352B;
-    --rule:#C9C2AC;
+    --paper:#0A0A0A;
+    --paper-soft:#1C1C1C;
+    --ink:#F7F5F0;
+    --ink-soft:#B4B0A8;
+    --gold:#F2C230;
+    --gold-deep:#F2C23072;
+    --gold-solid:#F2C230;
+    --crimson:#E8433F;
+    --rule:#3A3836;
     --green:#4C7A5D;
-    --white:#FFFBF2;
+    --white:#161514;
     --radius:14px;
-    --shadow: 0 2px 0 rgba(30,42,61,0.06), 0 8px 20px -10px rgba(30,42,61,0.25);
+    --shadow: 0 2px 0 rgba(0,0,0,0.5), 0 10px 24px -10px rgba(0,0,0,0.8);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:var(--paper);
     background-image:
-      radial-gradient(circle at 1px 1px, rgba(30,42,61,0.05) 1px, transparent 0);
+      radial-gradient(circle at 1px 1px, rgba(247,245,240,0.05) 1px, transparent 0);
     background-size: 14px 14px;
     color:var(--ink);
     font-family:'Libre Franklin', sans-serif;
@@ -47,16 +47,17 @@
 
   /* ---------- Header / marquee ---------- */
   header.marquee{
-    background:var(--ink);
-    color:var(--paper);
+    background:#000;
+    color:var(--ink);
     padding:22px 18px 26px;
     position:relative;
     overflow:hidden;
+    border-bottom:1px solid var(--rule);
   }
   header.marquee::after{
     content:"";
     position:absolute; left:0; right:0; bottom:0; height:6px;
-    background:repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 20px);
+    background:repeating-linear-gradient(90deg, var(--gold) 0 10px, var(--crimson) 10px 20px);
     opacity:0.9;
   }
   .eyebrow{
@@ -75,10 +76,11 @@
     line-height:1;
     margin:0 0 8px;
     text-transform:uppercase;
+    color:var(--ink);
   }
   header .sub{
     font-size:14px;
-    color:#C9D2DE;
+    color:var(--ink-soft);
     max-width:46ch;
     line-height:1.5;
     margin:0;
@@ -90,17 +92,17 @@
     font-family:'Libre Franklin', sans-serif;
     font-weight:600;
     font-size:13px;
-    border:1.5px solid rgba(242,238,223,0.35);
+    border:1.5px solid rgba(247,245,240,0.3);
     background:transparent;
-    color:var(--paper);
+    color:var(--ink);
     padding:8px 14px;
     border-radius:999px;
     cursor:pointer;
     display:inline-flex; align-items:center; gap:6px;
     transition:background .15s, border-color .15s;
   }
-  .pill-btn:hover{background:rgba(242,238,223,0.1); border-color:rgba(242,238,223,0.6);}
-  .pill-btn.active{background:var(--gold); color:var(--ink); border-color:var(--gold);}
+  .pill-btn:hover{background:rgba(247,245,240,0.08); border-color:rgba(247,245,240,0.5);}
+  .pill-btn.active{background:var(--gold); color:#000; border-color:var(--gold);}
 
   /* ---------- Main ---------- */
   main{max-width:640px; margin:0 auto; padding:20px 16px 40px;}
@@ -118,6 +120,7 @@
     background:var(--white);
     color:var(--ink);
   }
+  .search-row input[type=text]::placeholder{color:var(--ink-soft);}
   .search-row input[type=text]:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
 
   .date-heading{
@@ -143,25 +146,20 @@
     margin-bottom:14px;
     position:relative;
     overflow:hidden;
-    border:1px solid rgba(30,42,61,0.06);
-  }
-  .ticket.highlight{
-    transform:rotate(-0.4deg);
-    box-shadow: 0 2px 0 rgba(213,164,49,0.25), 0 10px 22px -10px rgba(181,135,34,0.45);
+    border:1px solid rgba(247,245,240,0.06);
   }
   .ticket-date{
     flex:0 0 74px;
-    background:var(--ink);
-    color:var(--paper);
+    background:var(--crimson);
+    color:#fff;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     font-family:'Space Mono', monospace;
     padding:10px 4px;
     position:relative;
   }
-  .ticket.highlight .ticket-date{background:linear-gradient(160deg, #24344c, var(--ink) 70%);}
-  .ticket-date .dow{font-size:11px; letter-spacing:0.08em; opacity:0.75; text-transform:uppercase;}
+  .ticket-date .dow{font-size:11px; letter-spacing:0.08em; opacity:0.85; text-transform:uppercase;}
   .ticket-date .day{font-size:26px; font-weight:700; line-height:1.1;}
-  .ticket-date .mon{font-size:11px; letter-spacing:0.08em; text-transform:uppercase; opacity:0.75;}
+  .ticket-date .mon{font-size:11px; letter-spacing:0.08em; text-transform:uppercase; opacity:0.85;}
 
   .perf{
     flex:0 0 0;
@@ -208,13 +206,6 @@
     margin-top:6px; padding-top:6px; border-top:1px dashed var(--rule);
     line-height:1.4;
   }
-  .star-btn{
-    background:none; border:none; cursor:pointer; font-size:20px;
-    line-height:1; padding:2px; flex-shrink:0; color:#D9D3BE;
-    transition:transform .15s;
-  }
-  .star-btn.on{color:var(--gold-solid);}
-  .star-btn:active{transform:scale(0.85);}
 
   .ticket-footer{
     display:flex; gap:12px; margin-top:8px;
@@ -236,21 +227,21 @@
   .fab{
     position:fixed; right:20px; bottom:24px;
     width:60px; height:60px; border-radius:50%;
-    background:var(--gold); color:var(--ink);
+    background:var(--gold); color:#000;
     border:none; font-size:30px; font-weight:700;
-    box-shadow:0 10px 24px -6px rgba(181,135,34,0.55);
+    box-shadow:0 10px 24px -6px rgba(242,194,48,0.4);
     cursor:pointer; z-index:40;
     display:flex; align-items:center; justify-content:center;
     transition:transform .15s;
   }
   .fab:active{transform:scale(0.92);}
-  .fab:focus-visible, .pill-btn:focus-visible, .star-btn:focus-visible, .link-btn:focus-visible, button:focus-visible{
+  .fab:focus-visible, .pill-btn:focus-visible, .link-btn:focus-visible, button:focus-visible{
     outline:2.5px solid var(--crimson); outline-offset:2px;
   }
 
   /* ---------- Sheet / modal ---------- */
   .scrim{
-    position:fixed; inset:0; background:rgba(30,42,61,0.45);
+    position:fixed; inset:0; background:rgba(0,0,0,0.75);
     z-index:50; display:none; align-items:flex-end; justify-content:center;
   }
   .scrim.open{display:flex;}
@@ -284,26 +275,19 @@
     width:100%; font-family:'Libre Franklin', sans-serif; font-size:15.5px;
     padding:11px 12px; border-radius:10px; border:1.5px solid var(--rule);
     background:var(--white); color:var(--ink);
+    color-scheme: dark;
   }
+  .field input::placeholder, .field textarea::placeholder{color:var(--ink-soft);}
   .field input:focus, .field textarea:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
   .field textarea{resize:vertical; min-height:60px; font-family:'Libre Franklin', sans-serif;}
-  .field-row{display:flex; gap:10px;}
-  .field-row .field{flex:1;}
+  .field-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .field-row .field{flex:1 1 130px; min-width:0;}
   .field-err{color:var(--crimson); font-size:12.5px; margin-top:5px; display:none;}
   .field.err input, .field.err textarea{border-color:var(--crimson);}
   .field.err .field-err{display:block;}
 
-  .star-toggle{
-    display:flex; align-items:center; gap:10px; padding:12px 14px;
-    background:var(--white); border:1.5px solid var(--rule); border-radius:10px;
-    cursor:pointer; user-select:none;
-  }
-  .star-toggle input{width:18px; height:18px; accent-color:var(--gold-solid);}
-  .star-toggle .lab{font-weight:600; font-size:14.5px;}
-  .star-toggle .sub{font-size:12px; color:var(--ink-soft); display:block;}
-
   .btn-primary{
-    width:100%; background:var(--ink); color:var(--paper);
+    width:100%; background:var(--gold); color:#000;
     border:none; padding:14px; border-radius:10px; font-weight:700; font-size:15.5px;
     cursor:pointer; margin-top:6px; font-family:'Libre Franklin', sans-serif;
   }
@@ -321,7 +305,7 @@
     text-align:center; cursor:pointer; background:var(--white);
     transition:border-color .15s, background .15s;
   }
-  .drop-zone.drag{border-color:var(--gold-solid); background:#FBF6E8;}
+  .drop-zone.drag{border-color:var(--gold-solid); background:#241E0C;}
   .drop-zone .ic{font-size:26px; display:block; margin-bottom:6px;}
   .drop-zone .main{font-weight:700; font-size:14.5px;}
   .drop-zone .sub{font-size:12.5px; color:var(--ink-soft); margin-top:3px;}
@@ -336,8 +320,6 @@
   .preview-row .pr-main{flex:1; min-width:0;}
   .preview-row .pr-title{font-weight:700; font-size:14px;}
   .preview-row .pr-meta{font-size:12px; color:var(--ink-soft); font-family:'Space Mono', monospace;}
-  .preview-row .pr-star{background:none; border:none; cursor:pointer; font-size:17px; color:#D9D3BE;}
-  .preview-row .pr-star.on{color:var(--gold-solid);}
   .preview-list{max-height:260px; overflow-y:auto; margin:14px 0; border:1px solid var(--rule); border-radius:10px; padding:0 12px; background:var(--white);}
 
   /* ---------- Calendar grid ---------- */
@@ -353,17 +335,17 @@
     background:transparent;
   }
   .cal-cell.has-events{cursor:pointer; background:var(--paper-soft); font-weight:700;}
-  .cal-cell.selected{background:var(--ink); color:var(--paper);}
+  .cal-cell.selected{background:var(--crimson); color:#fff;}
   .cal-cell.today{box-shadow:inset 0 0 0 1.5px var(--gold-solid);}
-  .cal-dot{width:5px; height:5px; border-radius:50%; background:var(--ink-soft); margin-top:2px;}
-  .cal-cell.selected .cal-dot{background:var(--paper);}
-  .cal-dot.gold{background:var(--gold-solid);}
+  .cal-dot{width:5px; height:5px; border-radius:50%; background:var(--gold-solid); margin-top:2px;}
+  .cal-cell.selected .cal-dot{background:#fff;}
 
   .toast{
     position:fixed; left:50%; bottom:100px; transform:translateX(-50%) translateY(20px);
-    background:var(--ink); color:var(--paper); padding:10px 18px; border-radius:999px;
+    background:var(--white); color:var(--ink); padding:10px 18px; border-radius:999px;
     font-size:13.5px; font-weight:600; box-shadow:var(--shadow); z-index:60;
     opacity:0; transition:opacity .2s, transform .2s; pointer-events:none;
+    border:1px solid var(--rule);
   }
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
@@ -373,7 +355,7 @@
   .admin-bar button{background:none; border:none; color:var(--ink-soft); text-decoration:underline; cursor:pointer; font-size:12px; font-family:'Libre Franklin', sans-serif;}
 
   .badge-admin{
-    font-family:'Space Mono', monospace; font-size:10px; background:var(--gold); color:var(--ink);
+    font-family:'Space Mono', monospace; font-size:10px; background:var(--gold); color:#000;
     padding:2px 7px; border-radius:5px; margin-left:6px; vertical-align:middle; text-transform:uppercase;
   }
   .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
@@ -388,6 +370,7 @@
   <div class="header-actions">
     <button class="pill-btn active" id="viewListBtn" type="button">☰ List</button>
     <button class="pill-btn" id="viewCalBtn" type="button">▦ Calendar</button>
+    <button class="pill-btn" id="addEventTopBtn" type="button">+ Add event</button>
     <button class="pill-btn" id="importBtn" type="button">⇪ Import a season</button>
   </div>
 </header>
@@ -445,20 +428,12 @@
     </div>
     <div class="field" id="f_location">
       <label for="in_location">Location</label>
-      <input type="text" id="in_location" placeholder="e.g. Westland High School">
+      <input type="text" id="in_location" placeholder="e.g. Canton High School">
     </div>
     <div class="field" id="f_notes">
       <label for="in_notes">Notes</label>
       <textarea id="in_notes" placeholder="Anything else people should know — parking, arrival time, cost…"></textarea>
     </div>
-
-    <label class="star-toggle" for="in_highlight">
-      <input type="checkbox" id="in_highlight">
-      <span>
-        <span class="lab">★ Highlight this one</span>
-        <span class="sub">Makes it stand out on the board</span>
-      </span>
-    </label>
 
     <button class="btn-primary" id="saveEventBtn" type="button">Add to the board</button>
     <button class="btn-secondary" id="cancelEventBtn" type="button">Cancel</button>
@@ -647,7 +622,7 @@ function renderTicket(e){
   const d = parseDateStr(e.dateStr);
   const canEdit = isAdmin || e.ownerId === deviceId;
   const el = document.createElement('div');
-  el.className = 'ticket' + (e.highlight ? ' highlight' : '');
+  el.className = 'ticket';
 
   const metaBits = [];
   if(e.time) metaBits.push(`<span class="mono">🕓 ${formatTime12(e.time)}</span>`);
@@ -666,7 +641,6 @@ function renderTicket(e){
           <p class="who">${escapeHtml(e.student)}</p>
           <p class="what">${escapeHtml(e.eventName)}</p>
         </div>
-        <button class="star-btn ${e.highlight?'on':''}" data-id="${e.id}" data-action="star" aria-label="${e.highlight?'Remove highlight':'Highlight this event'}">${e.highlight?'★':'☆'}</button>
       </div>
       ${metaBits.length ? `<div class="meta-row">${metaBits.join('')}</div>` : ''}
       ${e.notes ? `<div class="notes">${escapeHtml(e.notes)}</div>` : ''}
@@ -693,9 +667,7 @@ document.addEventListener('click', e => {
   const ev = allEvents.find(x => x.id === id);
   if(!ev) return;
 
-  if(action === 'star'){
-    eventsRef.doc(id).update({ highlight: !ev.highlight });
-  } else if(action === 'edit'){
+  if(action === 'edit'){
     openEventSheet(ev);
   } else if(action === 'delete'){
     if(confirm(`Remove "${ev.eventName}" from the board?`)){
@@ -723,14 +695,13 @@ function renderCalendar(){
   for(let day=1; day<=daysInMonth; day++){
     const ds = toDateStr(y, m+1, day);
     const has = !!eventsByDate[ds];
-    const anyHighlight = has && eventsByDate[ds].some(e=>e.highlight);
     const classes = ['cal-cell'];
     if(has) classes.push('has-events');
     if(ds === todayStr) classes.push('today');
     if(ds === calSelectedDate) classes.push('selected');
     cells += `<div class="${classes.join(' ')}" data-date="${ds}">
       <span>${day}</span>
-      ${has ? `<span class="cal-dot ${anyHighlight?'gold':''}"></span>` : ''}
+      ${has ? `<span class="cal-dot"></span>` : ''}
     </div>`;
   }
 
@@ -804,7 +775,6 @@ function openEventSheet(ev){
   $('#in_time').value = ev ? (ev.time||'') : '';
   $('#in_location').value = ev ? (ev.location||'') : '';
   $('#in_notes').value = ev ? (ev.notes||'') : '';
-  $('#in_highlight').checked = ev ? !!ev.highlight : false;
   $$('.field').forEach(f => f.classList.remove('err'));
   $('#eventScrim').classList.add('open');
   setTimeout(()=>$('#in_student').focus(), 50);
@@ -814,6 +784,7 @@ function closeEventSheet(){
   editingId = null;
 }
 $('#fabAdd').onclick = () => openEventSheet(null);
+$('#addEventTopBtn').onclick = () => openEventSheet(null);
 $('#cancelEventBtn').onclick = closeEventSheet;
 $('#eventScrim').addEventListener('click', e => { if(e.target.id==='eventScrim') closeEventSheet(); });
 
@@ -832,7 +803,6 @@ $('#saveEventBtn').onclick = () => {
     time: $('#in_time').value || '',
     location: $('#in_location').value.trim(),
     notes: $('#in_notes').value.trim(),
-    highlight: $('#in_highlight').checked,
   };
 
   if(editingId){
@@ -951,7 +921,6 @@ function parseICS(text, bulkStudent){
     time: e.time || '',
     location: e.location || '',
     notes: e.description || '',
-    highlight: false,
     include: !!e.dateStr,
   })).filter(e => e.dateStr);
 }
@@ -999,7 +968,6 @@ function parseCSV(text, bulkStudent){
       time: iTime>=0 ? normalizeCSVTime(cols[iTime]) : '',
       location: iLoc>=0 ? cols[iLoc] : '',
       notes: iNotes>=0 ? cols[iNotes] : '',
-      highlight: false,
       include: true,
     };
   }).filter(r => r.eventName && r.dateStr);
@@ -1037,7 +1005,7 @@ function normalizeCSVTime(raw){
 function showImportPreview(){
   $('#importStep1').style.display = 'none';
   $('#importStep2').style.display = 'block';
-  $('#importCount').textContent = `Found ${pendingImportRows.length} event${pendingImportRows.length===1?'':'s'}. Uncheck any you don't want, star any you'd like to highlight.`;
+  $('#importCount').textContent = `Found ${pendingImportRows.length} event${pendingImportRows.length===1?'':'s'}. Uncheck any you don't want to add.`;
   renderPreviewList();
 }
 
@@ -1055,7 +1023,6 @@ function renderPreviewList(){
         <div class="pr-title">${escapeHtml(row.eventName)}</div>
         <div class="pr-meta">${dateLabel}${row.time?' · '+formatTime12(row.time):''}${row.location?' · '+escapeHtml(row.location):''}</div>
       </div>
-      <button class="pr-star ${row.highlight?'on':''}" data-i="${i}" data-role="star">${row.highlight?'★':'☆'}</button>
     `;
     container.appendChild(el);
   });
@@ -1064,13 +1031,6 @@ $('#previewList').addEventListener('change', e => {
   if(e.target.dataset.role === 'inc'){
     pendingImportRows[+e.target.dataset.i].include = e.target.checked;
   }
-});
-$('#previewList').addEventListener('click', e => {
-  const btn = e.target.closest('[data-role="star"]');
-  if(!btn) return;
-  const row = pendingImportRows[+btn.dataset.i];
-  row.highlight = !row.highlight;
-  renderPreviewList();
 });
 
 $('#confirmImportBtn').onclick = async () => {
@@ -1089,7 +1049,6 @@ $('#confirmImportBtn').onclick = async () => {
         time: row.time || '',
         location: row.location || '',
         notes: row.notes || '',
-        highlight: row.highlight,
         ownerId: deviceId,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
