@@ -87,6 +87,7 @@
   }
   .header-actions{
     display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;
+    justify-content:center;
   }
   .pill-btn{
     font-family:'Libre Franklin', sans-serif;
@@ -122,6 +123,10 @@
   }
   .search-row input[type=text]::placeholder{color:var(--ink-soft);}
   .search-row input[type=text]:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
+
+  .view-toggle-row{
+    display:flex; gap:8px; justify-content:center; margin-bottom:20px;
+  }
 
   .date-heading{
     font-family:'Space Mono', monospace;
@@ -235,7 +240,7 @@
     transition:transform .15s;
   }
   .fab:active{transform:scale(0.92);}
-  .fab:focus-visible, .pill-btn:focus-visible, .link-btn:focus-visible, button:focus-visible{
+  .fab:focus-visible, .pill-btn:focus-visible, .link-btn:focus-visible, .admin-link:focus-visible, button:focus-visible{
     outline:2.5px solid var(--crimson); outline-offset:2px;
   }
 
@@ -349,27 +354,27 @@
   }
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
-  .admin-bar{
-    text-align:center; padding:16px 0 0; font-size:12px; color:var(--ink-soft);
+  .admin-link{
+    position:absolute; top:14px; right:16px;
+    font-family:'Libre Franklin', sans-serif; font-size:11px;
+    color:rgba(180,176,168,0.45);
+    background:none; border:none; cursor:pointer; padding:4px;
+    letter-spacing:0.02em;
   }
-  .admin-bar button{background:none; border:none; color:var(--ink-soft); text-decoration:underline; cursor:pointer; font-size:12px; font-family:'Libre Franklin', sans-serif;}
+  .admin-link:hover{color:rgba(180,176,168,0.75);}
+  .admin-link.active{color:var(--gold);}
 
-  .badge-admin{
-    font-family:'Space Mono', monospace; font-size:10px; background:var(--gold); color:#000;
-    padding:2px 7px; border-radius:5px; margin-left:6px; vertical-align:middle; text-transform:uppercase;
-  }
   .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
 </style>
 </head>
 <body>
 
 <header class="marquee">
+  <button class="admin-link" id="adminToggle" type="button">Admin</button>
   <p class="eyebrow">Calvary Students</p>
   <h1 class="wordmark">What's Coming Up</h1>
   <p class="sub">Games, plays, recitals — one board, so leaders and students can show up for each other.</p>
   <div class="header-actions">
-    <button class="pill-btn active" id="viewListBtn" type="button">☰ List</button>
-    <button class="pill-btn" id="viewCalBtn" type="button">▦ Calendar</button>
     <button class="pill-btn" id="addEventTopBtn" type="button">+ Add event</button>
     <button class="pill-btn" id="importBtn" type="button">⇪ Import a season</button>
   </div>
@@ -380,6 +385,11 @@
     <input type="text" id="searchInput" placeholder="Find a student, event, or place…" aria-label="Search events">
   </div>
 
+  <div class="view-toggle-row">
+    <button class="pill-btn active" id="viewListBtn" type="button">☰ List</button>
+    <button class="pill-btn" id="viewCalBtn" type="button">▦ Calendar</button>
+  </div>
+
   <div id="calendarView" style="display:none;"></div>
 
   <div id="listView">
@@ -388,11 +398,6 @@
       <div class="big">Nothing on the board yet</div>
       <p>Be the first to add a game, play, or recital — tap the gold button to get started.</p>
     </div>
-  </div>
-
-  <div class="admin-bar">
-    <span id="adminStatus"></span>
-    <button id="adminToggle" type="button">Leader sign-in</button>
   </div>
 </main>
 
@@ -490,7 +495,7 @@ const db = firebase.firestore();
 const eventsRef = db.collection("events");
 
 /* Change this to whatever passcode leaders should use to sign in as admin. */
-const ADMIN_PASSCODE = "calvary2026";
+const ADMIN_PASSCODE = "Promo1398!";
 
 /* =========================================================
    Device identity (so "who added it" can edit/delete)
@@ -595,8 +600,9 @@ function currentFilteredSorted(){
 
 function render(){
   if(currentView === 'list') renderList(); else renderCalendar();
-  $('#adminStatus').textContent = isAdmin ? "Signed in as leader" : "";
-  $('#adminToggle').textContent = isAdmin ? "Sign out" : "Leader sign-in";
+  const adminBtn = $('#adminToggle');
+  adminBtn.classList.toggle('active', isAdmin);
+  adminBtn.title = isAdmin ? 'Signed in as admin — tap to sign out' : 'Admin sign-in';
 }
 
 function renderList(){
@@ -823,11 +829,11 @@ $('#adminToggle').onclick = () => {
     isAdmin = false; safeSet('isAdmin','false');
     showToast('Signed out');
   } else {
-    const code = prompt('Leader passcode:');
+    const code = prompt('Admin passcode:');
     if(code === null) return;
     if(code === ADMIN_PASSCODE){
       isAdmin = true; safeSet('isAdmin','true');
-      showToast('Signed in as leader');
+      showToast('Signed in as admin');
     } else {
       showToast('That passcode isn\'t right');
     }
