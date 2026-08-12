@@ -138,8 +138,10 @@
   .search-row input[type=text]:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
 
   .view-toggle-row{
-    display:flex; gap:8px; justify-content:center; margin-bottom:20px;
+    display:flex; gap:8px; justify-content:center; margin-bottom:20px; flex-wrap:wrap;
   }
+  .pill-btn.filter-hs.active{background:var(--crimson); color:#fff; border-color:var(--crimson);}
+  .pill-btn.filter-ms.active{background:var(--gold); color:#000; border-color:var(--gold);}
 
   .date-heading{
     font-family:'Space Mono', monospace;
@@ -446,6 +448,8 @@
   <div class="view-toggle-row">
     <button class="pill-btn active" id="viewListBtn" type="button">☰ List</button>
     <button class="pill-btn" id="viewCalBtn" type="button">▦ Calendar</button>
+    <button class="pill-btn filter-hs" id="filterHSBtn" type="button" aria-label="Filter to High School events">HS</button>
+    <button class="pill-btn filter-ms" id="filterMSBtn" type="button" aria-label="Filter to Middle School events">MS</button>
   </div>
 
   <div id="calendarView" style="display:none;"></div>
@@ -615,6 +619,11 @@ let editingId = null;     // event currently being edited, or null for "new"
 let calMonth = new Date(); calMonth.setDate(1);
 let calSelectedDate = null;
 let pendingImportRows = []; // parsed rows awaiting confirmation
+let levelFilter = new Set(); // empty = show all levels; otherwise only levels in the set
+
+function passesLevelFilter(e){
+  return levelFilter.size === 0 || levelFilter.has(e.level);
+}
 
 /* =========================================================
    Firestore sync
@@ -768,6 +777,7 @@ function currentFilteredSorted(){
   let list = allEvents.filter(e => {
     const d = parseDateStr(e.dateStr);
     if(d < today) return false; // upcoming only on the board
+    if(!passesLevelFilter(e)) return false;
     if(!q) return true;
     const hay = `${e.student} ${e.eventName} ${e.location} ${e.notes}`.toLowerCase();
     return hay.includes(q);
@@ -786,7 +796,12 @@ function render(){
 function renderList(){
   const container = $('#eventsContainer');
   const list = currentFilteredSorted();
+  const isFiltered = levelFilter.size > 0 || !!($('#searchInput').value || '').trim();
   $('#emptyState').style.display = list.length ? 'none' : 'block';
+  $('#emptyState .big').textContent = list.length ? '' : (isFiltered ? 'Nothing matches yet' : 'Nothing on the board yet');
+  $('#emptyState p').textContent = list.length ? '' : (isFiltered
+    ? 'Try clearing the filter or search to see more.'
+    : 'Be the first to add a game, play, or recital — tap the gold button to get started.');
   container.innerHTML = '';
   let lastDateStr = null;
 
@@ -934,7 +949,7 @@ function renderCalendar(){
   const todayStr = toDateStr(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
 
   const eventsByDate = {};
-  allEvents.forEach(e => { (eventsByDate[e.dateStr] = eventsByDate[e.dateStr] || []).push(e); });
+  allEvents.filter(passesLevelFilter).forEach(e => { (eventsByDate[e.dateStr] = eventsByDate[e.dateStr] || []).push(e); });
 
   let cells = '';
   for(let i=0;i<firstDow;i++) cells += `<div class="cal-cell"></div>`;
@@ -1007,6 +1022,17 @@ $('#viewCalBtn').onclick = () => {
   render();
 };
 $('#searchInput').addEventListener('input', () => { if(currentView==='list') renderList(); });
+
+$('#filterHSBtn').onclick = () => {
+  if(levelFilter.has('hs')) levelFilter.delete('hs'); else levelFilter.add('hs');
+  $('#filterHSBtn').classList.toggle('active', levelFilter.has('hs'));
+  render();
+};
+$('#filterMSBtn').onclick = () => {
+  if(levelFilter.has('ms')) levelFilter.delete('ms'); else levelFilter.add('ms');
+  $('#filterMSBtn').classList.toggle('active', levelFilter.has('ms'));
+  render();
+};
 
 /* =========================================================
    Add / Edit sheet
