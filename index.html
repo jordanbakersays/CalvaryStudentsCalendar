@@ -297,8 +297,8 @@
   .field input::placeholder, .field textarea::placeholder{color:var(--ink-soft);}
   .field input:focus, .field textarea:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
   .field textarea{resize:vertical; min-height:60px; font-family:'Libre Franklin', sans-serif;}
-  .field-row{display:flex; gap:10px; flex-wrap:wrap;}
-  .field-row .field{flex:1 1 130px; min-width:0;}
+  .field-row{display:flex; flex-direction:column; gap:0;}
+  .field-row .field{width:100%;}
   .field-err{color:var(--crimson); font-size:12.5px; margin-top:5px; display:none;}
   .field.err input, .field.err textarea{border-color:var(--crimson);}
   .field.err .field-err{display:block;}
@@ -478,7 +478,7 @@
     </div>
     <div class="field" id="f_link">
       <label for="in_link">Link to event details or tickets</label>
-      <input type="text" id="in_link" placeholder="e.g. https://gofan.co/...">
+      <input type="text" id="in_link" placeholder="e.g. cbcjoy.org/events/...">
     </div>
     <div class="field" id="f_notes">
       <label for="in_notes">Notes</label>
@@ -860,7 +860,7 @@ function openEventSheet(ev){
   $('#in_date').value = ev ? ev.dateStr : '';
   $('#in_time').value = ev ? (ev.time||'') : '';
   $('#in_location').value = ev ? (ev.location||'') : '';
-  $('#in_link').value = ev ? (ev.link||'') : '';
+  $('#in_link').value = ev ? (ev.link||'') : 'cbcjoy.org/';
   $('#in_notes').value = ev ? (ev.notes||'') : '';
   const levelGroup = $('#levelToggle');
   levelGroup.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
@@ -899,7 +899,7 @@ $('#saveEventBtn').onclick = () => {
     student, eventName, dateStr, level,
     time: $('#in_time').value || '',
     location: $('#in_location').value.trim(),
-    link: normalizeUrl($('#in_link').value.trim()),
+    link: normalizeUrl($('#in_link').value.trim() === 'cbcjoy.org/' ? '' : $('#in_link').value.trim()),
     notes: $('#in_notes').value.trim(),
   };
 
