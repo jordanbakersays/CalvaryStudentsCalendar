@@ -216,6 +216,8 @@
   }
   .meta-row span{display:inline-flex; align-items:center; gap:4px;}
   .meta-row .mono{font-family:'Space Mono', monospace;}
+  .event-link{color:var(--gold-solid); text-decoration:underline; text-underline-offset:2px; font-weight:600;}
+  .event-link:hover{color:var(--gold);}
   .notes{
     font-size:13px; color:var(--ink-soft);
     margin-top:6px; padding-top:6px; border-top:1px dashed var(--rule);
@@ -474,6 +476,10 @@
       <label for="in_location">Location</label>
       <input type="text" id="in_location" placeholder="e.g. Canton High School">
     </div>
+    <div class="field" id="f_link">
+      <label for="in_link">Link to event details or tickets</label>
+      <input type="text" id="in_link" placeholder="e.g. https://gofan.co/...">
+    </div>
     <div class="field" id="f_notes">
       <label for="in_notes">Notes</label>
       <textarea id="in_notes" placeholder="Anything else people should know — parking, arrival time, cost…"></textarea>
@@ -495,6 +501,10 @@
       <div class="field">
         <label for="in_bulk_student">Whose season is this?</label>
         <input type="text" id="in_bulk_student" placeholder="e.g. Maya Thompson">
+      </div>
+      <div class="field">
+        <label for="in_bulk_link">Link to details or tickets (optional)</label>
+        <input type="text" id="in_bulk_link" placeholder="e.g. https://gofan.co/... — applies to all, unless the file has its own">
       </div>
       <div class="field" id="f_bulk_level">
         <label>High school or middle school?</label>
@@ -598,6 +608,12 @@ function showToast(msg){
 
 function pad(n){ return String(n).padStart(2,'0'); }
 
+function normalizeUrl(str){
+  if(!str) return '';
+  if(/^https?:\/\//i.test(str)) return str;
+  return 'https://' + str;
+}
+
 function toDateStr(y,m,d){ return `${y}-${pad(m)}-${pad(d)}`; }
 
 function parseDateStr(str){
@@ -680,6 +696,7 @@ function renderTicket(e){
   const metaBits = [];
   if(e.time) metaBits.push(`<span class="mono">🕓 ${formatTime12(e.time)}</span>`);
   if(e.location) metaBits.push(`<span>📍 ${escapeHtml(e.location)}</span>`);
+  if(e.link) metaBits.push(`<span><a class="event-link" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">🔗 Details / tickets</a></span>`);
 
   el.innerHTML = `
     <div class="ticket-date${e.level==='ms' ? ' level-ms' : ''}">
@@ -843,6 +860,7 @@ function openEventSheet(ev){
   $('#in_date').value = ev ? ev.dateStr : '';
   $('#in_time').value = ev ? (ev.time||'') : '';
   $('#in_location').value = ev ? (ev.location||'') : '';
+  $('#in_link').value = ev ? (ev.link||'') : '';
   $('#in_notes').value = ev ? (ev.notes||'') : '';
   const levelGroup = $('#levelToggle');
   levelGroup.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
@@ -881,6 +899,7 @@ $('#saveEventBtn').onclick = () => {
     student, eventName, dateStr, level,
     time: $('#in_time').value || '',
     location: $('#in_location').value.trim(),
+    link: normalizeUrl($('#in_link').value.trim()),
     notes: $('#in_notes').value.trim(),
   };
 
@@ -922,6 +941,7 @@ $('#importBtn').onclick = () => {
   $('#importStep1').style.display = 'block';
   $('#importStep2').style.display = 'none';
   $('#in_bulk_student').value = '';
+  $('#in_bulk_link').value = '';
   $('#fileInput').value = '';
   const bulkGroup = $('#bulkLevelToggle');
   bulkGroup.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
@@ -961,12 +981,13 @@ function handleImportFile(file){
   reader.onload = () => {
     const text = reader.result;
     const bulkStudent = $('#in_bulk_student').value.trim();
+    const bulkLink = normalizeUrl($('#in_bulk_link').value.trim());
     let rows = [];
     try{
       if(file.name.toLowerCase().endsWith('.ics') || text.includes('BEGIN:VCALENDAR')){
-        rows = parseICS(text, bulkStudent, bulkLevel);
+        rows = parseICS(text, bulkStudent, bulkLevel, bulkLink);
       } else {
-        rows = parseCSV(text, bulkStudent, bulkLevel);
+        rows = parseCSV(text, bulkStudent, bulkLevel, bulkLink);
       }
     }catch(err){
       console.error(err);
@@ -983,7 +1004,7 @@ function handleImportFile(file){
   reader.readAsText(file);
 }
 
-function parseICS(text, bulkStudent, bulkLevel){
+function parseICS(text, bulkStudent, bulkLevel, bulkLink){
   const lines = text.split(/\r\n|\n|\r/);
   const events = [];
   let cur = null;
@@ -1000,6 +1021,7 @@ function parseICS(text, bulkStudent, bulkLevel){
       if(key === 'SUMMARY') cur.summary = val;
       else if(key === 'LOCATION') cur.location = val.replace(/\\,/g, ',');
       else if(key === 'DESCRIPTION') cur.description = val.replace(/\\n/g, ' ').replace(/\\,/g, ',');
+      else if(key === 'URL') cur.url = val;
       else if(key === 'DTSTART'){ const p = parseICSDate(val); cur.dateStr = p.dateStr; cur.time = p.time; }
     }
   });
@@ -1009,6 +1031,7 @@ function parseICS(text, bulkStudent, bulkLevel){
     dateStr: e.dateStr || '',
     time: e.time || '',
     location: e.location || '',
+    link: normalizeUrl(e.url || '') || bulkLink || '',
     notes: e.description || '',
     level: bulkLevel,
     include: !!e.dateStr,
@@ -1024,7 +1047,7 @@ function parseICSDate(val){
   return { dateStr, time };
 }
 
-function parseCSV(text, bulkStudent, bulkLevel){
+function parseCSV(text, bulkStudent, bulkLevel, bulkLink){
   const lines = text.split(/\r\n|\n|\r/).filter(l => l.trim().length);
   if(!lines.length) return [];
   const splitLine = l => {
@@ -1047,6 +1070,7 @@ function parseCSV(text, bulkStudent, bulkLevel){
   const iTime = find(['time']);
   const iLoc = find(['location','place','where']);
   const iNotes = find(['note','description']);
+  const iLink = find(['link','url','ticket']);
 
   const rows = lines.slice(1).map(line => {
     const cols = splitLine(line);
@@ -1057,6 +1081,7 @@ function parseCSV(text, bulkStudent, bulkLevel){
       dateStr: normalizeCSVDate(dateRaw),
       time: iTime>=0 ? normalizeCSVTime(cols[iTime]) : '',
       location: iLoc>=0 ? cols[iLoc] : '',
+      link: (iLink>=0 && cols[iLink]) ? normalizeUrl(cols[iLink]) : (bulkLink || ''),
       notes: iNotes>=0 ? cols[iNotes] : '',
       level: bulkLevel,
       include: true,
@@ -1139,6 +1164,7 @@ $('#confirmImportBtn').onclick = async () => {
         dateStr: row.dateStr,
         time: row.time || '',
         location: row.location || '',
+        link: row.link || '',
         notes: row.notes || '',
         level: row.level,
         ownerId: deviceId,
