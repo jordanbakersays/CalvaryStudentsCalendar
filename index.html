@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>What's Coming Up — Calvary Students</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎟️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Franklin:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Firebase (compat SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
+<style>
+  :root{
+    --paper:#F2EEDF;
+    --paper-soft:#EAE4CE;
+    --ink:#1E2A3D;
+    --ink-soft:#4B5A70;
+    --gold:#D6A431;
+    --gold-deep:#B5872272;
+    --gold-solid:#B58722;
+    --crimson:#A3352B;
+    --rule:#C9C2AC;
+    --green:#4C7A5D;
+    --white:#FFFBF2;
+    --radius:14px;
+    --shadow: 0 2px 0 rgba(30,42,61,0.06), 0 8px 20px -10px rgba(30,42,61,0.25);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(30,42,61,0.05) 1px, transparent 0);
+    background-size: 14px 14px;
+    color:var(--ink);
+    font-family:'Libre Franklin', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    padding-bottom:110px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- Header / marquee ---------- */
+  header.marquee{
+    background:var(--ink);
+    color:var(--paper);
+    padding:22px 18px 26px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.marquee::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:6px;
+    background:repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 20px);
+    opacity:0.9;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:0 0 6px;
+  }
+  h1.wordmark{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:clamp(28px,7vw,40px);
+    letter-spacing:0.01em;
+    line-height:1;
+    margin:0 0 8px;
+    text-transform:uppercase;
+  }
+  header .sub{
+    font-size:14px;
+    color:#C9D2DE;
+    max-width:46ch;
+    line-height:1.5;
+    margin:0;
+  }
+  .header-actions{
+    display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;
+  }
+  .pill-btn{
+    font-family:'Libre Franklin', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    border:1.5px solid rgba(242,238,223,0.35);
+    background:transparent;
+    color:var(--paper);
+    padding:8px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    display:inline-flex; align-items:center; gap:6px;
+    transition:background .15s, border-color .15s;
+  }
+  .pill-btn:hover{background:rgba(242,238,223,0.1); border-color:rgba(242,238,223,0.6);}
+  .pill-btn.active{background:var(--gold); color:var(--ink); border-color:var(--gold);}
+
+  /* ---------- Main ---------- */
+  main{max-width:640px; margin:0 auto; padding:20px 16px 40px;}
+
+  .search-row{
+    display:flex; gap:8px; margin-bottom:18px;
+  }
+  .search-row input[type=text]{
+    flex:1;
+    font-family:'Libre Franklin', sans-serif;
+    font-size:15px;
+    padding:11px 14px;
+    border-radius:10px;
+    border:1.5px solid var(--rule);
+    background:var(--white);
+    color:var(--ink);
+  }
+  .search-row input[type=text]:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
+
+  .date-heading{
+    font-family:'Space Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin:26px 0 10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .date-heading::after{
+    content:""; flex:1; height:1px; background:var(--rule);
+  }
+  .date-heading:first-of-type{margin-top:4px;}
+
+  /* ---------- Ticket card ---------- */
+  .ticket{
+    display:flex;
+    background:var(--white);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    margin-bottom:14px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(30,42,61,0.06);
+  }
+  .ticket.highlight{
+    transform:rotate(-0.4deg);
+    box-shadow: 0 2px 0 rgba(213,164,49,0.25), 0 10px 22px -10px rgba(181,135,34,0.45);
+  }
+  .ticket-date{
+    flex:0 0 74px;
+    background:var(--ink);
+    color:var(--paper);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-family:'Space Mono', monospace;
+    padding:10px 4px;
+    position:relative;
+  }
+  .ticket.highlight .ticket-date{background:linear-gradient(160deg, #24344c, var(--ink) 70%);}
+  .ticket-date .dow{font-size:11px; letter-spacing:0.08em; opacity:0.75; text-transform:uppercase;}
+  .ticket-date .day{font-size:26px; font-weight:700; line-height:1.1;}
+  .ticket-date .mon{font-size:11px; letter-spacing:0.08em; text-transform:uppercase; opacity:0.75;}
+
+  .perf{
+    flex:0 0 0;
+    border-left:2px dashed var(--rule);
+    position:relative;
+  }
+  .perf::before, .perf::after{
+    content:""; position:absolute; left:-7px; width:14px; height:14px;
+    background:var(--paper); border-radius:50%;
+  }
+  .perf::before{top:-7px;}
+  .perf::after{bottom:-7px;}
+
+  .ticket-body{
+    flex:1;
+    padding:12px 14px;
+    min-width:0;
+  }
+  .ticket-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
+  .who{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+    margin:0 0 3px;
+  }
+  .what{
+    font-weight:800;
+    font-size:16.5px;
+    line-height:1.25;
+    margin:0 0 6px;
+    word-break:break-word;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:10px;
+    font-size:13px; color:var(--ink-soft);
+    margin-bottom:4px;
+  }
+  .meta-row span{display:inline-flex; align-items:center; gap:4px;}
+  .meta-row .mono{font-family:'Space Mono', monospace;}
+  .notes{
+    font-size:13px; color:var(--ink-soft);
+    margin-top:6px; padding-top:6px; border-top:1px dashed var(--rule);
+    line-height:1.4;
+  }
+  .star-btn{
+    background:none; border:none; cursor:pointer; font-size:20px;
+    line-height:1; padding:2px; flex-shrink:0; color:#D9D3BE;
+    transition:transform .15s;
+  }
+  .star-btn.on{color:var(--gold-solid);}
+  .star-btn:active{transform:scale(0.85);}
+
+  .ticket-footer{
+    display:flex; gap:12px; margin-top:8px;
+  }
+  .link-btn{
+    background:none; border:none; padding:0; cursor:pointer;
+    font-family:'Libre Franklin', sans-serif; font-weight:600; font-size:12.5px;
+    color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px;
+  }
+  .link-btn.danger{color:var(--crimson);}
+
+  .empty-state{
+    text-align:center; padding:60px 20px 30px; color:var(--ink-soft);
+  }
+  .empty-state .big{font-family:'Anton', sans-serif; font-size:22px; color:var(--ink); text-transform:uppercase; margin-bottom:8px;}
+  .empty-state p{max-width:34ch; margin:0 auto; line-height:1.5; font-size:14px;}
+
+  /* ---------- FAB ---------- */
+  .fab{
+    position:fixed; right:20px; bottom:24px;
+    width:60px; height:60px; border-radius:50%;
+    background:var(--gold); color:var(--ink);
+    border:none; font-size:30px; font-weight:700;
+    box-shadow:0 10px 24px -6px rgba(181,135,34,0.55);
+    cursor:pointer; z-index:40;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .15s;
+  }
+  .fab:active{transform:scale(0.92);}
+  .fab:focus-visible, .pill-btn:focus-visible, .star-btn:focus-visible, .link-btn:focus-visible, button:focus-visible{
+    outline:2.5px solid var(--crimson); outline-offset:2px;
+  }
+
+  /* ---------- Sheet / modal ---------- */
+  .scrim{
+    position:fixed; inset:0; background:rgba(30,42,61,0.45);
+    z-index:50; display:none; align-items:flex-end; justify-content:center;
+  }
+  .scrim.open{display:flex;}
+  @media (min-width:640px){ .scrim{align-items:center;} }
+
+  .sheet{
+    background:var(--paper); width:100%; max-width:520px;
+    border-radius:20px 20px 0 0;
+    max-height:92vh; overflow-y:auto;
+    padding:18px 18px 24px;
+    animation:slideup .22s ease-out;
+  }
+  @media (min-width:640px){ .sheet{border-radius:16px; margin-bottom:20px;} }
+  @keyframes slideup{ from{transform:translateY(16px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+
+  .sheet-handle{width:40px; height:4px; background:var(--rule); border-radius:2px; margin:0 auto 14px;}
+  @media (min-width:640px){ .sheet-handle{display:none;} }
+
+  .sheet h2{
+    font-family:'Anton', sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:22px; margin:0 0 4px; letter-spacing:0.01em;
+  }
+  .sheet .sheet-sub{font-size:13px; color:var(--ink-soft); margin:0 0 18px;}
+
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block; font-family:'Space Mono', monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft); margin-bottom:5px;
+  }
+  .field input[type=text], .field input[type=date], .field input[type=time], .field textarea{
+    width:100%; font-family:'Libre Franklin', sans-serif; font-size:15.5px;
+    padding:11px 12px; border-radius:10px; border:1.5px solid var(--rule);
+    background:var(--white); color:var(--ink);
+  }
+  .field input:focus, .field textarea:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
+  .field textarea{resize:vertical; min-height:60px; font-family:'Libre Franklin', sans-serif;}
+  .field-row{display:flex; gap:10px;}
+  .field-row .field{flex:1;}
+  .field-err{color:var(--crimson); font-size:12.5px; margin-top:5px; display:none;}
+  .field.err input, .field.err textarea{border-color:var(--crimson);}
+  .field.err .field-err{display:block;}
+
+  .star-toggle{
+    display:flex; align-items:center; gap:10px; padding:12px 14px;
+    background:var(--white); border:1.5px solid var(--rule); border-radius:10px;
+    cursor:pointer; user-select:none;
+  }
+  .star-toggle input{width:18px; height:18px; accent-color:var(--gold-solid);}
+  .star-toggle .lab{font-weight:600; font-size:14.5px;}
+  .star-toggle .sub{font-size:12px; color:var(--ink-soft); display:block;}
+
+  .btn-primary{
+    width:100%; background:var(--ink); color:var(--paper);
+    border:none; padding:14px; border-radius:10px; font-weight:700; font-size:15.5px;
+    cursor:pointer; margin-top:6px; font-family:'Libre Franklin', sans-serif;
+  }
+  .btn-primary:active{transform:scale(0.99);}
+  .btn-primary:disabled{opacity:0.5; cursor:not-allowed;}
+  .btn-secondary{
+    width:100%; background:none; color:var(--ink-soft);
+    border:none; padding:10px; font-size:13.5px; cursor:pointer; text-decoration:underline;
+    font-family:'Libre Franklin', sans-serif;
+  }
+
+  /* ---------- Import ---------- */
+  .drop-zone{
+    border:2px dashed var(--rule); border-radius:12px; padding:26px 16px;
+    text-align:center; cursor:pointer; background:var(--white);
+    transition:border-color .15s, background .15s;
+  }
+  .drop-zone.drag{border-color:var(--gold-solid); background:#FBF6E8;}
+  .drop-zone .ic{font-size:26px; display:block; margin-bottom:6px;}
+  .drop-zone .main{font-weight:700; font-size:14.5px;}
+  .drop-zone .sub{font-size:12.5px; color:var(--ink-soft); margin-top:3px;}
+  .drop-zone input{display:none;}
+
+  .preview-row{
+    display:flex; align-items:flex-start; gap:10px;
+    padding:10px 0; border-bottom:1px solid var(--rule);
+  }
+  .preview-row:last-child{border-bottom:none;}
+  .preview-row input[type=checkbox]{margin-top:4px; width:16px; height:16px; accent-color:var(--gold-solid);}
+  .preview-row .pr-main{flex:1; min-width:0;}
+  .preview-row .pr-title{font-weight:700; font-size:14px;}
+  .preview-row .pr-meta{font-size:12px; color:var(--ink-soft); font-family:'Space Mono', monospace;}
+  .preview-row .pr-star{background:none; border:none; cursor:pointer; font-size:17px; color:#D9D3BE;}
+  .preview-row .pr-star.on{color:var(--gold-solid);}
+  .preview-list{max-height:260px; overflow-y:auto; margin:14px 0; border:1px solid var(--rule); border-radius:10px; padding:0 12px; background:var(--white);}
+
+  /* ---------- Calendar grid ---------- */
+  .cal-wrap{background:var(--white); border-radius:14px; padding:14px; box-shadow:var(--shadow); margin-bottom:20px;}
+  .cal-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+  .cal-head .lab{font-family:'Anton', sans-serif; font-size:17px; text-transform:uppercase;}
+  .cal-nav{background:none; border:1.5px solid var(--rule); border-radius:8px; width:30px; height:30px; cursor:pointer; font-size:16px; color:var(--ink);}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px;}
+  .cal-dow{font-family:'Space Mono', monospace; font-size:10px; text-align:center; color:var(--ink-soft); text-transform:uppercase; padding-bottom:4px;}
+  .cal-cell{
+    aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    border-radius:8px; font-size:13px; color:var(--ink); cursor:default; position:relative;
+    background:transparent;
+  }
+  .cal-cell.has-events{cursor:pointer; background:var(--paper-soft); font-weight:700;}
+  .cal-cell.selected{background:var(--ink); color:var(--paper);}
+  .cal-cell.today{box-shadow:inset 0 0 0 1.5px var(--gold-solid);}
+  .cal-dot{width:5px; height:5px; border-radius:50%; background:var(--ink-soft); margin-top:2px;}
+  .cal-cell.selected .cal-dot{background:var(--paper);}
+  .cal-dot.gold{background:var(--gold-solid);}
+
+  .toast{
+    position:fixed; left:50%; bottom:100px; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--paper); padding:10px 18px; border-radius:999px;
+    font-size:13.5px; font-weight:600; box-shadow:var(--shadow); z-index:60;
+    opacity:0; transition:opacity .2s, transform .2s; pointer-events:none;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  .admin-bar{
+    text-align:center; padding:16px 0 0; font-size:12px; color:var(--ink-soft);
+  }
+  .admin-bar button{background:none; border:none; color:var(--ink-soft); text-decoration:underline; cursor:pointer; font-size:12px; font-family:'Libre Franklin', sans-serif;}
+
+  .badge-admin{
+    font-family:'Space Mono', monospace; font-size:10px; background:var(--gold); color:var(--ink);
+    padding:2px 7px; border-radius:5px; margin-left:6px; vertical-align:middle; text-transform:uppercase;
+  }
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+</style>
+</head>
+<body>
+
+<header class="marquee">
+  <p class="eyebrow">Calvary Students</p>
+  <h1 class="wordmark">What's Coming Up</h1>
+  <p class="sub">Games, plays, recitals — one board, so leaders and students can show up for each other.</p>
+  <div class="header-actions">
+    <button class="pill-btn active" id="viewListBtn" type="button">☰ List</button>
+    <button class="pill-btn" id="viewCalBtn" type="button">▦ Calendar</button>
+    <button class="pill-btn" id="importBtn" type="button">⇪ Import a season</button>
+  </div>
+</header>
+
+<main>
+  <div class="search-row">
+    <input type="text" id="searchInput" placeholder="Find a student, event, or place…" aria-label="Search events">
+  </div>
+
+  <div id="calendarView" style="display:none;"></div>
+
+  <div id="listView">
+    <div id="eventsContainer"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="big">Nothing on the board yet</div>
+      <p>Be the first to add a game, play, or recital — tap the gold button to get started.</p>
+    </div>
+  </div>
+
+  <div class="admin-bar">
+    <span id="adminStatus"></span>
+    <button id="adminToggle" type="button">Leader sign-in</button>
+  </div>
+</main>
+
+<button class="fab" id="fabAdd" type="button" aria-label="Add an event">+</button>
+
+<!-- Add / Edit Event Sheet -->
+<div class="scrim" id="eventScrim">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="eventSheetTitle">
+    <div class="sheet-handle"></div>
+    <h2 id="eventSheetTitle">Add an event</h2>
+    <p class="sheet-sub">Fill in what you know — location and notes are optional.</p>
+
+    <div class="field" id="f_student">
+      <label for="in_student">Student's name</label>
+      <input type="text" id="in_student" placeholder="e.g. Maya Thompson">
+      <div class="field-err">Add the student's name so people know who to cheer for.</div>
+    </div>
+    <div class="field" id="f_event">
+      <label for="in_event">Event name</label>
+      <input type="text" id="in_event" placeholder="e.g. Varsity Soccer vs. Wayne Memorial">
+      <div class="field-err">Give the event a name.</div>
+    </div>
+    <div class="field-row">
+      <div class="field" id="f_date">
+        <label for="in_date">Date</label>
+        <input type="date" id="in_date">
+        <div class="field-err">Pick a date.</div>
+      </div>
+      <div class="field" id="f_time">
+        <label for="in_time">Time</label>
+        <input type="time" id="in_time">
+      </div>
+    </div>
+    <div class="field" id="f_location">
+      <label for="in_location">Location</label>
+      <input type="text" id="in_location" placeholder="e.g. Westland High School">
+    </div>
+    <div class="field" id="f_notes">
+      <label for="in_notes">Notes</label>
+      <textarea id="in_notes" placeholder="Anything else people should know — parking, arrival time, cost…"></textarea>
+    </div>
+
+    <label class="star-toggle" for="in_highlight">
+      <input type="checkbox" id="in_highlight">
+      <span>
+        <span class="lab">★ Highlight this one</span>
+        <span class="sub">Makes it stand out on the board</span>
+      </span>
+    </label>
+
+    <button class="btn-primary" id="saveEventBtn" type="button">Add to the board</button>
+    <button class="btn-secondary" id="cancelEventBtn" type="button">Cancel</button>
+  </div>
+</div>
+
+<!-- Import Sheet -->
+<div class="scrim" id="importScrim">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="importSheetTitle">
+    <div class="sheet-handle"></div>
+    <h2 id="importSheetTitle">Import a season</h2>
+    <p class="sheet-sub">Upload a calendar (.ics) or spreadsheet (.csv) export and add every event at once.</p>
+
+    <div id="importStep1">
+      <div class="field">
+        <label for="in_bulk_student">Whose season is this?</label>
+        <input type="text" id="in_bulk_student" placeholder="e.g. Maya Thompson">
+      </div>
+      <div class="drop-zone" id="dropZone" tabindex="0">
+        <span class="ic">📄</span>
+        <span class="main">Tap to choose a file</span>
+        <span class="sub">.ics from a team or school calendar, or .csv/.txt with columns</span>
+        <input type="file" id="fileInput" accept=".ics,.csv,.txt">
+      </div>
+    </div>
+
+    <div id="importStep2" style="display:none;">
+      <p class="sheet-sub" id="importCount"></p>
+      <div class="preview-list" id="previewList"></div>
+      <button class="btn-primary" id="confirmImportBtn" type="button">Add these to the board</button>
+      <button class="btn-secondary" id="backImportBtn" type="button">Choose a different file</button>
+    </div>
+
+    <button class="btn-secondary" id="cancelImportBtn" type="button">Cancel</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   FIREBASE CONFIG — replace with your project's config
+   ========================================================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyCtoJFWSBxuBygedjrs3zXNX7pite7uKfQ",
+  authDomain: "calvarystudentscalendar.firebaseapp.com",
+  projectId: "calvarystudentscalendar",
+  storageBucket: "calvarystudentscalendar.firebasestorage.app",
+  messagingSenderId: "426478572123",
+  appId: "1:426478572123:web:d6cfcc71138c6af59e257e"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const eventsRef = db.collection("events");
+
+/* Change this to whatever passcode leaders should use to sign in as admin. */
+const ADMIN_PASSCODE = "calvary2026";
+
+/* =========================================================
+   Device identity (so "who added it" can edit/delete)
+   Falls back gracefully if storage is unavailable (e.g. in-preview).
+   ========================================================= */
+function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
+function safeSet(key, val){ try{ localStorage.setItem(key, val); }catch(e){ /* ignore */ } }
+
+function uuid(){
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c=>{
+    const r = Math.random()*16|0, v = c==='x'?r:(r&0x3|0x8);
+    return v.toString(16);
+  });
+}
+let deviceId = safeGet('deviceId');
+if(!deviceId){ deviceId = uuid(); safeSet('deviceId', deviceId); }
+let isAdmin = safeGet('isAdmin') === 'true';
+
+/* =========================================================
+   State
+   ========================================================= */
+let allEvents = [];       // live from Firestore
+let currentView = 'list'; // 'list' | 'calendar'
+let editingId = null;     // event currently being edited, or null for "new"
+let calMonth = new Date(); calMonth.setDate(1);
+let calSelectedDate = null;
+let pendingImportRows = []; // parsed rows awaiting confirmation
+
+/* =========================================================
+   Firestore sync
+   ========================================================= */
+eventsRef.orderBy("dateStr").onSnapshot(snap => {
+  allEvents = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  render();
+}, err => {
+  console.error(err);
+  showToast("Couldn't connect — check the Firebase setup.");
+});
+
+/* =========================================================
+   Helpers
+   ========================================================= */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+function showToast(msg){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function toDateStr(y,m,d){ return `${y}-${pad(m)}-${pad(d)}`; }
+
+function parseDateStr(str){
+  // 'YYYY-MM-DD' -> local Date at midnight
+  const [y,m,d] = str.split('-').map(Number);
+  return new Date(y, m-1, d);
+}
+
+function formatTime12(t){
+  if(!t) return '';
+  const [h,m] = t.split(':').map(Number);
+  const ampm = h>=12?'pm':'am';
+  const h12 = ((h+11)%12)+1;
+  return `${h12}:${pad(m)}${ampm}`;
+}
+
+const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+const MON = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const MON_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function dateHeadingLabel(dateStr){
+  const d = parseDateStr(dateStr);
+  const today = new Date(); today.setHours(0,0,0,0);
+  const diffDays = Math.round((d - today) / 86400000);
+  if(diffDays === 0) return "Today";
+  if(diffDays === 1) return "Tomorrow";
+  if(diffDays > 1 && diffDays < 7) return DOW[d.getDay()].charAt(0)+DOW[d.getDay()].slice(1).toLowerCase();
+  return `${MON_FULL[d.getMonth()]} ${d.getDate()}`;
+}
+
+/* =========================================================
+   Rendering — List view
+   ========================================================= */
+function currentFilteredSorted(){
+  const q = ($('#searchInput').value || '').trim().toLowerCase();
+  const today = new Date(); today.setHours(0,0,0,0);
+  let list = allEvents.filter(e => {
+    const d = parseDateStr(e.dateStr);
+    if(d < today) return false; // upcoming only on the board
+    if(!q) return true;
+    const hay = `${e.student} ${e.eventName} ${e.location} ${e.notes}`.toLowerCase();
+    return hay.includes(q);
+  });
+  list.sort((a,b) => (a.dateStr+  (a.time||'99:99')).localeCompare(b.dateStr + (b.time||'99:99')));
+  return list;
+}
+
+function render(){
+  if(currentView === 'list') renderList(); else renderCalendar();
+  $('#adminStatus').textContent = isAdmin ? "Signed in as leader" : "";
+  $('#adminToggle').textContent = isAdmin ? "Sign out" : "Leader sign-in";
+}
+
+function renderList(){
+  const container = $('#eventsContainer');
+  const list = currentFilteredSorted();
+  $('#emptyState').style.display = list.length ? 'none' : 'block';
+  container.innerHTML = '';
+  let lastDateStr = null;
+
+  list.forEach(e => {
+    if(e.dateStr !== lastDateStr){
+      const h = document.createElement('div');
+      h.className = 'date-heading';
+      h.textContent = dateHeadingLabel(e.dateStr);
+      container.appendChild(h);
+      lastDateStr = e.dateStr;
+    }
+    container.appendChild(renderTicket(e));
+  });
+}
+
+function renderTicket(e){
+  const d = parseDateStr(e.dateStr);
+  const canEdit = isAdmin || e.ownerId === deviceId;
+  const el = document.createElement('div');
+  el.className = 'ticket' + (e.highlight ? ' highlight' : '');
+
+  const metaBits = [];
+  if(e.time) metaBits.push(`<span class="mono">🕓 ${formatTime12(e.time)}</span>`);
+  if(e.location) metaBits.push(`<span>📍 ${escapeHtml(e.location)}</span>`);
+
+  el.innerHTML = `
+    <div class="ticket-date">
+      <span class="dow">${DOW[d.getDay()]}</span>
+      <span class="day">${d.getDate()}</span>
+      <span class="mon">${MON[d.getMonth()]}</span>
+    </div>
+    <div class="perf"></div>
+    <div class="ticket-body">
+      <div class="ticket-top">
+        <div>
+          <p class="who">${escapeHtml(e.student)}</p>
+          <p class="what">${escapeHtml(e.eventName)}</p>
+        </div>
+        <button class="star-btn ${e.highlight?'on':''}" data-id="${e.id}" data-action="star" aria-label="${e.highlight?'Remove highlight':'Highlight this event'}">${e.highlight?'★':'☆'}</button>
+      </div>
+      ${metaBits.length ? `<div class="meta-row">${metaBits.join('')}</div>` : ''}
+      ${e.notes ? `<div class="notes">${escapeHtml(e.notes)}</div>` : ''}
+      ${canEdit ? `
+        <div class="ticket-footer">
+          <button class="link-btn" data-id="${e.id}" data-action="edit">Edit</button>
+          <button class="link-btn danger" data-id="${e.id}" data-action="delete">Remove</button>
+        </div>` : ''}
+    </div>
+  `;
+  return el;
+}
+
+function escapeHtml(str){
+  if(!str) return '';
+  return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-action]');
+  if(!btn) return;
+  const id = btn.dataset.id;
+  const action = btn.dataset.action;
+  const ev = allEvents.find(x => x.id === id);
+  if(!ev) return;
+
+  if(action === 'star'){
+    eventsRef.doc(id).update({ highlight: !ev.highlight });
+  } else if(action === 'edit'){
+    openEventSheet(ev);
+  } else if(action === 'delete'){
+    if(confirm(`Remove "${ev.eventName}" from the board?`)){
+      eventsRef.doc(id).delete();
+      showToast('Removed from the board');
+    }
+  }
+});
+
+/* =========================================================
+   Rendering — Calendar view
+   ========================================================= */
+function renderCalendar(){
+  const wrap = $('#calendarView');
+  const y = calMonth.getFullYear(), m = calMonth.getMonth();
+  const firstDow = new Date(y,m,1).getDay();
+  const daysInMonth = new Date(y,m+1,0).getDate();
+  const todayStr = toDateStr(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
+
+  const eventsByDate = {};
+  allEvents.forEach(e => { (eventsByDate[e.dateStr] = eventsByDate[e.dateStr] || []).push(e); });
+
+  let cells = '';
+  for(let i=0;i<firstDow;i++) cells += `<div class="cal-cell"></div>`;
+  for(let day=1; day<=daysInMonth; day++){
+    const ds = toDateStr(y, m+1, day);
+    const has = !!eventsByDate[ds];
+    const anyHighlight = has && eventsByDate[ds].some(e=>e.highlight);
+    const classes = ['cal-cell'];
+    if(has) classes.push('has-events');
+    if(ds === todayStr) classes.push('today');
+    if(ds === calSelectedDate) classes.push('selected');
+    cells += `<div class="${classes.join(' ')}" data-date="${ds}">
+      <span>${day}</span>
+      ${has ? `<span class="cal-dot ${anyHighlight?'gold':''}"></span>` : ''}
+    </div>`;
+  }
+
+  let selectedListHtml = '';
+  if(calSelectedDate && eventsByDate[calSelectedDate]){
+    const evs = eventsByDate[calSelectedDate].slice().sort((a,b)=>(a.time||'99:99').localeCompare(b.time||'99:99'));
+    selectedListHtml = `<div class="date-heading">${dateHeadingLabel(calSelectedDate)}</div>` +
+      `<div id="calDayEvents"></div>`;
+  }
+
+  wrap.innerHTML = `
+    <div class="cal-wrap">
+      <div class="cal-head">
+        <button class="cal-nav" id="calPrev" aria-label="Previous month">‹</button>
+        <span class="lab">${MON_FULL[m]} ${y}</span>
+        <button class="cal-nav" id="calNext" aria-label="Next month">›</button>
+      </div>
+      <div class="cal-grid">
+        ${DOW.map(d=>`<div class="cal-dow">${d.slice(0,1)}</div>`).join('')}
+        ${cells}
+      </div>
+    </div>
+    ${selectedListHtml}
+  `;
+
+  $('#calPrev').onclick = () => { calMonth.setMonth(calMonth.getMonth()-1); renderCalendar(); };
+  $('#calNext').onclick = () => { calMonth.setMonth(calMonth.getMonth()+1); renderCalendar(); };
+  $$('.cal-cell.has-events').forEach(c => {
+    c.onclick = () => { calSelectedDate = c.dataset.date === calSelectedDate ? null : c.dataset.date; renderCalendar(); };
+  });
+
+  if(calSelectedDate && eventsByDate[calSelectedDate]){
+    const container = $('#calDayEvents');
+    eventsByDate[calSelectedDate]
+      .slice().sort((a,b)=>(a.time||'99:99').localeCompare(b.time||'99:99'))
+      .forEach(e => container.appendChild(renderTicket(e)));
+  }
+}
+
+/* =========================================================
+   View toggle
+   ========================================================= */
+$('#viewListBtn').onclick = () => {
+  currentView = 'list';
+  $('#viewListBtn').classList.add('active');
+  $('#viewCalBtn').classList.remove('active');
+  $('#listView').style.display = 'block';
+  $('#calendarView').style.display = 'none';
+  render();
+};
+$('#viewCalBtn').onclick = () => {
+  currentView = 'calendar';
+  $('#viewCalBtn').classList.add('active');
+  $('#viewListBtn').classList.remove('active');
+  $('#listView').style.display = 'none';
+  $('#calendarView').style.display = 'block';
+  render();
+};
+$('#searchInput').addEventListener('input', () => { if(currentView==='list') renderList(); });
+
+/* =========================================================
+   Add / Edit sheet
+   ========================================================= */
+function openEventSheet(ev){
+  editingId = ev ? ev.id : null;
+  $('#eventSheetTitle').textContent = ev ? 'Edit event' : 'Add an event';
+  $('#saveEventBtn').textContent = ev ? 'Save changes' : 'Add to the board';
+  $('#in_student').value = ev ? ev.student : '';
+  $('#in_event').value = ev ? ev.eventName : '';
+  $('#in_date').value = ev ? ev.dateStr : '';
+  $('#in_time').value = ev ? (ev.time||'') : '';
+  $('#in_location').value = ev ? (ev.location||'') : '';
+  $('#in_notes').value = ev ? (ev.notes||'') : '';
+  $('#in_highlight').checked = ev ? !!ev.highlight : false;
+  $$('.field').forEach(f => f.classList.remove('err'));
+  $('#eventScrim').classList.add('open');
+  setTimeout(()=>$('#in_student').focus(), 50);
+}
+function closeEventSheet(){
+  $('#eventScrim').classList.remove('open');
+  editingId = null;
+}
+$('#fabAdd').onclick = () => openEventSheet(null);
+$('#cancelEventBtn').onclick = closeEventSheet;
+$('#eventScrim').addEventListener('click', e => { if(e.target.id==='eventScrim') closeEventSheet(); });
+
+$('#saveEventBtn').onclick = () => {
+  const student = $('#in_student').value.trim();
+  const eventName = $('#in_event').value.trim();
+  const dateStr = $('#in_date').value;
+  let ok = true;
+  $('#f_student').classList.toggle('err', !student); if(!student) ok=false;
+  $('#f_event').classList.toggle('err', !eventName); if(!eventName) ok=false;
+  $('#f_date').classList.toggle('err', !dateStr); if(!dateStr) ok=false;
+  if(!ok) return;
+
+  const payload = {
+    student, eventName, dateStr,
+    time: $('#in_time').value || '',
+    location: $('#in_location').value.trim(),
+    notes: $('#in_notes').value.trim(),
+    highlight: $('#in_highlight').checked,
+  };
+
+  if(editingId){
+    eventsRef.doc(editingId).update(payload).then(()=>showToast('Changes saved'));
+  } else {
+    payload.ownerId = deviceId;
+    payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+    eventsRef.add(payload).then(()=>showToast('Added to the board 🎟️'));
+  }
+  closeEventSheet();
+};
+
+/* =========================================================
+   Admin sign-in
+   ========================================================= */
+$('#adminToggle').onclick = () => {
+  if(isAdmin){
+    isAdmin = false; safeSet('isAdmin','false');
+    showToast('Signed out');
+  } else {
+    const code = prompt('Leader passcode:');
+    if(code === null) return;
+    if(code === ADMIN_PASSCODE){
+      isAdmin = true; safeSet('isAdmin','true');
+      showToast('Signed in as leader');
+    } else {
+      showToast('That passcode isn\'t right');
+    }
+  }
+  render();
+};
+
+/* =========================================================
+   Import a season — .ics / .csv
+   ========================================================= */
+$('#importBtn').onclick = () => {
+  pendingImportRows = [];
+  $('#importStep1').style.display = 'block';
+  $('#importStep2').style.display = 'none';
+  $('#in_bulk_student').value = '';
+  $('#fileInput').value = '';
+  $('#importScrim').classList.add('open');
+};
+$('#cancelImportBtn').onclick = () => $('#importScrim').classList.remove('open');
+$('#importScrim').addEventListener('click', e => { if(e.target.id==='importScrim') $('#importScrim').classList.remove('open'); });
+$('#backImportBtn').onclick = () => {
+  $('#importStep1').style.display = 'block';
+  $('#importStep2').style.display = 'none';
+};
+
+const dropZone = $('#dropZone');
+dropZone.onclick = () => $('#fileInput').click();
+dropZone.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') $('#fileInput').click(); });
+['dragenter','dragover'].forEach(evt => dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.add('drag'); }));
+['dragleave','drop'].forEach(evt => dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.remove('drag'); }));
+dropZone.addEventListener('drop', e => {
+  const file = e.dataTransfer.files[0];
+  if(file) handleImportFile(file);
+});
+$('#fileInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if(file) handleImportFile(file);
+});
+
+function handleImportFile(file){
+  const reader = new FileReader();
+  reader.onload = () => {
+    const text = reader.result;
+    const bulkStudent = $('#in_bulk_student').value.trim();
+    let rows = [];
+    try{
+      if(file.name.toLowerCase().endsWith('.ics') || text.includes('BEGIN:VCALENDAR')){
+        rows = parseICS(text, bulkStudent);
+      } else {
+        rows = parseCSV(text, bulkStudent);
+      }
+    }catch(err){
+      console.error(err);
+      showToast("Couldn't read that file — check the format and try again.");
+      return;
+    }
+    if(!rows.length){
+      showToast("No events found in that file.");
+      return;
+    }
+    pendingImportRows = rows;
+    showImportPreview();
+  };
+  reader.readAsText(file);
+}
+
+function parseICS(text, bulkStudent){
+  const lines = text.split(/\r\n|\n|\r/);
+  const events = [];
+  let cur = null;
+  lines.forEach(rawLine => {
+    const line = rawLine;
+    if(line.startsWith('BEGIN:VEVENT')){ cur = {}; }
+    else if(line.startsWith('END:VEVENT')){ if(cur) events.push(cur); cur=null; }
+    else if(cur){
+      const idx = line.indexOf(':');
+      if(idx === -1) return;
+      let key = line.slice(0, idx);
+      const val = line.slice(idx+1);
+      key = key.split(';')[0];
+      if(key === 'SUMMARY') cur.summary = val;
+      else if(key === 'LOCATION') cur.location = val.replace(/\\,/g, ',');
+      else if(key === 'DESCRIPTION') cur.description = val.replace(/\\n/g, ' ').replace(/\\,/g, ',');
+      else if(key === 'DTSTART'){ const p = parseICSDate(val); cur.dateStr = p.dateStr; cur.time = p.time; }
+    }
+  });
+  return events.map(e => ({
+    student: bulkStudent,
+    eventName: e.summary || 'Untitled event',
+    dateStr: e.dateStr || '',
+    time: e.time || '',
+    location: e.location || '',
+    notes: e.description || '',
+    highlight: false,
+    include: !!e.dateStr,
+  })).filter(e => e.dateStr);
+}
+
+function parseICSDate(val){
+  // formats: 20260815T180000Z or 20260815T180000 or 20260815
+  const m = val.match(/^(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2}))?/);
+  if(!m) return { dateStr:'', time:'' };
+  const dateStr = `${m[1]}-${m[2]}-${m[3]}`;
+  const time = m[5] ? `${m[5]}:${m[6]}` : '';
+  return { dateStr, time };
+}
+
+function parseCSV(text, bulkStudent){
+  const lines = text.split(/\r\n|\n|\r/).filter(l => l.trim().length);
+  if(!lines.length) return [];
+  const splitLine = l => {
+    // basic CSV split respecting quoted fields
+    const out = []; let cur=''; let inQ=false;
+    for(let i=0;i<l.length;i++){
+      const c = l[i];
+      if(c === '"'){ inQ = !inQ; }
+      else if(c === ',' && !inQ){ out.push(cur); cur=''; }
+      else cur += c;
+    }
+    out.push(cur);
+    return out.map(s=>s.trim().replace(/^"|"$/g,''));
+  };
+  const header = splitLine(lines[0]).map(h=>h.toLowerCase());
+  const find = (names) => header.findIndex(h => names.some(n => h.includes(n)));
+  const iStudent = find(['student','name','who']);
+  const iEvent = find(['event','title','summary']);
+  const iDate = find(['date']);
+  const iTime = find(['time']);
+  const iLoc = find(['location','place','where']);
+  const iNotes = find(['note','description']);
+
+  const rows = lines.slice(1).map(line => {
+    const cols = splitLine(line);
+    const dateRaw = iDate>=0 ? cols[iDate] : '';
+    return {
+      student: (iStudent>=0 && cols[iStudent]) ? cols[iStudent] : bulkStudent,
+      eventName: iEvent>=0 ? cols[iEvent] : '',
+      dateStr: normalizeCSVDate(dateRaw),
+      time: iTime>=0 ? normalizeCSVTime(cols[iTime]) : '',
+      location: iLoc>=0 ? cols[iLoc] : '',
+      notes: iNotes>=0 ? cols[iNotes] : '',
+      highlight: false,
+      include: true,
+    };
+  }).filter(r => r.eventName && r.dateStr);
+  return rows;
+}
+
+function normalizeCSVDate(raw){
+  if(!raw) return '';
+  raw = raw.trim();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  const m = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+  if(m){
+    let [_, mo, da, yr] = m;
+    if(yr.length===2) yr = '20'+yr;
+    return `${yr}-${pad(+mo)}-${pad(+da)}`;
+  }
+  const d = new Date(raw);
+  if(!isNaN(d)) return toDateStr(d.getFullYear(), d.getMonth()+1, d.getDate());
+  return '';
+}
+function normalizeCSVTime(raw){
+  if(!raw) return '';
+  raw = raw.trim();
+  if(/^\d{1,2}:\d{2}$/.test(raw)) return raw.length===4?'0'+raw:raw;
+  const m = raw.match(/^(\d{1,2}):(\d{2})\s*(am|pm)$/i);
+  if(m){
+    let h = +m[1]; const min = m[2]; const ap = m[3].toLowerCase();
+    if(ap==='pm' && h!==12) h+=12;
+    if(ap==='am' && h===12) h=0;
+    return `${pad(h)}:${min}`;
+  }
+  return '';
+}
+
+function showImportPreview(){
+  $('#importStep1').style.display = 'none';
+  $('#importStep2').style.display = 'block';
+  $('#importCount').textContent = `Found ${pendingImportRows.length} event${pendingImportRows.length===1?'':'s'}. Uncheck any you don't want, star any you'd like to highlight.`;
+  renderPreviewList();
+}
+
+function renderPreviewList(){
+  const container = $('#previewList');
+  container.innerHTML = '';
+  pendingImportRows.forEach((row, i) => {
+    const el = document.createElement('div');
+    el.className = 'preview-row';
+    const d = row.dateStr ? parseDateStr(row.dateStr) : null;
+    const dateLabel = d ? `${MON[d.getMonth()]} ${d.getDate()}` : '—';
+    el.innerHTML = `
+      <input type="checkbox" ${row.include?'checked':''} data-i="${i}" data-role="inc">
+      <div class="pr-main">
+        <div class="pr-title">${escapeHtml(row.eventName)}</div>
+        <div class="pr-meta">${dateLabel}${row.time?' · '+formatTime12(row.time):''}${row.location?' · '+escapeHtml(row.location):''}</div>
+      </div>
+      <button class="pr-star ${row.highlight?'on':''}" data-i="${i}" data-role="star">${row.highlight?'★':'☆'}</button>
+    `;
+    container.appendChild(el);
+  });
+}
+$('#previewList').addEventListener('change', e => {
+  if(e.target.dataset.role === 'inc'){
+    pendingImportRows[+e.target.dataset.i].include = e.target.checked;
+  }
+});
+$('#previewList').addEventListener('click', e => {
+  const btn = e.target.closest('[data-role="star"]');
+  if(!btn) return;
+  const row = pendingImportRows[+btn.dataset.i];
+  row.highlight = !row.highlight;
+  renderPreviewList();
+});
+
+$('#confirmImportBtn').onclick = async () => {
+  const toAdd = pendingImportRows.filter(r => r.include);
+  if(!toAdd.length){ showToast('Nothing selected to add'); return; }
+  $('#confirmImportBtn').disabled = true;
+  $('#confirmImportBtn').textContent = 'Adding…';
+  try{
+    const batch = db.batch();
+    toAdd.forEach(row => {
+      const ref = eventsRef.doc();
+      batch.set(ref, {
+        student: row.student || '',
+        eventName: row.eventName,
+        dateStr: row.dateStr,
+        time: row.time || '',
+        location: row.location || '',
+        notes: row.notes || '',
+        highlight: row.highlight,
+        ownerId: deviceId,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+    });
+    await batch.commit();
+    showToast(`Added ${toAdd.length} events 🎟️`);
+    $('#importScrim').classList.remove('open');
+  }catch(err){
+    console.error(err);
+    showToast("Something went wrong adding those — try again.");
+  }
+  $('#confirmImportBtn').disabled = false;
+  $('#confirmImportBtn').textContent = 'Add these to the board';
+};
+
+/* initial paint */
+render();
+</script>
+</body>
+</html>
