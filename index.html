@@ -368,6 +368,22 @@
   .field.err .field-err{display:block;}
   .field-hint{color:var(--ink-soft); font-size:12px; margin-top:5px; line-height:1.4;}
 
+  .name-rows{display:flex; flex-direction:column; gap:8px;}
+  .name-row{display:flex; gap:8px; align-items:center;}
+  .name-row .name-input{flex:1;}
+  .name-row .name-remove{
+    flex-shrink:0; width:32px; height:32px; border-radius:8px;
+    background:var(--white); border:1.5px solid var(--rule); color:var(--ink-soft);
+    cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center;
+    padding:0;
+  }
+  .name-row .name-remove:hover{color:var(--crimson); border-color:var(--crimson);}
+  .add-name-btn{
+    margin-top:8px; background:none; border:none; padding:0; cursor:pointer;
+    font-family:'Libre Franklin', sans-serif; font-weight:600; font-size:13px;
+    color:var(--gold-solid); text-decoration:underline; text-underline-offset:2px;
+  }
+
   .level-toggle{
     display:flex; gap:8px;
   }
@@ -524,9 +540,10 @@
     <p class="sheet-sub">Fill in what you know — location and notes are optional.</p>
 
     <div class="field" id="f_student">
-      <label for="in_student">Student's name</label>
-      <input type="text" id="in_student" placeholder="e.g. Beth Elliot" maxlength="80">
-      <div class="field-err">Add the student's name so people know who to cheer for.</div>
+      <label>Student name(s)</label>
+      <div class="name-rows" id="studentNameRows"></div>
+      <button type="button" class="add-name-btn" id="addStudentNameBtn">+ Add another student</button>
+      <div class="field-err">Add at least one student's name so people know who to cheer for.</div>
     </div>
     <div class="field" id="f_event">
       <label for="in_event">Event name</label>
@@ -583,8 +600,9 @@
 
     <div id="importStep1">
       <div class="field">
-        <label for="in_bulk_student">Whose season is this?</label>
-        <input type="text" id="in_bulk_student" placeholder="e.g. Beth Elliot">
+        <label>Whose season is this?</label>
+        <div class="name-rows" id="bulkNameRows"></div>
+        <button type="button" class="add-name-btn" id="addBulkNameBtn">+ Add another student</button>
       </div>
       <div class="field">
         <label for="in_bulk_link">Link to details or tickets (optional)</label>
@@ -936,6 +954,40 @@ function escapeHtml(str){
   return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
+/* =========================================================
+   Multi-name fields (student names) — reusable rows
+   ========================================================= */
+function createNameRow(wrapEl, value){
+  const row = document.createElement('div');
+  row.className = 'name-row';
+  row.innerHTML = `
+    <input type="text" class="name-input" placeholder="e.g. Beth Elliot" maxlength="80">
+    <button type="button" class="name-remove" aria-label="Remove this name">✕</button>
+  `;
+  row.querySelector('.name-input').value = value || '';
+  row.querySelector('.name-remove').onclick = () => {
+    if(wrapEl.querySelectorAll('.name-row').length > 1){
+      row.remove();
+    } else {
+      row.querySelector('.name-input').value = '';
+    }
+  };
+  wrapEl.appendChild(row);
+  return row;
+}
+function setNameRows(wrapEl, namesStr){
+  wrapEl.innerHTML = '';
+  const names = (namesStr || '').split(',').map(s => s.trim()).filter(Boolean);
+  if(!names.length) names.push('');
+  names.forEach(n => createNameRow(wrapEl, n));
+}
+function getNamesValue(wrapEl){
+  return Array.from(wrapEl.querySelectorAll('.name-input'))
+    .map(i => i.value.trim())
+    .filter(Boolean)
+    .join(', ');
+}
+
 document.addEventListener('click', e => {
   const lbtn = e.target.closest('.level-btn');
   if(lbtn){
@@ -1105,7 +1157,7 @@ function openEventSheet(ev, opts){
   editingId = (ev && !isDup) ? ev.id : null;
   $('#eventSheetTitle').textContent = isDup ? 'Duplicate event' : (editingId ? 'Edit event' : 'Add an event');
   $('#saveEventBtn').textContent = editingId ? 'Save changes' : 'Add to the board';
-  $('#in_student').value = ev ? ev.student : '';
+  setNameRows($('#studentNameRows'), ev ? ev.student : '');
   $('#in_event').value = ev ? ev.eventName : '';
   $('#in_date').value = ev ? ev.dateStr : '';
   $('#in_time').value = ev ? (ev.time||'') : '';
@@ -1123,7 +1175,7 @@ function openEventSheet(ev, opts){
   $$('.field').forEach(f => f.classList.remove('err'));
   $('#hp_field').value = '';
   $('#eventScrim').classList.add('open');
-  setTimeout(()=>$('#in_student').focus(), 50);
+  setTimeout(()=>{ const first = $('#studentNameRows .name-input'); if(first) first.focus(); }, 50);
 }
 function closeEventSheet(){
   $('#eventScrim').classList.remove('open');
@@ -1133,6 +1185,10 @@ $('#fabAdd').onclick = () => openEventSheet(null);
 $('#addEventTopBtn').onclick = () => openEventSheet(null);
 $('#cancelEventBtn').onclick = closeEventSheet;
 $('#closeEventBtn').onclick = closeEventSheet;
+$('#addStudentNameBtn').onclick = () => {
+  const row = createNameRow($('#studentNameRows'), '');
+  row.querySelector('.name-input').focus();
+};
 $('#eventScrim').addEventListener('click', e => { if(e.target.id==='eventScrim') closeEventSheet(); });
 
 let isSavingEvent = false;
@@ -1144,7 +1200,7 @@ $('#saveEventBtn').onclick = () => {
     showToast('Added to the board 🎟️');
     return;
   }
-  const student = $('#in_student').value.trim();
+  const student = getNamesValue($('#studentNameRows'));
   const eventName = $('#in_event').value.trim();
   const dateStr = $('#in_date').value;
   const level = $('#levelToggle').dataset.selected;
@@ -1207,7 +1263,7 @@ $('#importBtn').onclick = () => {
   pendingImportRows = [];
   $('#importStep1').style.display = 'block';
   $('#importStep2').style.display = 'none';
-  $('#in_bulk_student').value = '';
+  setNameRows($('#bulkNameRows'), '');
   $('#in_bulk_link').value = '';
   $('#fileInput').value = '';
   const bulkGroup = $('#bulkLevelToggle');
@@ -1215,6 +1271,10 @@ $('#importBtn').onclick = () => {
   bulkGroup.dataset.selected = '';
   $('#f_bulk_level .level-field-err').classList.remove('show');
   $('#importScrim').classList.add('open');
+};
+$('#addBulkNameBtn').onclick = () => {
+  const row = createNameRow($('#bulkNameRows'), '');
+  row.querySelector('.name-input').focus();
 };
 $('#cancelImportBtn').onclick = () => $('#importScrim').classList.remove('open');
 $('#importScrim').addEventListener('click', e => { if(e.target.id==='importScrim') $('#importScrim').classList.remove('open'); });
@@ -1247,7 +1307,7 @@ function handleImportFile(file){
   const reader = new FileReader();
   reader.onload = () => {
     const text = reader.result;
-    const bulkStudent = $('#in_bulk_student').value.trim();
+    const bulkStudent = getNamesValue($('#bulkNameRows'));
     const bulkLink = normalizeUrl($('#in_bulk_link').value.trim());
     let rows = [];
     try{
@@ -1508,6 +1568,8 @@ $('#confirmImportBtn').onclick = async () => {
 })();
 
 /* initial paint */
+setNameRows($('#studentNameRows'), '');
+setNameRows($('#bulkNameRows'), '');
 render();
 </script>
 </body>
