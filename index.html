@@ -1347,12 +1347,26 @@ function handleImportFile(file){
         if(!window.pdfjsLib) throw new Error('pdf.js not loaded');
         const pdf = await pdfjsLib.getDocument({ data: reader.result }).promise;
         let lines = [];
+        let columnarRows = [];
         for(let p = 1; p <= pdf.numPages; p++){
           const page = await pdf.getPage(p);
           const textContent = await page.getTextContent();
-          lines = lines.concat(pdfLinesFromTextContent(textContent));
+          const items = pdfCleanItems(textContent);
+          lines = lines.concat(pdfLinesFromItems(items));
+          const rows = pdfColumnarRowsFromPage(items);
+          if(rows && rows.length) columnarRows = columnarRows.concat(rows);
         }
-        const rows = parsePDFLines(lines, bulkStudent, bulkLevel, bulkLink);
+        let rows;
+        if(columnarRows.length){
+          // Table-style PDF with wrapped multi-line cells (Calendar/Event/Date/Location columns)
+          rows = columnarRows.map(r => ({
+            student: bulkStudent, eventName: r.eventName, dateStr: r.dateStr, time: r.time,
+            location: r.location, link: bulkLink || '', notes: '', level: bulkLevel, include: true,
+          }));
+        } else {
+          // Simple one-line-per-event PDF
+          rows = parsePDFLines(lines, bulkStudent, bulkLevel, bulkLink);
+        }
         finish(rows, rows.length ? null : "Couldn't find any dated rows in that PDF — a .csv or .xlsx export usually works better.");
       }catch(err){
         console.error(err);
@@ -1507,35 +1521,51 @@ function parseCSV(text, bulkStudent, bulkLevel, bulkLink){
 }
 
 /* =========================================================
-   PDF schedule parsing — reconstruct lines from text
-   positions, then pull out date/time/location by pattern
-   since PDFs don't preserve real table columns
+   PDF schedule parsing
+   Two strategies, since school PDFs vary a lot:
+   A) one line per event (date/time/location all on one row)
+   B) a real table with wrapped multi-line cells (Calendar/
+      Event/Date/Location columns) — reconstructed using each
+      text item's on-page position, anchored by the day-of-week
+      that starts every Date cell
    ========================================================= */
-function pdfLinesFromTextContent(textContent){
-  const items = (textContent.items || []).filter(it => it.str && it.str.trim());
-  items.sort((a,b) => b.transform[5] - a.transform[5] || a.transform[4] - b.transform[4]);
+function pdfCleanItems(textContent){
+  const isJunk = str => {
+    const t = str.trim();
+    if(!t) return true;
+    if(/^\d+\/\d+$/.test(t)) return true;        // page "1/5" footers
+    if(/^[\uE000-\uF8FF\s]+$/.test(t)) return true; // icon glyphs (social links etc.)
+    return false;
+  };
+  return (textContent.items || [])
+    .filter(it => it.str && !isJunk(it.str))
+    .map(it => ({ str: it.str, x: it.transform[4], sortY: -it.transform[5] }));
+}
+
+/* ---- Strategy A: one line per event ---- */
+function pdfLinesFromItems(items){
+  const sorted = items.slice().sort((a,b) => a.sortY - b.sortY || a.x - b.x);
   const groups = [];
   let current = null;
   let currentY = null;
   const tolerance = 3;
-  items.forEach(it => {
-    const y = it.transform[5];
-    if(current === null || Math.abs(y - currentY) > tolerance){
+  sorted.forEach(it => {
+    if(current === null || Math.abs(it.sortY - currentY) > tolerance){
       current = [];
       groups.push(current);
-      currentY = y;
+      currentY = it.sortY;
     }
     current.push(it);
   });
   return groups
-    .map(g => g.sort((a,b) => a.transform[4]-b.transform[4]).map(it => it.str).join(' ').replace(/\s+/g,' ').trim())
+    .map(g => g.sort((a,b) => a.x-b.x).map(it => it.str).join(' ').replace(/\s+/g,' ').trim())
     .filter(Boolean);
 }
 
 function parsePDFLine(line){
   const dayRe = /\b(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)\b/i;
   const dateRe = /\b(\d{1,2})\/(\d{1,2})\/(\d{2,4})\b/;
-  const timeRe = /\b(\d{1,2}:\d{2}\s*[APap][Mm]|TBA)\b/g;
+  const timeRe = /\b(\d{1,2}:\d{2}\s*[APap][Mm]|TBA|TBD)\b/g;
 
   const dateMatch = dateRe.exec(line);
   if(!dateMatch) return null;
@@ -1553,7 +1583,7 @@ function parsePDFLine(line){
   if(!eventName) return null;
 
   let time = '';
-  if(times.length && !/tba/i.test(times[0].text)){
+  if(times.length && !/tb[ad]/i.test(times[0].text)){
     const t = times[0].text.match(/(\d{1,2}):(\d{2})\s*([APap][Mm])/);
     if(t){
       let hh = parseInt(t[1],10);
@@ -1595,6 +1625,90 @@ function parsePDFLines(lines, bulkStudent, bulkLevel, bulkLink){
     });
   });
   return rows;
+}
+
+/* ---- Strategy B: real table with wrapped multi-line cells ---- */
+const PDF_MONTHS = { jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,sept:9,oct:10,nov:11,dec:12 };
+
+function detectPDFColumns(items){
+  const wanted = ['calendar','event','date','location'];
+  const found = {};
+  items.forEach(it => {
+    const t = it.str.trim().toLowerCase();
+    if(wanted.includes(t) && !(t in found)) found[t] = it.x;
+  });
+  if(!('event' in found) || !('date' in found)) return null;
+  return Object.entries(found).sort((a,b) => a[1]-b[1]).map(([name,x]) => ({ name, x }));
+}
+
+function assignPDFColumn(x, cols){
+  let idx = 0;
+  for(let i=0;i<cols.length;i++){
+    if(cols[i].x <= x + 10) idx = i; else break;
+  }
+  return cols[idx].name;
+}
+
+function parsePDFDateColText(text){
+  const m = text.match(/\b([A-Za-z]{3,9})\.?\s+(\d{1,2})\s+(\d{4})\b/);
+  if(!m) return '';
+  const key = m[1].toLowerCase();
+  const mon = PDF_MONTHS[key.slice(0,4)] || PDF_MONTHS[key.slice(0,3)];
+  if(!mon) return '';
+  return `${m[3]}-${pad(mon)}-${pad(+m[2])}`;
+}
+function parsePDFTimeColText(text){
+  const m = text.match(/\b(\d{1,2}:\d{2}\s*[APap][Mm]|TBA|TBD)\b/);
+  if(!m || /tb[ad]/i.test(m[0])) return '';
+  const t = m[0].match(/(\d{1,2}):(\d{2})\s*([APap][Mm])/);
+  if(!t) return '';
+  let hh = parseInt(t[1],10);
+  const mm = t[2];
+  const ap = t[3].toLowerCase();
+  if(ap==='pm' && hh!==12) hh += 12;
+  if(ap==='am' && hh===12) hh = 0;
+  return `${pad(hh)}:${mm}`;
+}
+function expandHomeAway(text){
+  return text.replace(/\(H\)/g, '(Home)').replace(/\(A\)/g, '(Away)');
+}
+
+function pdfColumnarRowsFromPage(items){
+  const cols = detectPDFColumns(items);
+  if(!cols) return null;
+  const dayRe = /^(Sun|Mon|Tue|Wed|Thu|Fri|Sat)/i;
+  const anchors = items
+    .filter(it => assignPDFColumn(it.x, cols) === 'date' && dayRe.test(it.str.trim()))
+    .map(it => it.sortY)
+    .sort((a,b) => a-b);
+  if(!anchors.length) return [];
+
+  const rows = anchors.map(() => ({}));
+  items.forEach(it => {
+    if(it.sortY < anchors[0]) return; // header text, or a stray row-continuation from a prior page
+    let rowIdx = anchors.length - 1;
+    for(let i=0;i<anchors.length-1;i++){
+      if(it.sortY >= anchors[i] && it.sortY < anchors[i+1]){ rowIdx = i; break; }
+    }
+    const colName = assignPDFColumn(it.x, cols);
+    if(!rows[rowIdx][colName]) rows[rowIdx][colName] = [];
+    rows[rowIdx][colName].push(it);
+  });
+
+  return rows.map(row => {
+    const colText = name => (row[name]||[])
+      .sort((a,b) => a.sortY-b.sortY)
+      .map(x => x.str).join(' ').replace(/\s+/g,' ').trim();
+    const dateStr = parsePDFDateColText(colText('date'));
+    const eventName = expandHomeAway(colText('event'));
+    if(!dateStr || !eventName) return null;
+    return {
+      eventName,
+      dateStr,
+      time: parsePDFTimeColText(colText('date')),
+      location: colText('location'),
+    };
+  }).filter(Boolean);
 }
 
 function normalizeCSVDate(raw){
