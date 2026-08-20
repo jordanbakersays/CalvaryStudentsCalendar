@@ -179,6 +179,10 @@
     overflow:hidden;
     border:1px solid rgba(247,245,240,0.06);
   }
+  .ticket.admin-highlight{
+    border:1.5px solid var(--gold-solid);
+    box-shadow: 0 2px 0 rgba(242,194,48,0.2), 0 10px 22px -10px rgba(242,194,48,0.5);
+  }
   .ticket-date{
     flex:0 0 74px;
     background:var(--crimson);
@@ -371,6 +375,35 @@
   .field.err input, .field.err textarea{border-color:var(--crimson);}
   .field.err .field-err{display:block;}
   .field-hint{color:var(--ink-soft); font-size:12px; margin-top:5px; line-height:1.4;}
+
+  .admin-panel{
+    margin-top:6px; padding:12px 14px; border:1.5px dashed var(--gold-solid); border-radius:10px;
+    background: rgba(242,194,48,0.06);
+  }
+  .admin-panel-label{
+    font-family:'Space Mono', monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--gold-solid); margin:0 0 10px;
+  }
+  .admin-highlight-toggle{
+    display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
+    font-weight:600; font-size:14px; color:var(--ink);
+  }
+  .admin-highlight-toggle input{width:18px; height:18px; accent-color:var(--gold-solid);}
+  .field-hint-inline{font-weight:400; color:var(--ink-soft); font-size:11px; text-transform:none; letter-spacing:normal;}
+
+  .admin-badge{
+    display:inline-flex; align-items:center; gap:3px;
+    font-family:'Space Mono', monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.05em;
+    background:var(--gold); color:#000; padding:2px 8px; border-radius:999px; margin-bottom:5px;
+  }
+  .admin-note{
+    background: rgba(242,194,48,0.08); border:1px solid rgba(242,194,48,0.35); border-radius:8px;
+    padding:8px 10px; margin-top:6px; font-size:13px; color:var(--ink); line-height:1.4;
+  }
+  .admin-note .lab{
+    font-weight:700; color:var(--gold-solid); margin-right:5px; font-size:10.5px;
+    text-transform:uppercase; letter-spacing:0.05em;
+  }
 
   .name-rows{display:flex; flex-direction:column; gap:8px;}
   .name-row{display:flex; gap:8px; align-items:center;}
@@ -584,6 +617,18 @@
     <div class="field" id="f_notes">
       <label for="in_notes">Notes</label>
       <textarea id="in_notes" placeholder="Anything else people should know — parking, arrival time, cost…" maxlength="600"></textarea>
+    </div>
+
+    <div class="admin-panel" id="adminPanel" style="display:none;">
+      <p class="admin-panel-label">Admin only</p>
+      <label class="admin-highlight-toggle" for="in_admin_highlight">
+        <input type="checkbox" id="in_admin_highlight">
+        <span>★ Highlight this event</span>
+      </label>
+      <div class="field" style="margin-top:10px;">
+        <label for="in_admin_note">Admin note <span class="field-hint-inline">(visible to everyone)</span></label>
+        <textarea id="in_admin_note" placeholder="e.g. Several students are in this one!" maxlength="300"></textarea>
+      </div>
     </div>
 
     <button class="btn-primary" id="saveEventBtn" type="button">Add to the board</button>
@@ -920,7 +965,7 @@ function renderTicket(e){
   const d = parseDateStr(e.dateStr);
   const canEdit = isAdmin || e.ownerId === deviceId;
   const el = document.createElement('div');
-  el.className = 'ticket';
+  el.className = 'ticket' + (e.adminHighlight ? ' admin-highlight' : '');
 
   const metaBits = [];
   if(e.time) metaBits.push(`<span class="mono">${icon('clock')} ${formatTime12(e.time)}</span>`);
@@ -937,11 +982,13 @@ function renderTicket(e){
     <div class="ticket-body">
       <div class="ticket-top">
         <div>
+          ${e.adminHighlight ? '<span class="admin-badge">★ Highlighted</span>' : ''}
           <p class="who">${escapeHtml(e.student)}</p>
           <p class="what">${escapeHtml(e.eventName)}</p>
         </div>
       </div>
       ${metaBits.length ? `<div class="meta-row">${metaBits.join('')}</div>` : ''}
+      ${e.adminNote ? `<div class="admin-note"><span class="lab">Note</span>${escapeHtml(e.adminNote)}</div>` : ''}
       ${e.notes ? `<div class="notes">${escapeHtml(e.notes)}</div>` : ''}
       <div class="ticket-footer">
         <button class="link-btn" data-id="${e.id}" data-action="addcal">${icon('calendar')} Add to my calendar</button>
@@ -1172,6 +1219,14 @@ function openEventSheet(ev, opts){
   $('#in_location').value = ev ? (ev.location||'') : '';
   $('#in_link').value = ev ? (ev.link||'') : '';
   $('#in_notes').value = ev ? (ev.notes||'') : '';
+  const adminPanel = $('#adminPanel');
+  if(isAdmin){
+    adminPanel.style.display = 'block';
+    $('#in_admin_highlight').checked = ev ? !!ev.adminHighlight : false;
+    $('#in_admin_note').value = ev ? (ev.adminNote || '') : '';
+  } else {
+    adminPanel.style.display = 'none';
+  }
   const levelGroup = $('#levelToggle');
   levelGroup.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
   levelGroup.dataset.selected = '';
@@ -1226,6 +1281,10 @@ $('#saveEventBtn').onclick = () => {
     link: normalizeUrl($('#in_link').value.trim()),
     notes: $('#in_notes').value.trim(),
   };
+  if(isAdmin){
+    payload.adminHighlight = $('#in_admin_highlight').checked;
+    payload.adminNote = $('#in_admin_note').value.trim();
+  }
 
   isSavingEvent = true;
   $('#saveEventBtn').disabled = true;
