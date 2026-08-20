@@ -988,7 +988,7 @@ function renderTicket(e){
         </div>
       </div>
       ${metaBits.length ? `<div class="meta-row">${metaBits.join('')}</div>` : ''}
-      ${e.adminNote ? `<div class="admin-note"><span class="lab">Note</span>${escapeHtml(e.adminNote)}</div>` : ''}
+      ${e.adminNote ? `<div class="admin-note"><span class="lab">Admin Note</span>${escapeHtml(e.adminNote)}</div>` : ''}
       ${e.notes ? `<div class="notes">${escapeHtml(e.notes)}</div>` : ''}
       <div class="ticket-footer">
         <button class="link-btn" data-id="${e.id}" data-action="addcal">${icon('calendar')} Add to my calendar</button>
