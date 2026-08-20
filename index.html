@@ -1,1758 +1,1756 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Volunteer Schedule</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Be There — Calvary Students</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAIUklEQVR4nO3daWxUVRjG8XM7DXYaaO1QYFCWWAQppdNGFgVqoRqWD6KAiiwKoZZAIomgRqNigIgJOyiiiSwGUSwFgiJL2SNGQOi00AI1KEIB6RRahUKny9AZP0wje3tm3nu995zz/D7pcOa+b5p/ZqadLlp0dDQDCFeE2QuA2BAQkCAgIEFAQIKAgAQBAQkCAhIEBCQICEgQEJAgICBBQECCgIAEAQEJAgISBAQkCAhIEBCQICAgQUBAgoCAJNLsBcBAntwut/6vc8gp3Udo+LEeKd2Rzq30zQgBSei/eu5o5X63UyAg2QQraSSRJg+EBC+ipcITR/BfG3mOCwkCAhIEJA/+5yYdH4QQEJAgICBBQECCgIAEAcmD/6Wxjl8KQkBAgoCkwvMgpO9XovFWhoTwXhhQ4d140AG+HwisDi+igQQBAQkCAhIEBCQICEgQEJAgICBBQECCgIDEWj/abLPZevXsQbmC3++v8/l8dXVeb/U/V/65erUyEAjosltCwiOtW7XS5VL6Kjh6rLa21qzp1norIzY25s8/ftPxgvX19Rcvlp47f/7Uqd8LC4uO5LmLi8O8/rKlS0aNGqnjbnrp2bvvmTNnzZpurUcg3dlstvbt27Vv365f3z7BWzyesm3bc7PXrXe7883dTQ7KvQZyOttkThi/M3dL7rYf09PTzF5HeMoF9J9evXps2pizbOkSSz2JC0fdgIJGjRq59cdN8fHxZi8iKtUDYoy5XMnrvluDx6HwICDGGEtNTZk5Y7rZWwgJATXInDDe5Uo2ewvxIKAGmqa9/eZUs7cQDwK6afDggQ5HnNlbCEbgLySu/vqbioqKu2+Piopq6XCkpLi6dn0spAtGRkYOGjQwOztHpwWVIHBAy1esavx9icTErh/NmpGR0Z//mk/07nW/gIqOn3Ds2h3aiow5nU5Xcneek7W1tT/t/znU6zPGvN7qMO6lF4HfC0tLf7rJN7Y0Tfv8s09GjnyR85pud/6gIc9yHuYxYvjzy7/8gudkaamnu+txHUf/PyR/DRQIBKa99c6lS5c4z3fs2MHQfeQjeUCMsZqamrVr13EejovDi+jQyB8QY+zQr4c5T9pstgeaNTN0GckoEVBZWRn/4Xq/37hN5KNEQEzTOA/W1NTcuHHD0F0ko0RAbVq35jxZ6vEYuol8lAjoySd6c54sPqnnN9SqQP6AoqKixox5mfMw/8ttCJI8IE3TFi+c15r7KWzLlm2G7iMfmQNK6pa4Iec7/i9D79y1u+TcOUNXko/A74VNnjSxouLvu2+PinrA4XCkuJK7dOnMfzW/3z9n7gL9tlOFwAG9Mna0jldb8snSY8cKdbygImR+CuP3/Q+b8fATHgTElq9YNWnylPr6erMXEZLAT2F0J4uLZ86cvWfvPrMXEZi6j0DV1dXffpud53abvYjY1A3Ibrd/PHvWiaKCqW9MiYxU+pGYQt2Agux2+4fT39+zO/ehh9qavYuQVA8oqHtSt+1bNyckPGL2IuJBQA3atXs4e+2a5s2bm72IYBDQTZ06JSyYP8fsLQQj8IvHSZNfP1tyj7euIjQtJibG4YhzuZL793+qW2Ii/zVfenHEipVf5eXhUzNeAgd04mRx4z/Wk7N+I2OsX98+CxfM7dz5Uc7LfvDeu8NfsOKvsrMm+Z/CfjlwMOOZwYeP5HGeT09P69gBP9zDS/6AGGPV1dWvjsu8fv065/lhw4Yauo9MlAiIMVZeXr5y1WrOwxkDQvhpaMWpEhBjbMeOnZwnk5KSDN1EJgoFVHD0KOdJhyPO6Wxj5C7yUCigujrftWvXOA/Ht2xp6DLSUCggxlhtXR3nyZiYGEM3kYZaAT0YG8t50m63G7qJNBQKqGOHDvzftlFj3p8vEYtCAaWl9eU/XFVVZdwmMlEooKzXJvAfvnix1LhNZKJKQBOzMvl/DbTX6718+bKh+0hDiYCysibM/mgm//mCgqN6/Zk66Qn8bnyT4uPjMwakT8zK7NEjtF9eeeDgIYNWko/AAX326eIqr/fu2yMiIlq0aNHS4Wjb1hnelTdv3kpbTSECB5SammLEZfPzC04WFxtxZSkp8RooJAsXLTF7BZEgoNvs2r0nd8cus7cQCQK6yeMpmzrtbbO3EAwCanDlytXRY8d5PCH8QmBgCCjowoW/hj43orCwyOxFxKN6QIFAICdnQ/qAZ/CZV3gE/jSeyO/379m7b978Rfn5BWbvIjDlAvL7/YWFRdu279i4cdPZkhKz1xGetAH5fD6fz1dVVVVeXlFeXl5y7vzp06eLjp9wuwsqKyvN3k4e1vqDcyAc1V9EAxECAhIEBCQICEgQEJAgICBBQECCgIAEAQEJAgISBAQkCAhIEBCQICAgQUBAgoCABAEBCQICEgQEJAgISBAQkCAgIEFAQIKAgAQBAQkCAhIEBCQICEgQEJAgICBBQECCgIAEAQEJAgISBAQkCAhIEBCQICAgQUBAgoCABAEBCQICEgQEJAgISBAQkCAgIEFAQIKAgAQBAQkCAhIEBCQICEgQEJAgICBBQECCgIAEAQFJZKqru9k7gMDwCAQkCAhItOjo6OB/eXK7hHpn76zYUO8SPeMqpsg0peERCPVgSnhTIhjqwRTCFK1yfyrl/pyE+FhgShhTQn4RLfHHAlPCmBJaQHJ/LDAljCkhBCT9xwJTwpjCG5AKHwtMCWMKV0Cmb4kplp3SdEBW2BJTLDuliYAssiWmWHZKYwFZZ0tMseyU+wZkqS0xxbJT7h2Q1bbEFMtOuUdAFtwSUyw75c6ArLklplh2ym0BWXZLTLHslJsBWXlLTLHslAji/UOCKfJNiSDenx+mSDnlX1Q1OBV+qMI0AAAAAElFTkSuQmCC">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Be There">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAH3klEQVR4nO3de1BUZRjH8bPLAiNL7DLmTMoyauUNEXEyRYeQEsO1qcymcexiaIymWU3mJStNTbtManjBG6BjBtl4v1RYk7d/8AYK2kw1mqbLjMII7g67C7sr9AeNGeyz+y6c9Zz3Pb/Pf+K7D8/qd9gbC7qYmBgJwB+90guAeiEOICEOICEOICEOICEOICEOICEOICEOICEOICEOICEOICEOICEOICEOICEOICEOICEOICEOIBmUXgA65UZp33v/+NDYP2UcrsM3GHOqTRb3kisRxMGlu2W06YD6eMcgDv60FhDgvz/oAUa4Q8oZlv/41r8NcLvDCHEACXHwhP32QpYvHogDSIgDSIgDSIgDSIiDJ+x3M2V5qgNxAAlxcIbli4dcz5Di6XMu4bUVCASvykIQ+H4OUAbukAIJcQAJcQAJcQAJcQAJcQAJcQAJcQBJLe94yxr9lNWa3bHLtrS0+Hw+j8fjdrtv37bX1dfbbNXXrl2z2apbWlo6NvPVVyYNGZLascuGw9JPl9vtjvv8SdUSx+DBKTmvvybvzIaGhgsXfysrO3nkyLFTp880NzezXzYzc9QL45+Td5/OWLkq7/7HIfLNSmxs7Ii04bPfe/fQwb2V5858MH9OfLxZ6aV4InIc9+rRo/vcObPPV5yePi1Xr9fKte4kbf0zxcbGfrZ8aUnxNqPRqPQuHNBWHK3GZI3e8d326KgopRdROy3GIUnSyBFpy5YtUXoLtdNoHJIkTcmZPOzxoUpvoWrajUOn082b+77SW6iaduOQJCkzM8NiSVB6C/VSy5NgjFwu18ZNBe0/HhFhiI83D0wakJo6OCIignGaTqezjs0uKNwi647i4CwOp9O5/LMvAxywWBIWLfzoxQnjGQempQ3zG0fZyVM+ny+k3fr17ZOSMijoMa/Xu2//wZAmS5LkcrlCvUjncRZHUDZb9bTpM+vr6nNzp7Cc79+vn9+PFxVtLSraGtKnnvXWDJY43G73mzNmhTRZKWLe51i0eOnNmzdZTiYmWsK9DL/EjKOpqWn/gUMsJ41Go8Eg2pdPuYgZhyRJ5yurGE9GR0eHdRN+CRuH/fZtxpONjY3hXIRjwsbB+NKa0+m8c+dOuJfhlLBx9OnzKMuxS5cuh3sTfgkbh9U6luVY1YWL4d6EX2LG8fKkickDk1hOlh7+OdzL8Eu0OPR6/ZScyStWBHoW9a6ampqjR46FeSOOcfYQPyoqOvvpMe0/HmGIMMWZkpL6W63ZvXv1Ypy2ek1+k8cj535i4SwOkymupHibLKPKyysKQ3yCXGtEu1lhdP26bWru9FBfWtMaLcZRVXXh2ecn2GzVSi+idpzdrHSS3e7IX79x7bp8j8er9C4c0NZXjsrKqrPl5V4vbk2YaCuOjIz0Pbu+L/3xwIAB/ZXehQPaiqPV0KGPHf318MSJLym9iNppMQ5JkiIjI/PX5k3Jmaz0Iqqm0TgkSdLpdF98vgxvXQmAs0crPp/v9z/8/5De2Fij2WQ2m03s0wwGQ8HmDcPS0puammRaUCicxVFfXz8qMyvAAYslYVTGE7m5U1MGJbMMtFgS3pias37DJpkWFIpoNys2W3VxyY7RWWMDv4PhXu+8PZP9rS6aIlocrZqbm1d9vTpv9TqWw926dUtPHxnulXgkZhytvlqxqqamhuXkM+Os4V6GRyLH0djYuGfvfpaTqYNTwr0Mj0SOQ5KkU6fOsBxLShqAnwXVnuD/Iozve+vSpYvJFBfuZbgjeBxut5vxZNwDiKMtweMwmc2MJ2OM+I1VbQkexyMP92Y8iSdJ2xM8joyMdMaTDQ3OsG7CI5HjSEy0jGN7a1OTx1NbWxvufbgjbBxRUZEb1q+NjIxkOXz1ytUO/wh9gYkZR6+ePfft3TUibTjj+bPlFWHdh1OcvSqr0+t79Oju96+MRmO82ZycPPDJzFHZ2WNCei3t+PETMi0oFM7ieLBr1wuV5fLOdLvdpYd/kXemGMS8WQnJN9uLnU48VPFD63E4HI7Va/KV3kKltB7HxwsXM77+okGajqOgcEtxyQ6lt1Av7caxaXPhgg8XKr2FqnH2aEUWdrtj3vwFu3bvVXoRtdNWHC6Xa/u3JStX5t2qq1N6Fw5oIg6fz1dWdvLgDz/t3Lnb4bjfv4CTX0LF4fP5vF6v0+m8dauutrb2ytW/L1/+69z5yoqKc4r81gHe6WJi8E0u4J92H61AUIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIgDSIbUlGSldwCVwlcOICEOIP37G6lvlPYN6WKuJaaQzsd8Ysd87ubrJZSB+cR8neNEascuyUi11xzzg84P7T6HSNcc84PODyEOwa455gedzxqHeNcc84POZ4pDyGuO+UHnB49D1GuO+UHnB4lD4GuO+UHnB4pD7GuO+UHnk3EovhnmKz7ffxxq2AzzFZ/vJw6VbIb5is9vG4d6NsN8xef/Lw5VbYb5is//Lw61bYb5is/Xd/iSIZ3HfB7n6zt8SXaYz+n8fwD2zgQboUQoGgAAAABJRU5ErkJggg==">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiQmUgVGhlcmUgXHUyMDE0IENhbHZhcnkgU3R1ZGVudHMiLCJzaG9ydF9uYW1lIjoiQmUgVGhlcmUiLCJkZXNjcmlwdGlvbiI6IkdhbWVzLCBwbGF5cywgcmVjaXRhbHMsIGFuZCBtb3JlIFx1MjAxNCBvbmUgc2hhcmVkIGJvYXJkIGZvciBDYWx2YXJ5IFN0dWRlbnRzLiIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGEwYTBhIiwidGhlbWVfY29sb3IiOiIjMGEwYTBhIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBTUFBQUFEQUNBSUFBQURkdnZ0UUFBQUlVa2xFUVZSNG5PM2RhV3hVVlJqRzhYTTdEWFlhYU8xUVlGQ1dXQVFwcGROR0ZnVnFvUnFXRDZLQWlpd0tvWlpBSW9tZ1JxTmlnSWdKT3lpaWlTd0dVU3dGZ2lKTDJTTkdRT2kwMEFJMUtFSUI2UlJhaFVLbnk5QVpQMHdqZTN0bTNudTk5NXp6L0Q3cGNPYStiNXAvWnFhZExscDBkRFFEQ0ZlRTJRdUEyQkFRa0NBZ0lFRkFRSUtBZ0FRQkFRa0NBaElFQkNRSUNFZ1FFSkFnSUNCQlFFQ0NnSUFFQVFFSkFnSVNCQVFrQ0FoSUVCQ1FJQ0FnUVVCQWdvQ0FKTkxzQmNCQW50d3V0LzZ2YzhncDNVZG8rTEVlS2QyUnpxMzB6UWdCU2VpL2V1NW81WDYzVXlBZzJRUXJhU1NSSmcrRUJDK2lwY0lUUi9CZkczbU9Dd2tDQWhJRUpBLys1eVlkSDRRUUVKQWdJQ0JCUUVDQ2dJQUVBY21ELzZXeGpsOEtRa0JBZ29Da3d2TWdwTzlYb3ZGV2hvVHdYaGhRNGQxNDBBRytId2lzRGkraWdRUUJBUWtDQWhJRUJDUUlDRWdRRUpBZ0lDQkJRRUNDZ0lERVdqL2FiTFBaZXZYc1FibUMzKyt2OC9sOGRYVmViL1UvVi82NWVyVXlFQWpvc2x0Q3dpT3RXN1hTNVZMNktqaDZyTGEyMXF6cDFub3JJelkyNXM4L2Z0UHhndlgxOVJjdmxwNDdmLzdVcWQ4TEM0dU81TG1MaThPOC9yS2xTMGFOR3FuamJucnAyYnZ2bVRObnpacHVyVWNnM2Rsc3R2YnQyN1Z2MzY1ZjN6N0JXenllc20zYmM3UFhyWGU3ODgzZFRRN0t2UVp5T3R0a1RoaS9NM2RMN3JZZjA5UFR6RjVIZU1vRjlKOWV2WHBzMnBpemJPa1NTejJKQzBmZGdJSkdqUnE1OWNkTjhmSHhaaThpS3RVRFlveTVYTW5ydmx1RHg2SHdJQ0RHR0V0TlRaazVZN3JaV3dnSkFUWEluRERlNVVvMmV3dnhJS0FHbXFhOS9lWlVzN2NRRHdLNmFmRGdnUTVIbk5sYkNFYmdMeVN1L3ZxYmlvcUt1MitQaW9wcTZYQ2twTGk2ZG4wc3BBdEdSa1lPR2pRd096dEhwd1dWSUhCQXkxZXNhdng5aWNURXJoL05tcEdSMFovL21rLzA3blcvZ0lxT24zRHMyaDNhaW93NW5VNVhjbmVlazdXMXRUL3Qvem5VNnpQR3ZON3FNTzZsRjRIZkMwdExmN3JKTjdZMFRmdjhzMDlHam55Ujg1cHVkLzZnSWM5eUh1WXhZdmp6eTcvOGd1ZGthYW1udSt0eEhVZi9QeVIvRFJRSUJLYTk5YzZsUzVjNHozZnMyTUhRZmVRamVVQ01zWnFhbXJWcjEzRWVqb3ZEaStqUXlCOFFZK3pRcjRjNVQ5cHN0Z2VhTlROMEdja29FVkJaV1JuLzRYcS8zN2hONUtORVFFelRPQS9XMU5UY3VISEQwRjBrbzBSQWJWcTM1anhaNnZFWXVvbDhsQWpveVNkNmM1NHNQcW5uTjlTcVFQNkFvcUtpeG94NW1mTXcvOHR0Q0pJOElFM1RGaStjMTVyN0tXekxsbTJHN2lNZm1RTks2cGE0SWVjNy9pOUQ3OXkxdStUY09VTlhrby9BNzRWTm5qU3hvdUx2dTIrUGluckE0WENrdUpLN2RPbk1melcvM3o5bjdnTDl0bE9Gd0FHOU1uYTBqbGRiOHNuU1k4Y0tkYnlnSW1SK0N1UDMvUStiOGZBVEhnVEVscTlZTldueWxQcjZlck1YRVpMQVQyRjBKNHVMWjg2Y3ZXZnZQck1YRVppNmowRFYxZFhmZnB1ZDUzYWJ2WWpZMUEzSWJyZC9QSHZXaWFLQ3FXOU1pWXhVK3BHWVF0MkFndXgyKzRmVDM5K3pPL2VoaDlxYXZZdVFWQThvcUh0U3QrMWJOeWNrUEdMMkl1SkJRQTNhdFhzNGUrMmE1czJibTcySVlCRFFUWjA2SlN5WVA4ZnNMUVFqOEl2SFNaTmZQMXR5ajdldUlqUXRKaWJHNFloenVaTDc5MytxVzJJaS96VmZlbkhFaXBWZjVlWGhVek5lQWdkMDRtUng0ei9XazdOK0kyT3NYOTgrQ3hmTTdkejVVYzdMZnZEZXU4TmZzT0t2c3JNbStaL0Nmamx3TU9PWndZZVA1SEdlVDA5UDY5Z0JQOXpEUy82QUdHUFYxZFd2anN1OGZ2MDY1L2xodzRZYXVvOU1sQWlJTVZaZVhyNXkxV3JPd3hrRFF2aHBhTVdwRWhCamJNZU9uWnduazVLU0ROMUVKZ29GVkhEMEtPZEpoeVBPNld4ajVDN3lVQ2lndWpyZnRXdlhPQS9IdDJ4cDZETFNVQ2dneGxodFhSM255WmlZR0VNM2tZWmFBVDBZRzh0NTBtNjNHN3FKTkJRS3FHT0hEdnpmdGxGajNwOHZFWXRDQWFXbDllVS9YRlZWWmR3bU1sRW9vS3pYSnZBZnZuaXgxTGhOWktKS1FCT3pNdmwvRGJUWDY3MTgrYktoKzBoRGlZQ3lzaWJNL21nbS8vbUNncU42L1prNjZRbjhibnlUNHVQak13YWtUOHpLN05FanRGOWVlZURnSVlOV2tvL0FBWDMyNmVJcXIvZnUyeU1pSWxxMGFOSFM0V2piMWhuZWxUZHYza3BiVFNFQ0I1U2FtbUxFWmZQekMwNFdGeHR4WlNrcDhSb29KQXNYTFRGN0JaRWdvTnZzMnIwbmQ4Y3VzN2NRQ1FLNnllTXBtenJ0YmJPM0VBd0NhbkRseXRYUlk4ZDVQQ0g4UW1CZ0NDam93b1cvaGo0M29yQ3d5T3hGeEtONlFJRkFJQ2RuUS9xQVovQ1pWM2dFL2pTZXlPLzM3OW03Yjk3OFJmbjVCV2J2SWpEbEF2TDcvWVdGUmR1Mjc5aTRjZFBaa2hLejF4R2V0QUg1ZkQ2ZnoxZFZWVlZlWGxGZVhsNXk3dnpwMDZlTGpwOXd1d3NxS3l2TjNrNGUxdnFEY3lBYzFWOUVBeEVDQWhJRUJDUUlDRWdRRUpBZ0lDQkJRRUNDZ0lBRUFRRUpBZ0lTQkFRa0NBaElFQkNRSUNBZ1FVQkFnb0NBQkFFQkNRSUNFZ1FFSkFnSVNCQVFrQ0FnSUVGQVFJS0FnQVFCQVFrQ0FoSUVCQ1FJQ0VnUUVKQWdJQ0JCUUVDQ2dJQUVBUUVKQWdJU0JBUWtDQWhJRUJDUUlDQWdRVUJBZ29DQUJBRUJDUUlDRWdRRUpBZ0lTQkFRa0NBZ0lFRkFRSUtBZ0FRQkFRa0NBaElFQkNRSUNFZ1FFSkFnSUNCQlFFQ0NnSUFFQVFGSlpLcXJ1OWs3Z01Ed0NBUWtDQWhJdE9qbzZPQi9lWEs3aEhwbjc2ellVTzhTUGVNcXBzZzBwZUVSQ1BWZ1NuaFRJaGpxd1JUQ0ZLMXlmeXJsL3B5RStGaGdTaGhUUW40UkxmSEhBbFBDbUJKYVFISi9MREFsakNraEJDVDl4d0pUd3BqQ0c1QUtId3RNQ1dNS1YwQ21iNGtwbHAzU2RFQlcyQkpUTER1bGlZQXNzaVdtV0haS1l3RlpaMHRNc2V5VSt3WmtxUzB4eGJKVDdoMlExYmJFRk10T3VVZEFGdHdTVXl3NzVjNkFyTGtscGxoMnltMEJXWFpMVExIc2xKc0JXWGxMVExIc2xBamkvVU9DS2ZKTmlTRGVueCttU0RubFgxUTFPQlYrcU1JMEFBQUFBRWxGVGtTdVFtQ0MiLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn0seyJzcmMiOiJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQUlBQUFCN0drT3RBQUFaQzBsRVFWUjRuTzNkZTV6ZTA2SHY4WmxrSnBPTUVpSlJ0NlNDdUVWd3VnbHkxSEZyMFl1aTNYdlg1ZWl1b2hmcVZuVDNva3JMZGllYnFtcVVqZHFPbHFDT09vU20ycm9rcWJnbUVpU1NrS2dtN0IwcWs3bWVQM2kxWk9VaW1lZFo2L2Y3cmZmN3o5MXQxbnA5Znp5Zm1Vbm1tY2JXMXRZR0FQTFRKL1VGQUVoREFBQXlKUUFBbVJJQWdFd0pBRUNtQkFBZ1V3SUFrQ2tCQU1pVUFBQmtTZ0FBTWlVQUFKa1NBSUJNQ1FCQXBnUUFJRk1DQUpBcEFRRElsQUFBWkVvQUFESWxBQUNaRWdDQVRBa0FRS1lFQUNCVEFnQ1FLUUVBeUpRQUFHUktBQUF5SlFBQW1SSUFnRXdKQUVDbUJBQWdVd0lBa0NrQkFNaVVBQUJrU2dBQU1pVUFBSmtTQUlCTUNRQkFwZ1FBSUZNQ0FKQXBBUURJbEFBQVpFb0FBRElsQUFDWkVnQ0FUQWtBUUtZRUFDQlRBZ0NRS1FFQXlKUUFBR1JLQUFBeUpRQUFtUklBZ0V3SkFFQ21CQUFnVXdJQWtDa0JBTWlVQUFCa3FpbjFCUURTZVBYZXJWYjBQMjE0d015WU4wbWxzYlcxTmZVZEFDSlp5WXYraWxRNEJnSUFaR0VOWHZyZnE1SVpFQUNnNG5yNTB2OWVGY3VBUHdRR3FxeUdyLzQxLzJqSkNRQlFXZlY0dmE1U0Ezd0xDS2lnRC9JeXZaTHY1L1R5SHk4TEFRQ3FadVV2MzZ2MXdsM0REMVZBZmc0QXlNVWF2RjYvODQ5VTZkcys3K1hQQUlCS1dkR0xkVzgrVzEvUlAxdjJNQWdBVUIzMWVQVmYrVWNvZFFNRUFLaUkrcjM2ci96amxMY0JBZ0JVV1czL25MYnNmK3E3REFFQXFtQzVuNGJYNC9WNnVSK3pwRjhFQ0FCUVRmWDdiTDB5WHdjSUFGQjZSZmdFdkFoM1dGMENBRlJRdlQ5SnI4WVhBUUlBa0NrQkFNaVVBQURsRm43elBjNzNaOEpUU3ZmSEFBSUFrQ2tCQU1pVUFBQmtTZ0FBTWlVQUFKa1NBSUJNQ1FCQXBnUUFJRk1DQUpSYnFoL0lTdlVEYURVa0FBQ1pFZ0NBVEFrQVVFSDEvaTVRNmQ3Mlo3a0VBQ2k5SW56enZRaDNXRjBDQUZSVC9UNUpyOGFuL3cwQ0FGUkR0Ti9WSHUyM3owY2dBRUNWMWJZQmxmbmMveDBDQUZURWlqNE5yOVdyOW9vK1Rray8vVzhRQUtCSzZ0ZUE2cjM2TndnQVVESDFhRUFsWC8wYkdocWFVbDhBSUpKM1hzZFg2MVc3WXQvMFgwWmphMnRyNmpzQTFOZ0hlZUZlU1FsNitZK1hoUUFBbFZXbno5OHI4TkwvRG44R0FGUldQVjZwSy9QcTN5QUFRTFhWOXZXNlNxLytEYjRGQkdTaWw5OE9xdGhML3pzRUFNaklHbVNna2kvOTd4QUFJRk1yaVVHRlgvVGZTd0FBTXVVUGdRRXlKUUFBbVJJQWdFd0pBRUNtQkFBZ1V3SUFrQ2tCQU1pVUFBQmtTZ0FBTWlVQUFKa1NBSUJNQ1FCQXBnUUFJRk1DQUpBcEFRRElsQUFBWkVvQUFESWxBQUNaRWdDQVRBa0FRS1lFQUNCVEFnQ1FLUUVBeUpRQUFHU3FLZlVGY3RlM2I5K21wcEk4aFo2ZTdwNmVycTZ1N3U3dTFGZUpvYVdsSmZVVldJNmxTNWVtdmtKMWxPU2xwN3FPUGVib2MzOTBkdXBickxiT3pzNzI5dllsYlcxTDI1YSsvZmJiaXhjdmZ2UE50eGEvdVhqUm90Y1hMbHo0bDRVTC8venFhL01YTEhqbGxWZGVlKzB2WlF4R1UxUFQvSmRucDc0Rnk3SCtrSTFUWDZFNkJJQTEwZFRVMU5UVTFOcmF1c3Ivei9iMmpqbHo1c3lhUGZ2RkYyZE5tL2JjdE9uVFo4eVkyZGJXRnVHU3dNb0pBUFhWcjEvemlCRmJqaGl4NWQvK0w1MmRuZE9mbS9INDQxTW5UWjd5eHo4K1BHL2V5d212QnprVEFHSnJhbW9hdGYzSVVkdVAvT0pSUnpZME5NeVpPL2ZCQnlmZWQ5K0VoMzcvQjE4WlFFeitGaENKZldUWXNDLzl5MUgvZWZNTno4OTQ1bWZYL09TQUF6N1IzTnljK2xLUUJRR2dLRnBiV3c4OTVMTy91UEg2cDUrY2N1YjN2ak5zNk5EVU40S0tFd0FLWjhpUUlTZWZkTUtVeVErUCs5blZvN1lmbWZvNlVGa0NRRUgxN2R2M2tJTVArdTJEOTEwNzd1ck5OeCtlK2pwUVFRSkFvVFUyTmg3ODJZUCsrUHVKWjM3MzJ3TUdERWg5SGFnVUFhQUUrdlZyUHZua2Ivemg5dytPM21YbjFIZUI2aEFBU21Pemozems3bCtQUC9ta0UxSmZCQ3BDQUNpVHZuMzdudm05NzR5OS9CSi9WUlI2VHdBb255T1BPT3pXVzM2eHpqcnJwTDRJbEpzQVVFcDc3cm5IK052K3p3ZDVNeUpnUlFTQXN0cHBweDJ2Ky9rMXBYa3piU2dlQWFERTl0dDNuMHN1dmlEMUxhQ3NCSUJ5Ty9LSXc3NXkzREdwYndHbEpBQ1UzdmZQL0k0ZkZZWTFJQUNVWHYvKy9hKzg0dkkrZmZ6TERLdkhmek5Vd2E2amR6bnUyQytudmdXVWpBQlFFYWVmZHVyYWE2K2QraFpRSmdKQVJheTc3c0JqanprNjlTMmdUQVNBNnZqYVY0OWJhNjIxVXQ4Q1NrTUFxSTVCZzliNzh0RmZUSDBMS0EwQm9GS09QT0x3MUZlQTBoQUFLbVdMTFRiZllZZFJxVzhCNVNBQVZNM25EajA0OVJXZ0hBU0Fxam4wa0lNYkd4dFQzd0pLd0RzcFp1ZU5OLzVyNXZQUDkrWWp0UFRyMTlMU3N2NzZnd1lQSGx6QW43L2RlT09OdGgrNTNkUFBQSnY2SWxCMEFwQ2RSeDk5N01panZsU1REOVhVMURSOCtHWWp0OXR1ekpqZDl0bG5yK0diYlZhVEQ5dDdvMGZ2SWdDd1NvWDc5STBTNmV6c2ZQNzVGKzY0ODY0enZ2V2RuWGNaYytBbkQvclZiZU83dTd0VDM2dGg5T2hkVWw4QlNzQlhBTlRNcE1sVEprMmVjdWxsWXkrNzlLSmRrNzRFang2OWN5OC9RazlQeitMRmkydHltUnFLLzFzdzMzenp6WjZlbnNpSEVvMEFVR016WnN6ODlHY09PZVAwVTA4LzdkUlVkeGcyZE9pR0czNzQxVmYvdk1ZZm9hdXJhL2dXMjlUd1NyM1gxTlQwNXdWekl4ODZabys5NXM5ZkVQbFFvdkV0SUdxdnU3djcvQXN1L3VacDMwcDRoeEVqUmlROEhVcEJBS2lYNi8vanhnc3Z1aVRWNmNPR2JwcnFhQ2dMQWFDT0xycjRzajgrL0VpU280Y05HNXJrWENnUkFhQ091cnU3di9XdjMrM3E2b3AvOUxCaHcrSWZDdVVpQU5UWDlPblAzWEhucitPZjZ5c0FXQ1VCb083R2pmdDUvRU1IcmJkZS9FT2hYQVNBdXBzODVVKzkrUnVaYTJiQWdBR1JUNFRTRVFEcXJxZW41OEhmVG94ODZJQldBWUJWRUFCaW1EcjFpY2dudHZvS0FGWkZBSWhoMnJUcGtVL3MzNzkvNUJPaGRBU0FHRjZaUHoveWlYMzY5R2x1Ym81OEtKU0xBQkREb2tXdnh6KzBvNk1qL3FGUUlnSkFERzF0YlpGUGJHLzM2ZytySUFERTBOUFRFL2xkaFpjc1dSTHpPQ2dqQVNDR2xwYVd5TCtuZDlHaVJUR1BneklTQUdLSS81dE1GZ29BcklvQUVNTW1tMndjK2NRRkMvd2FFMWdGQVNDR0xUWWZIdm5FV2JObVJ6NFJTa2NBaUdISEhYZUlmT0tMTHdvQXJJSUFFTVBIUHJaSDVCT2ZmZmJaeUNkQzZRZ0FkYmZwcHB1TTJuNWt6QlBiMnRxbVRYOHU1b2xRUmdKQTNYM3hxQ01qbnpqMWlTYzdPenNqSHdxbEl3RFUxenJyclBNdlh6d3E4cUcvL2UzdklwOElaU1FBMU5jWnA1ODZhRkRzWDg0MTRZRUhJNThJWlNRQTFOR2VlKzd4bGVPT2lYem8zSG56bm5ycTZjaUhRaGtKQVBVeWNydHRyN3YyWjMzNnhQNTM3SmUvdkMzeSt3NUJTUWtBZGJIN2JydU9ILy9MZGRjZEdQbmM3dTd1Lzd6bDFzaUhRa2tKQURYVzNOeDgyamRQR1gvN3Jlc1BHaFQvOVB2dW16Qjc5a3Z4ejRVeWFrcDlBYXFqcGFYbGM0Y2VmT3FwSnczZmJMTlVkN2ppeXF0U0hRMmxJd0QwMXBBaFEzYmZiZGQ5OTkzN001LysxTUNCc2QvMTg3M3VuL0RBbzQ5TlNuZ0JLQmNCeU03V1cyLzEvVE8vMjV1UDBLOWZjMHRMeTZCQjYyMjQ0WVpiYnJINTRNR0RhM1czM3VqcTZqcm5uUE5TM3dMS1JBQ3lzL25tdzA4NjhmalV0Nmk5cTM3eTAyblRwNmUrQlpTSlB3U21DbWJObW4zK0JSZW52Z1dVakFCUWVtMXRiVWQvK2JqNHYzY2V5azRBS0wxdm52NnZUei9qelo5aHRRa0E1Zlp2NTE5MGk1LzhnalVpQUpUWWo2KzYrdUpMTGt0OUN5Z3Jmd3VJc2pydjN5Njg1TkxMVTk4Q1Nrd0FLSjhsUzVhY2N1cnB2L3pWN2FrdkF1VW1BSlRNekpuUEgzUHNWNStkNXEvOFEyLzVNd0JLbzdPejgvS3hWKzYxOThlOStrTk4rQXFBY3Jqdi9nbG4vZUNITTJjK24vb2lVQjBDUUtIMTlQVGNkLytFc1dPdmZHelM1TlIzZ2FyeExTQUs3WVVYWHJ6enJydjluQmZVZ3dCUWFDTkdiSG5WbFdOblRIL3EzOGRldXRWV0kxSmZCeXBGQUNpQjF0YldJdzcvd3NOL21QaUxHNi9mY2NjZFVsOEhLa0lBS0kzR3hzWUREdmpFQS9mLzVvcC92MnlERFRaSWZSMG9QUUdnWkJvYkd3OC83SjhuUC9hSEk0ODRMUFZkb053RWdGTDYwSWMrTlBieVMyNjY0Ym9rdjNvZXFrRUFLTEVERDl4L3dvVGZiTFBOMXFrdkFxVWtBSlRic0tGRDc3M25ycjMzL2wrcEx3TGxJd0NVM3RwcnIzM3pUVGQ4NHVQN3BiNElsSXdBVUFYOStqVmZmLzI0ZmZmWk8vVkZvRXdFZ0lwbzZkZnZQNjRmTjJyN2tha3ZBcVVoQUZUSGdBRURicnJ4K2lGRGhxUytDSlNEQUZBcG0yNjZ5Yyt2L1dtZlB2N0ZobFh6M3dsVk0yYjMzWTcvK2xkVDN3SktRQUNvb0c5Lys0eHR0OTBtOVMyZzZBU0FDbXJwMSsvQ0M4NUxmUXNvT3I4UUpqdVRKazg1LzRLTGV2bEJtcHVhKzdYMDY5L1NNbWo5UVIvZVlJT05OOXBvNjYyMzJucnJyVnBiVzJ0eXlkNGJzL3R1QjMzbTAzZjkrdTdVRjRIaUVvRHNMRnE0NkhlLyszMDlQbkpqWStPbzdVZCs3R043N1ArSi9jYU0yYjJ4c2JFZXAzeHdaNTk5NW0vdS9YOGRIUjFwcndHRjVWdEExRXhQVDg5VFR6L3o0NnV1UHVqZ3orLzAwZEdYWGpaMjhlTEZDZTh6Yk9qUWYvejhvUWt2QUFVbkFOVEZ5eSsvY3U1NUYrejRQMGIvK0txcnU3cTZVbDNqeEc4Yzc2K0V3b3I0YjRNNldyeDQ4ZmZQT3VmaiszOXE3cng1U1M0d1lzU1crKy8vOFNSSFEvRUpBSFgzNUpOUDdidmZBWTlObXB6azlDT1BPRHpKdVZCOEFrQU1yNy8reGovOTh4RlRwejRSLytqOTl0M2JtMFBBY2drQWtiejExbHRmT1B5bzExNTdMZks1VFUxTm4vL2NJWkVQaFZJUUFPSlp1SERoMTQ0L01mNjVCeDY0Zi94RG9mZ0VnS2dtVG53by9nOW43VHA2bDRFRDE0bDhLQlNmQUJEYk9UODhyN3U3TythSlRVMU4rK3k5Vjh3VG9SUUVnTmhtejM3cC9na1BSRDUwdDExM2pYd2lGSjhBa01DTk45MGMrY1NkZC81bzVCT2grQVNBQkNaT2ZLaXRyUzNtaVNOSGJ0ZlMwaEx6UkNnK0FTQ0JKVXVXUFBMSVl6RlBiRzV1M21hYnJXT2VDTVVuQUtUeHhKTlBSajV4eXkwMmozd2lGSndBa01hVFR6NGQrY1F0dDl3aThvbFFjQUpBR3ZIZkhtNzQ4T0dSVDRTQ0V3RFNlT1dWK1pGUDNQRERHMFErRVFwT0FFampqVGZlaUh6aTRNR0RJNThJQlNjQXBOSFYxUlg1bHpVT0dTSUE4RDRDUURKTGx5Nk5lZHpBZ1FOakhnZkZKd0FrMDl5dlg5VGptcHY5ZWtoNEwvODlrRWFmUG4xYTRnYWdvYUdodWJrNThvbFFaQUpBR211di9hSDRoL2J2NzkwZzRPOEVnRFEyMlhpVCtJZDJkL2ZFUHhRS1N3QklZK09OTjRwLzZKSWxTK0lmQ29VbEFLUXhjdVMya1UvczZPam83T3lNZkNnVW1RQ1F4cWhSb3lLZjZOTi9XSVlBa0VCalkrUC9ITE5iNUVNRkFKWWhBQ1N3MDA0N2JyQkI3SGZtZWZ0dEFZRDNFUUFTT1BTUXo4WS9kUDZDQmZFUGhTSVRBR0xyMzcvLzRZZDlJZjY1OCtiR2ZnTnFLRGdCSUxaanZ2eWxkZGROOExZOGN3UUEzazhBaUdyOVFZTk9QZVdrSkVmSC94VTBVSEFDUUZTWFgzYnh3SUhySkRsNjdweTVTYzZGd2hJQTRqbmgrSzk5OHBNSHBEcDl4b3lacVk2R1loSUFJam5pOEMvODRLenZwVHA5MXF6WmkxNS9QZFhwVUV3Q1FOMDFOalorNjR4dmpyMzhrc2JHeGxSM21EUnBjcXFqb2JDYVVsK0FpdnZJc0dHWFhuTGhYbnZ0bWZZYWt5WlBTWHNCS0NBQm9GNEdEeDc4OWE5OTViaGpqeDR3WUVEcXV3Z0FMSWNBVUdQTnpjMTc3REhtbi83eDh3ZDk1bFA5Ky9kUGZaMkdob2FHQlF0ZWZlNjVHYWx2QVlVakFQUldTMHZMeGh0dHRQVTJXMjI3elRhNzdyckxtTjEzVzJ1dHRWSmY2bjN1dVBPdW5oNi9DZ2FXSlFEWjJYMzMzZTY3OSs1ZWZwQytmZnUydExUMDc5OS92ZlhXUy9KanZhdmw5dkYzcHI0Q0ZKRUFaR2ZkZFFmK3d6OThOUFV0NHBremQrN2pqMDlOZlFzb0luOE5sSXE3L2ZZN1VsOEJDa29BcUxLbDdlM2pycjB1OVMyZ29BU0FLcnY1NWx0ZWZmWFBxVzhCQlNVQVZGWm5aK2NWVjF5VitoWlFYQUpBWmQxMjIvZzVjNzBES0t5UUFGQk5iNzMxMW8vT096LzFMYURRQklCcU92dWNjK2ZQOTB1QVlXVUVnQXA2NU5ISHJyditodFMzZ0tJVEFLcW1yYTN0NUZOTzg5NFBzRW9DUUtYMDlQU2M4STJUWDNqaHhkUVhnUklRQUNybGdnc3ZHWC9IWGFsdkFlVWdBRlRIcjI0YmY5SEZsNmErQlpTR0FGQVI5MDk0NE1RVFQwbDlDeWdUQWFBS2JyMzFWMGYrN3k4dGJXOVBmUkVvRXdHZzlINXk5VFZmUCtHa3pzN08xQmVCa3ZIN0FDaXhwZTN0WjUvOW81OWVNeTcxUmFDVUJJQ3ltakZqNW5GZitmb3p6MDVMZlJFb0s5OENvcFN1dmZhNnZmZmQzNnMvOUlhdkFDaVp4eCtmZXRZUGZ2andJNCttdmdpVW5nQlFHck5mZXVuY2M4LzNjMTVRS3dKQUNjeWFOZnZxYThiZGNNTk5IUjBkcWU4QzFTRUFGRmQzZC9kOTl6OHc3dHFmVDV6NGtEZDNnNW9UQUlwbyt2VG43djYvOS96aTVsdm16WHM1OVYyZ3NnU0FvdWpxNnBvMGVjbzk5OXg3enozM3ZqUm5UdXJyUVBVSkFDbjk5YTkvblRyMWljbFQvalI1OHA4bVRaNzh4aHYvbGZwR2tCRUJJSjZsN2Uxelhwb3phOWJzRjE1ODhZVVhYbnppaVNlblRYK3VxNnNyOWIwZ1V3SkFyM1IyZG5aMGRDeGQydDdSMGQ3ZTN0SGUzcjUwNmRMRmI3NjVhT0dpaFlzV0xWeTRjT0hDUllzV0xYcnRMMzk1YWZhY2VTKy8zTjNkbmZyS3dMc2FXMXRiVTk4QmdBUzhGUVJBcGdRQUlGTUNBSkFwQVFESWxBQUFaRW9BQURJbEFBQ1pFZ0NBVEFrQVFLWUVBQ0JUQWdDUUtRRUF5SlFBQUdSS0FBQXlKUUFBbVJJQWdFd0pBRUNtQkFBZ1V3SUFrQ2tCQU1pVUFBQmtTZ0FBTWlVQUFKa1NBSUJNQ1FCQXBnUUFJRk1DQUpBcEFRRElsQUFBWkVvQUFESWxBQUNaRWdDQVRBa0FRS1lFQUNCVEFnQ1FLUUVBeUpRQUFHUktBQUF5SlFBQW1SSUFnRXdKQUVDbUJBQWdVd0lBa0NrQkFNaVVBQUJrU2dBQU1pVUFBSmtTQUlCTUNRQkFwZ1FBSUZNQ0FKQXBBUURJbEFBQVpFb0FBRElsQUFDWkVnQ0FUQWtBUUtZRUFDQlRBZ0NRS1FFQXlKUUFBR1JLQUFBeUpRQUFtUklBZ0V3SkFFQ21CQUFnVXdJQWtDa0JBTWlVQUFCa1NnQUFNaVVBQUprU0FJQk1DUUJBcGdRQUlGTUNBSkFwQVFESWxBQUFaRW9BQURJbEFBQ1pFZ0NBVEFrQVFLWUVBQ0JUQWdDUUtRRUF5SlFBQUdSS0FBQXlKUUFBbVJJQWdFd0pBRUNtQkFBZ1V3SUFrQ2tCQU1pVUFBQmtTZ0FBTWlVQUFKa1NBSUJNQ1FCQXBnUUFJRk1DQUpBcEFRRElsQUFBWkVvQUFESWxBQUNaRWdDQVRBa0FRS1lFQUNCVEFnQ1FLUUVBeUpRQUFHUktBQUF5SlFBQW1SSUFnRXdKQUVDbUJBQWdVd0lBa0NrQkFNaVVBQUJrU2dBQU1pVUFBSmtTQUlCTUNRQkFwZ1FBSUZNQ0FKQXBBUURJbEFBQVpFb0FBRElsQUFDWkVnQ0FUQWtBUUtZRUFDQlRBZ0NRS1FFQXlKUUFBR1JLQUFBeUpRQUFtUklBZ0V3SkFFQ21CQUFnVXdJQWtDa0JBTWlVQUFCa1NnQUFNaVVBQUprU0FJQk1DUUJBcGdRQUlGTUNBSkFwQVFESWxBQUFaRW9BQURJbEFBQ1pFZ0NBVEFrQVFLWUVBQ0JUQWdDUUtRRUF5SlFBQUdSS0FBQXkxYlRURHR1bnZnTUFDZmdLQUNCVEFnQ1FxY2JXMXRZVi9XK3YzcnRWekt1c3hOdG5EMHg5aFhlMW52WGZxYS93THB1RWJCS3lTY2dtZjdQQ3J3Qzgrb2VTUDYyL3NVbklKaUdiaEd6eVhzc1BnRmYvVUJHZTFqdHNFckpKeUNZaG15eGpPUUh3Nmg4cXlOTnFzTW55MkNSa2s1Qk5Rc3NHd0t0L3FEaFB5eVlobTRSc0VySko2TzJ6Qjc0dkFGNzlRNFY2V3FtdjhDNmJoR3dTc2ttb2FKdjhQUUJlL1VORmUxcEZZSk9RVFVJMkNSVndrM2NENE5VL1ZNQ25sWnhOUWpZSjJTUlV6RTM2TkhqMVg1NWlQcTIwYkJLeVNjZ21vY0p1MHJqNG9aMFMzV1JabmxiSUppR2JoR3dTc2trbzNLUW9id1hoYVlWc0VySkp5Q1lobTRTV3Uwa2hBdUJwaFd3U3NrbklKaUdiaEZhMFNmb0FlRm9obTRSc0VySkp5Q2FobFd5U09BQ2VWc2dtSVp1RWJCS3lTV2psbTZRTWdLY1Zza25JSmlHYmhHd1NXdVVteVFMZ2FZVnNFckpKeUNZaG00USt5Q1pwQXVCcGhXd1Nza25JSmlHYmhEN2dKZ2tDNEdtRmJCS3lTY2dtSVp1RVB2Z21zUVBnYVlWc0VySkp5Q1lobTRSV2E1T29BZkMwUWpZSjJTUmtrNUJOUXF1N1Nid0FlRm9obTRSc0VySkp5Q2FoTmRna1VnQThyWkJOUWpZSjJTUmtrOUNhYlJJakFKNVd5Q1lobTRSc0VySkphSTAzcVhzQVBLMlFUVUkyQ2Rra1pKTlFiemFwYndBOHJaQk5RallKMlNSa2sxQXZONmxqQUR5dGtFMUNOZ25aSkdTVFVPODNxVmNBUEsyUVRVSTJDZGtrWkpOUVRUYXBTd0E4clpCTlFqWUoyU1JrazFDdE5xbDlBRHl0a0UxQ05nblpKR1NUVUEwM3FYRUFQSzJRVFVJMkNka2taSk5RYlRlcFpRQThyWkJOUWpZSjJTUmtrMUROTjZsWkFEeXRrRTFDTmduWkpHU1RVRDAycVUwQVBLMlFUVUkyQ2Rra1pKTlFuVGFwUVFBOHJaQk5RallKMlNSa2sxRDlOdWx0QUR5dGtFMUNOZ25aSkdTVFVGMDM2VlVBUEsyUVRVSTJDZGtrWkpOUXZUZFo4d0I0V2lHYmhHd1Nza25JSnFFSW02eGhBRHl0a0UxQ05nblpKR1NUVUp4TjFpUUFubGJJSmlHYmhHd1Nza2tvMmlhckhRQlBLMlNUa0UxQ05nblpKQlJ6azlVTGdLY1Zza25JSmlHYmhHd1NpcnpKYWdUQTB3clpKR1NUa0UxQ05nbkYzK1NEQnNEVEN0a2taSk9RVFVJMkNTWFo1QU1Gd05NSzJTUmtrNUJOUWpZSnBkcGsxUUh3dEVJMkNka2taSk9RVFVJSk4xbEZBRHl0a0UxQ05nblpKR1NUVU5wTlZoWUFUeXRrazVCTlFqWUoyU1NVZkpNVkJpRDV6ZjdHMHdyWkpHU1RrRTFDTm5tdjVRZWdDRGQ3aDZjVnNrbklKaUdiaEd5eWpPVUVvQ0EzYS9DMGxzY21JWnVFYkJLeVNXalpBQlRuWnA1V3lDWWhtNFJzRXJKSnFQV3MvMzVmQUFwMXM5UlhlSmROUWpZSjJTUmtrMURSTnZsN0FJcDJzeUt3U2NnbUladUViQklxNENidkJxQ0FOMHZPSmlHYmhHd1Nza21vbUp2MGFTanF6ZEt5U2NnbUladUViQklxN0NiL0g2MmlMb3g5bEIvL0FBQUFBRWxGVGtTdVFtQ0MiLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn1dfQ==">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Quicksand:wght@500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Franklin:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Firebase (compat SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
+<!-- Import helpers: spreadsheets (.xlsx/.xls) and PDF schedules -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
 <style>
-  :root {
+  :root{
+    --paper:#0A0A0A;
+    --paper-soft:#1C1C1C;
+    --ink:#F7F5F0;
+    --ink-soft:#B4B0A8;
+    --gold:#F2C230;
+    --gold-deep:#F2C23072;
+    --gold-solid:#F2C230;
+    --crimson:#E8433F;
+    --rule:#3A3836;
+    --green:#4C7A5D;
+    --white:#161514;
+    --radius:14px;
+    --shadow: 0 2px 0 rgba(0,0,0,0.5), 0 10px 24px -10px rgba(0,0,0,0.8);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(247,245,240,0.05) 1px, transparent 0);
+    background-size: 14px 14px;
+    color:var(--ink);
+    font-family:'Libre Franklin', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    padding-bottom:110px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- Header / marquee ---------- */
+  header.marquee{
+    background:#000;
+    color:var(--ink);
+    padding:22px 18px 26px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--rule);
+  }
+  header.marquee::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:6px;
+    background:repeating-linear-gradient(90deg, var(--gold) 0 10px, var(--crimson) 10px 20px);
+    opacity:0.9;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:0 0 6px;
+    text-align:center;
+  }
+  h1.wordmark{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:clamp(40px,14vw,68px);
+    letter-spacing:0.01em;
+    line-height:1;
+    margin:0 0 8px;
+    text-transform:uppercase;
+    color:var(--ink);
+    text-align:center;
+  }
+  header .sub{
+    font-size:14px;
+    color:var(--ink-soft);
+    max-width:46ch;
+    line-height:1.5;
+    margin:0 auto;
+    text-align:center;
+  }
+  .verse{
+    font-size:12.5px;
+    font-style:italic;
+    color:var(--ink-soft);
+    max-width:44ch;
+    line-height:1.5;
+    margin:36px auto 10px;
+    opacity:0.8;
+    text-align:center;
+  }
+  .header-actions{
+    display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;
+    justify-content:center;
+  }
+  .pill-btn{
+    font-family:'Libre Franklin', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    border:1.5px solid rgba(247,245,240,0.3);
+    background:transparent;
+    color:var(--ink);
+    padding:8px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    display:inline-flex; align-items:center; gap:6px;
+    transition:background .15s, border-color .15s;
+  }
+  .pill-btn:hover{background:rgba(247,245,240,0.08); border-color:rgba(247,245,240,0.5);}
+  .pill-btn.active{background:var(--gold); color:#000; border-color:var(--gold);}
+
+  /* ---------- Main ---------- */
+  main{max-width:640px; margin:0 auto; padding:20px 16px 40px;}
+
+  .search-row{
+    display:flex; gap:8px; margin-bottom:18px;
+  }
+  .search-row input[type=text]{
+    flex:1;
+    font-family:'Libre Franklin', sans-serif;
+    font-size:15px;
+    padding:11px 14px;
+    border-radius:10px;
+    border:1.5px solid var(--rule);
+    background:var(--white);
+    color:var(--ink);
+  }
+  .search-row input[type=text]::placeholder{color:var(--ink-soft);}
+  .search-row input[type=text]:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
+
+  .view-toggle-row{
+    display:flex; gap:8px; justify-content:center; margin-bottom:20px; flex-wrap:wrap;
+  }
+  .pill-btn.filter-hs.active{background:var(--crimson); color:#fff; border-color:var(--crimson);}
+  .pill-btn.filter-ms.active{background:var(--gold); color:#000; border-color:var(--gold);}
+
+  .date-heading{
+    font-family:'Space Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin:26px 0 10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .date-heading::after{
+    content:""; flex:1; height:1px; background:var(--rule);
+  }
+  .date-heading:first-of-type{margin-top:4px;}
+
+  /* ---------- Ticket card ---------- */
+  .ticket{
+    display:flex;
+    background:var(--white);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    margin-bottom:14px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(247,245,240,0.06);
+  }
+  .ticket-date{
+    flex:0 0 74px;
+    background:var(--crimson);
+    color:#fff;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-family:'Space Mono', monospace;
+    padding:10px 4px;
+    position:relative;
+  }
+  .ticket-date.level-ms{background:var(--gold); color:#000;}
+  .ticket-date .dow{font-size:11px; letter-spacing:0.08em; opacity:0.85; text-transform:uppercase;}
+  .ticket-date .day{font-size:26px; font-weight:700; line-height:1.1;}
+  .ticket-date .mon{font-size:11px; letter-spacing:0.08em; text-transform:uppercase; opacity:0.85;}
+
+  .perf{
+    flex:0 0 0;
+    border-left:2px dashed var(--rule);
+    position:relative;
+  }
+  .perf::before, .perf::after{
+    content:""; position:absolute; left:-7px; width:14px; height:14px;
+    background:var(--paper); border-radius:50%;
+  }
+  .perf::before{top:-7px;}
+  .perf::after{bottom:-7px;}
+
+  .ticket-body{
+    flex:1;
+    padding:12px 14px;
+    min-width:0;
+  }
+  .ticket-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
+  .who{
+    font-family:'Libre Franklin', sans-serif;
+    font-weight:800;
+    font-size:18px;
+    line-height:1.2;
+    color:var(--ink);
+    margin:0 0 3px;
+    word-break:break-word;
+  }
+  .what{
+    font-family:'Space Mono', monospace;
+    font-weight:500;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    line-height:1.35;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+    word-break:break-word;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:10px;
+    font-size:13px; color:var(--ink-soft);
+    margin-bottom:4px;
+  }
+  .meta-row span{display:inline-flex; align-items:center; gap:4px;}
+  .meta-row .mono{font-family:'Space Mono', monospace;}
+  .icon{width:13px; height:13px; flex-shrink:0;}
+  .event-link{
+    color:var(--gold-solid); text-decoration:underline; text-underline-offset:2px; font-weight:600;
+    display:inline-flex; align-items:center; gap:4px;
+  }
+  .event-link:hover{color:var(--gold);}
+  .notes{
+    font-size:13px; color:var(--ink-soft);
+    margin-top:6px; padding-top:6px; border-top:1px dashed var(--rule);
+    line-height:1.4;
+  }
+
+  .ticket-footer{
+    display:flex; gap:12px; margin-top:8px; flex-wrap:wrap;
+  }
+  .link-btn{
+    background:none; border:none; padding:0; cursor:pointer;
+    font-family:'Libre Franklin', sans-serif; font-weight:600; font-size:12.5px;
+    color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px;
+    display:inline-flex; align-items:center; gap:4px;
+  }
+  .link-btn.danger{color:var(--crimson);}
+
+  .empty-state{
+    text-align:center; padding:60px 20px 30px; color:var(--ink-soft);
+  }
+  .empty-state .big{font-family:'Anton', sans-serif; font-size:22px; color:var(--ink); text-transform:uppercase; margin-bottom:8px;}
+  .empty-state p{max-width:34ch; margin:0 auto; line-height:1.5; font-size:14px;}
+
+  .loading-state{
+    text-align:center; padding:60px 20px 30px; color:var(--ink-soft);
+  }
+  .spinner{
+    width:30px; height:30px; margin:0 auto 14px;
+    border:3px solid var(--rule); border-top-color:var(--gold-solid);
+    border-radius:50%;
+    animation:spin 0.8s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .loading-state p{font-size:13.5px;}
+
+  /* ---------- FAB ---------- */
+  .fab{
+    position:fixed; right:20px; bottom:24px;
+    width:60px; height:60px; border-radius:50%;
+    background:var(--gold); color:#000;
+    border:none; font-size:30px; font-weight:700;
+    box-shadow:0 10px 24px -6px rgba(242,194,48,0.4);
+    cursor:pointer; z-index:40;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .15s;
+  }
+  .fab:active{transform:scale(0.92);}
+  .fab:focus-visible, .pill-btn:focus-visible, .link-btn:focus-visible, .admin-link:focus-visible, button:focus-visible{
+    outline:2.5px solid var(--crimson); outline-offset:2px;
+  }
+
+  /* ---------- Pull to refresh ---------- */
+  #pullIndicator{
+    position:fixed; top:0; left:50%;
+    width:34px; height:34px; border-radius:50%;
+    background:var(--white); border:1.5px solid var(--rule);
+    display:flex; align-items:center; justify-content:center;
+    z-index:70; opacity:0; pointer-events:none;
+    transform:translateX(-50%) translateY(-50px);
+    box-shadow:var(--shadow);
+  }
+  #pullIndicator svg{width:16px; height:16px; color:var(--ink-soft);}
+  #pullIndicator.ready svg{color:var(--gold-solid);}
+  #pullIndicator.spinning svg{color:var(--gold-solid); animation:spin 0.6s linear infinite;}
+
+  /* ---------- Sheet / modal ---------- */
+  .scrim{
+    position:fixed; inset:0; background:rgba(0,0,0,0.75);
+    z-index:50; display:none; align-items:flex-end; justify-content:center;
+  }
+  .scrim.open{display:flex;}
+  @media (min-width:640px){ .scrim{align-items:center;} }
+
+  .sheet{
+    background:var(--paper); width:100%; max-width:520px;
+    border-radius:20px 20px 0 0;
+    max-height:92vh; overflow-y:auto; overflow-x:hidden;
+    padding:18px 18px 24px;
+    animation:slideup .22s ease-out;
+    box-sizing:border-box;
+  }
+  @media (min-width:640px){ .sheet{border-radius:16px; margin-bottom:20px;} }
+  @keyframes slideup{ from{transform:translateY(16px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+
+  .sheet-handle{width:40px; height:4px; background:var(--rule); border-radius:2px; margin:0 auto 14px;}
+  @media (min-width:640px){ .sheet-handle{display:none;} }
+
+  .sheet-top{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
+  .sheet h2{
+    font-family:'Anton', sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:22px; margin:0 0 4px; letter-spacing:0.01em;
+  }
+  .sheet-close{
+    flex-shrink:0;
+    width:32px; height:32px; border-radius:50%;
+    background:var(--paper-soft); border:1.5px solid var(--rule);
+    color:var(--ink-soft); font-size:15px; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; margin-top:2px;
+  }
+  .sheet-close:hover{color:var(--ink); border-color:var(--ink-soft);}
+  .sheet .sheet-sub{font-size:13px; color:var(--ink-soft); margin:0 0 18px;}
+
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block; font-family:'Space Mono', monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft); margin-bottom:5px;
+  }
+  .field input[type=text], .field input[type=date], .field input[type=time], .field textarea{
+    width:100%; font-family:'Libre Franklin', sans-serif; font-size:15.5px;
+    padding:11px 12px; border-radius:10px; border:1.5px solid var(--rule);
+    background:var(--white); color:var(--ink);
     color-scheme: dark;
-    --bg: #1c1d21;
-    --panel: #24262b;
-    --panel-2: #2c2e34;
-    --border: #35373e;
-    --accent: #e8a33d;
-    --accent-dim: #e8a33d33;
-    --accent2: #d1594e;
-    --text: #f5f3ee;
-    --muted: #9b9ca3;
-    --good: #6fbf73;
-    --bad: #e2645a;
   }
-  * { box-sizing: border-box; }
-  html, body {
-    overflow-x: hidden;
+  .field input[type=date], .field input[type=time]{
+    min-width:0; max-width:100%;
+    -webkit-appearance:none; appearance:none;
   }
-  html {
-    overflow-y: scroll;
-    scrollbar-gutter: stable;
+  .field input::placeholder, .field textarea::placeholder{color:var(--ink-soft);}
+  .field input:focus, .field textarea:focus{outline:2px solid var(--gold-solid); outline-offset:1px; border-color:var(--gold-solid);}
+  .field textarea{resize:vertical; min-height:60px; font-family:'Libre Franklin', sans-serif;}
+  .field-row{display:flex; flex-direction:column; gap:0;}
+  .field-row .field{width:100%;}
+  .field-err{color:var(--crimson); font-size:12.5px; margin-top:5px; display:none;}
+  .field.err input, .field.err textarea{border-color:var(--crimson);}
+  .field.err .field-err{display:block;}
+  .field-hint{color:var(--ink-soft); font-size:12px; margin-top:5px; line-height:1.4;}
+
+  .name-rows{display:flex; flex-direction:column; gap:8px;}
+  .name-row{display:flex; gap:8px; align-items:center;}
+  .name-row .name-input{flex:1;}
+  .name-row .name-remove{
+    flex-shrink:0; width:32px; height:32px; border-radius:8px;
+    background:var(--white); border:1.5px solid var(--rule); color:var(--ink-soft);
+    cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center;
+    padding:0;
   }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Nunito', system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  h1, h2, h3 { font-family: 'Quicksand', 'Nunito', system-ui, sans-serif; }
-  .mono { font-family: 'Nunito', system-ui, sans-serif; font-variant-numeric: tabular-nums; }
-  .stub-font { font-family: 'Oswald', 'Nunito', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.03em; }
-  button {
-    font-family: inherit;
-    cursor: pointer;
-  }
-  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-  ::-webkit-scrollbar { width: 8px; height: 8px; }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
+  .name-row .name-remove:hover{color:var(--crimson); border-color:var(--crimson);}
+  .add-name-btn{
+    margin-top:8px; background:none; border:none; padding:0; cursor:pointer;
+    font-family:'Libre Franklin', sans-serif; font-weight:600; font-size:13px;
+    color:var(--gold-solid); text-decoration:underline; text-underline-offset:2px;
   }
 
-  /* ---- ticket-stub styling ---- */
-  .ticket {
-    position: relative;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px 18px;
-    overflow: visible;
+  .level-toggle{
+    display:flex; gap:8px;
   }
-  .ticket-hero-time {
-    font-family: 'Oswald', 'Nunito', system-ui, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    font-weight: 700;
-    color: var(--accent);
-    font-size: 19px;
-    line-height: 1.15;
+  .level-btn{
+    flex:1;
+    font-family:'Libre Franklin', sans-serif; font-weight:700; font-size:14px;
+    padding:12px 10px; border-radius:10px; border:1.5px solid var(--rule);
+    background:var(--white); color:var(--ink-soft);
+    cursor:pointer; text-align:center;
+    transition:border-color .15s, color .15s, background .15s;
   }
-  .ticket-divider {
-    position: relative;
-    margin: 12px -18px 14px;
-    border-top: 2px dashed var(--border);
+  .level-btn .dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle;}
+  .level-btn[data-level="hs"] .dot{background:var(--crimson);}
+  .level-btn[data-level="ms"] .dot{background:var(--gold);}
+  .level-btn.selected{color:var(--ink); border-color:currentColor;}
+  .level-btn[data-level="hs"].selected{border-color:var(--crimson); background:rgba(232,67,63,0.1);}
+  .level-btn[data-level="ms"].selected{border-color:var(--gold); background:rgba(242,194,48,0.1);}
+  .level-field-err{color:var(--crimson); font-size:12.5px; margin-top:5px; display:none;}
+  .level-field-err.show{display:block;}
+
+  .btn-primary{
+    width:100%; background:var(--gold); color:#000;
+    border:none; padding:14px; border-radius:10px; font-weight:700; font-size:15.5px;
+    cursor:pointer; margin-top:6px; font-family:'Libre Franklin', sans-serif;
   }
-  .ticket-divider::before,
-  .ticket-divider::after {
-    content: "";
-    position: absolute;
-    top: -9px;
-    width: 18px;
-    height: 18px;
-    background: var(--bg);
-    border-radius: 50%;
-    border: 1px solid var(--border);
+  .btn-primary:active{transform:scale(0.99);}
+  .btn-primary:disabled{opacity:0.5; cursor:not-allowed;}
+  .btn-secondary{
+    width:100%; background:none; color:var(--ink-soft);
+    border:none; padding:10px; font-size:13.5px; cursor:pointer; text-decoration:underline;
+    font-family:'Libre Franklin', sans-serif;
   }
-  .ticket-divider::before { left: -9px; }
-  .ticket-divider::after { right: -9px; }
-  .ticket-names {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  .hp-wrap{position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;}
+
+  /* ---------- Import ---------- */
+  .drop-zone{
+    border:2px dashed var(--rule); border-radius:12px; padding:26px 16px;
+    text-align:center; cursor:pointer; background:var(--white);
+    transition:border-color .15s, background .15s;
   }
-  .ticket-name-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 10px;
+  .drop-zone.drag{border-color:var(--gold-solid); background:#241E0C;}
+  .drop-zone .ic{font-size:26px; display:block; margin-bottom:6px;}
+  .drop-zone .main{font-weight:700; font-size:14.5px;}
+  .drop-zone .sub{font-size:12.5px; color:var(--ink-soft); margin-top:3px;}
+  .drop-zone input{display:none;}
+
+  .preview-row{
+    display:flex; align-items:flex-start; gap:10px;
+    padding:10px 0; border-bottom:1px solid var(--rule);
   }
+  .preview-row:last-child{border-bottom:none;}
+  .preview-row input[type=checkbox]{margin-top:4px; width:16px; height:16px; accent-color:var(--gold-solid);}
+  .preview-row .pr-main{flex:1; min-width:0;}
+  .preview-row .pr-title{font-weight:700; font-size:14px;}
+  .preview-row .pr-meta{font-size:12px; color:var(--ink-soft); font-family:'Space Mono', monospace;}
+  .preview-list{max-height:260px; overflow-y:auto; margin:14px 0; border:1px solid var(--rule); border-radius:10px; padding:0 12px; background:var(--white);}
+
+  /* ---------- Calendar grid ---------- */
+  .cal-wrap{background:var(--white); border-radius:14px; padding:14px; box-shadow:var(--shadow); margin-bottom:20px;}
+  .cal-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+  .cal-head .lab{font-family:'Anton', sans-serif; font-size:17px; text-transform:uppercase;}
+  .cal-nav{background:none; border:1.5px solid var(--rule); border-radius:8px; width:30px; height:30px; cursor:pointer; font-size:16px; color:var(--ink);}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px;}
+  .cal-dow{font-family:'Space Mono', monospace; font-size:10px; text-align:center; color:var(--ink-soft); text-transform:uppercase; padding-bottom:4px;}
+  .cal-cell{
+    aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    border-radius:8px; font-size:13px; color:var(--ink); cursor:default; position:relative;
+    background:transparent;
+  }
+  .cal-cell.has-events{cursor:pointer; background:var(--paper-soft); font-weight:700;}
+  .cal-cell.selected{background:var(--crimson); color:#fff;}
+  .cal-cell.today{box-shadow:inset 0 0 0 1.5px var(--gold-solid);}
+  .cal-dot{width:5px; height:5px; border-radius:50%; background:var(--gold-solid); margin-top:2px;}
+  .cal-cell.selected .cal-dot{background:#fff;}
+
+  .toast{
+    position:fixed; left:50%; bottom:100px; transform:translateX(-50%) translateY(20px);
+    background:var(--white); color:var(--ink); padding:10px 18px; border-radius:999px;
+    font-size:13.5px; font-weight:600; box-shadow:var(--shadow); z-index:60;
+    opacity:0; transition:opacity .2s, transform .2s; pointer-events:none;
+    border:1px solid var(--rule);
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  .admin-link{
+    position:absolute; top:14px; right:16px;
+    font-family:'Libre Franklin', sans-serif; font-size:11px;
+    color:rgba(180,176,168,0.45);
+    background:none; border:none; cursor:pointer; padding:4px;
+    letter-spacing:0.02em;
+  }
+  .admin-link:hover{color:rgba(180,176,168,0.75);}
+  .admin-link.active{color:var(--gold);}
+
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
 </style>
-
 </head>
 <body>
-<div id="fatal-banner" style="display:none; position:fixed; top:0; left:0; right:0; background:#3a1a1a; color:#ffb4ab; padding:14px 16px; font-family:monospace; font-size:13px; white-space:pre-wrap; z-index:9999; border-bottom:2px solid #e2645a; max-height:50vh; overflow:auto;"></div>
-<div id="root"></div>
+
+<header class="marquee">
+  <button class="admin-link" id="adminToggle" type="button">Admin</button>
+  <p class="eyebrow">Calvary Students</p>
+  <h1 class="wordmark">Be There</h1>
+  <p class="sub">Games, plays, recitals, and more, all in one place.<br>Let's be there for one another!</p>
+  <div class="header-actions">
+    <button class="pill-btn" id="addEventTopBtn" type="button">+ Add event</button>
+    <button class="pill-btn" id="importBtn" type="button">⇪ Import a season</button>
+  </div>
+</header>
+
+<main>
+  <div class="search-row">
+    <input type="text" id="searchInput" placeholder="Find a student, event, or place…" aria-label="Search events">
+  </div>
+
+  <div class="view-toggle-row">
+    <button class="pill-btn active" id="viewListBtn" type="button">☰ List</button>
+    <button class="pill-btn" id="viewCalBtn" type="button">▦ Calendar</button>
+    <button class="pill-btn filter-hs" id="filterHSBtn" type="button" aria-label="Filter to High School events">HS</button>
+    <button class="pill-btn filter-ms" id="filterMSBtn" type="button" aria-label="Filter to Middle School events">MS</button>
+  </div>
+
+  <div id="calendarView" style="display:none;"></div>
+
+  <div id="listView">
+    <div class="loading-state" id="loadingState">
+      <div class="spinner"></div>
+      <p>Loading the board…</p>
+    </div>
+    <div id="eventsContainer"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="big">Nothing on the board yet</div>
+      <p>Be the first to add a game, play, or recital — tap the gold button to get started.</p>
+    </div>
+  </div>
+
+  <p class="verse">"By this everyone will know that you are my disciples, if you love one another."</p>
+</main>
+
+<div id="pullIndicator" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v5h-5"/></svg>
+</div>
+
+<button class="fab" id="fabAdd" type="button" aria-label="Add an event">+</button>
+
+<!-- Add / Edit Event Sheet -->
+<div class="scrim" id="eventScrim">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="eventSheetTitle">
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <h2 id="eventSheetTitle">Add an event</h2>
+      <button class="sheet-close" id="closeEventBtn" type="button" aria-label="Close">✕</button>
+    </div>
+    <p class="sheet-sub">Fill in what you know — location and notes are optional.</p>
+
+    <div class="field" id="f_student">
+      <label>Student name(s)</label>
+      <div class="name-rows" id="studentNameRows"></div>
+      <button type="button" class="add-name-btn" id="addStudentNameBtn">+ Add another student</button>
+      <div class="field-err">Add at least one student's name so people know who to cheer for.</div>
+    </div>
+    <div class="field" id="f_event">
+      <label for="in_event">Event name</label>
+      <input type="text" id="in_event" placeholder="e.g. Varsity Soccer vs. Wayne Memorial" maxlength="140">
+      <div class="field-err">Give the event a name.</div>
+    </div>
+    <div class="field" id="f_level">
+      <label>High school or middle school?</label>
+      <div class="level-toggle" id="levelToggle">
+        <button type="button" class="level-btn" data-level="hs"><span class="dot"></span>High School</button>
+        <button type="button" class="level-btn" data-level="ms"><span class="dot"></span>Middle School</button>
+      </div>
+      <div class="level-field-err">Pick one so the board can tell them apart.</div>
+    </div>
+    <div class="field-row">
+      <div class="field" id="f_date">
+        <label for="in_date">Date</label>
+        <input type="date" id="in_date">
+        <div class="field-err">Pick a date.</div>
+      </div>
+      <div class="field" id="f_time">
+        <label for="in_time">Time</label>
+        <input type="time" id="in_time">
+      </div>
+    </div>
+    <div class="field" id="f_location">
+      <label for="in_location">Location</label>
+      <input type="text" id="in_location" placeholder="e.g. Canton High School" maxlength="140">
+    </div>
+    <div class="field" id="f_link">
+      <label for="in_link">Link to event details or tickets</label>
+      <input type="text" id="in_link" placeholder="e.g. cbcjoy.org/" maxlength="300">
+    </div>
+    <div class="field" id="f_notes">
+      <label for="in_notes">Notes</label>
+      <textarea id="in_notes" placeholder="Anything else people should know — parking, arrival time, cost…" maxlength="600"></textarea>
+    </div>
+
+    <button class="btn-primary" id="saveEventBtn" type="button">Add to the board</button>
+    <div class="hp-wrap" aria-hidden="true">
+      <label for="hp_field">Leave this field blank</label>
+      <input type="text" id="hp_field" name="website" tabindex="-1" autocomplete="off">
+    </div>
+    <button class="btn-secondary" id="cancelEventBtn" type="button">Cancel</button>
+  </div>
+</div>
+
+<!-- Import Sheet -->
+<div class="scrim" id="importScrim">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="importSheetTitle">
+    <div class="sheet-handle"></div>
+    <h2 id="importSheetTitle">Import a season</h2>
+    <p class="sheet-sub">Upload a calendar (.ics) or spreadsheet (.csv) export and add every event at once.</p>
+
+    <div id="importStep1">
+      <div class="field">
+        <label>Whose season is this?</label>
+        <div class="name-rows" id="bulkNameRows"></div>
+        <button type="button" class="add-name-btn" id="addBulkNameBtn">+ Add another student</button>
+      </div>
+      <div class="field">
+        <label for="in_bulk_link">Link to details or tickets (optional)</label>
+        <input type="text" id="in_bulk_link" placeholder="e.g. cbcjoy.org/">
+        <div class="field-hint">Applies to all events in this file, unless the file has its own links.</div>
+      </div>
+      <div class="field" id="f_bulk_level">
+        <label>High school or middle school?</label>
+        <div class="level-toggle" id="bulkLevelToggle">
+          <button type="button" class="level-btn" data-level="hs"><span class="dot"></span>High School</button>
+          <button type="button" class="level-btn" data-level="ms"><span class="dot"></span>Middle School</button>
+        </div>
+        <div class="level-field-err">Pick one — it applies to every event in this file.</div>
+      </div>
+      <div class="drop-zone" id="dropZone" tabindex="0">
+        <span class="ic">📄</span>
+        <span class="main">Tap to choose a file</span>
+        <span class="sub">.ics, .csv, .xlsx, or a PDF schedule</span>
+        <input type="file" id="fileInput" accept=".ics,.csv,.txt,.xlsx,.xls,.pdf">
+      </div>
+    </div>
+
+    <div id="importStep2" style="display:none;">
+      <p class="sheet-sub" id="importCount"></p>
+      <div class="preview-list" id="previewList"></div>
+      <button class="btn-primary" id="confirmImportBtn" type="button">Add these to the board</button>
+      <button class="btn-secondary" id="backImportBtn" type="button">Choose a different file</button>
+    </div>
+
+    <button class="btn-secondary" id="cancelImportBtn" type="button">Cancel</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-  // Catches ANY error (even before React/Firebase load) and shows it
-  // on screen instead of silently failing. This is a debugging aid —
-  // safe to leave in.
-  function showFatal(msg) {
-    var el = document.getElementById("fatal-banner");
-    el.style.display = "block";
-    el.textContent = (el.textContent ? el.textContent + "\n\n" : "") + msg;
-  }
-  window.showFatal = showFatal;
-  window.addEventListener("error", function (e) {
-    showFatal("Error: " + (e.message || e.type) + (e.filename ? ("\n" + e.filename + ":" + e.lineno) : ""));
-  });
-  window.addEventListener("unhandledrejection", function (e) {
-    var reason = e.reason;
-    var msg = (reason && (reason.message || reason.code)) ? (reason.code ? reason.code + " — " + reason.message : reason.message) : String(reason);
-    showFatal("Unhandled promise rejection: " + msg);
-  });
-</script>
-
-<!-- Firebase (compat/classic SDK — avoids <script type="module"> entirely,
-     since some hosts/proxies mangle module scripts) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script>
-  // ------------------------------------------------------------------
-  // FIREBASE CONFIG — replace with your own project's config values.
-  // See README.md "Step 1" for where to get these.
-  // ------------------------------------------------------------------
-  var firebaseConfig = {
-    apiKey: "AIzaSyAS8yCrCtKSltUCvPViZJrScUBy8dkiPMU",
-    authDomain: "schedulercs.firebaseapp.com",
-    projectId: "schedulercs",
-    storageBucket: "schedulercs.firebasestorage.app",
-    messagingSenderId: "733761692220",
-    appId: "1:733761692220:web:2d87567543e20cf39e5939"
-  };
-
-  try {
-    firebase.initializeApp(firebaseConfig);
-    var db = firebase.firestore();
-
-    // Small wrapper layer so the React app below can call these with the
-    // same shape as the modern modular Firestore API, while everything
-    // underneath actually runs on the classic/compat SDK.
-    function collection(dbRef, name) { return dbRef.collection(name); }
-    function doc(dbRef, collName, docId) { return dbRef.collection(collName).doc(docId); }
-    function orderBy(field) { return { type: "orderBy", field: field }; }
-    function query(collRef, constraint) {
-      return constraint && constraint.type === "orderBy" ? collRef.orderBy(constraint.field) : collRef;
-    }
-    function onSnapshot(ref, onNext, onError) { return ref.onSnapshot(onNext, onError); }
-    async function getDoc(docRef) {
-      const snap = await docRef.get();
-      return { exists: () => snap.exists, data: () => snap.data(), id: snap.id };
-    }
-    async function getDocs(collRef) { return collRef.get(); }
-    async function addDoc(collRef, data) { return collRef.add(data); }
-    async function updateDoc(docRef, data) { return docRef.update(data); }
-    async function deleteDoc(docRef) { return docRef.delete(); }
-    async function setDoc(docRef, data) { return docRef.set(data); }
-
-    window.__fb = {
-      db, collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc,
-      onSnapshot, setDoc, query, orderBy
-    };
-    window.dispatchEvent(new Event("fb-ready"));
-  } catch (err) {
-    showFatal("Firebase failed to initialize: " + (err && err.message ? err.message : String(err)));
-  }
-</script>
-
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
-
-<script type="text/babel" data-presets="react">
-const { useState, useEffect, useMemo, useCallback } = React;
-
-// ---------- ministry (multi-instance) config ----------
-// Add an entry here for each group using this app. The `key` is what goes
-// in the URL as ?org=key — e.g. yoursite.pages.dev/?org=kids
-// Each key gets its own volunteers, shifts, and admin passcode, all inside
-// the same Firebase project — nothing else to duplicate or maintain twice.
-const MINISTRIES = {
-  students: { label: "Calvary Students" },
-  kids: { label: "Calvary Kids" },
+/* =========================================================
+   FIREBASE CONFIG — replace with your project's config
+   ========================================================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyCtoJFWSBxuBygedjrs3zXNX7pite7uKfQ",
+  authDomain: "calvarystudentscalendar.firebaseapp.com",
+  projectId: "calvarystudentscalendar",
+  storageBucket: "calvarystudentscalendar.firebasestorage.app",
+  messagingSenderId: "426478572123",
+  appId: "1:426478572123:web:d6cfcc71138c6af59e257e"
 };
-const DEFAULT_MINISTRY = "students";
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const eventsRef = db.collection("events");
 
-function getMinistryKey() {
-  const params = new URLSearchParams(window.location.search);
-  const key = params.get("org");
-  return (key && MINISTRIES[key]) ? key : DEFAULT_MINISTRY;
-}
-function getMinistryLabel(key) {
-  return MINISTRIES[key]?.label || key;
-}
+/* Change this to whatever passcode leaders should use to sign in as admin. */
+const ADMIN_PASSCODE = "Promo1398!";
 
-// ---------- helpers ----------
-function parseCSV(text) {
-  const rows = [];
-  let row = [], field = "", inQuotes = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (inQuotes) {
-      if (c === '"') {
-        if (text[i + 1] === '"') { field += '"'; i++; }
-        else { inQuotes = false; }
-      } else field += c;
-    } else {
-      if (c === '"') inQuotes = true;
-      else if (c === ",") { row.push(field); field = ""; }
-      else if (c === "\n" || c === "\r") {
-        if (c === "\r" && text[i + 1] === "\n") i++;
-        row.push(field); rows.push(row); row = []; field = "";
-      } else field += c;
-    }
-  }
-  if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
-  return rows.filter(r => r.some(cell => cell.trim() !== ""));
-}
-function lastNameOf(fullName) {
-  const parts = (fullName || "").trim().split(/\s+/);
-  return parts[parts.length - 1] || "";
-}
-function fmtDate(iso) {
-  const [y, m, d] = iso.split("-").map(Number);
-  const dt = new Date(y, m - 1, d);
-  return dt.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
-}
-function fmtTime(hhmm) {
-  const [h, m] = hhmm.split(":").map(Number);
-  const period = h >= 12 ? "PM" : "AM";
-  const h12 = h % 12 === 0 ? 12 : h % 12;
-  return m === 0 ? `${h12} ${period}` : `${h12}:${String(m).padStart(2,"0")} ${period}`;
-}
-function todayISO() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-}
-function addDaysISO(iso, days) {
-  const [y, m, d] = iso.split("-").map(Number);
-  const dt = new Date(y, m - 1, d);
-  dt.setDate(dt.getDate() + days);
-  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}-${String(dt.getDate()).padStart(2,"0")}`;
-}
-function toISO(dt) {
-  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}-${String(dt.getDate()).padStart(2,"0")}`;
-}
-const WEEKDAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-function ordinal(n) {
-  if (n === "last") return "last";
-  const s = ["th","st","nd","rd"];
-  const v = n % 100;
-  return n + (s[(v - 20) % 10] || s[v] || s[0]);
-}
-// Given a date, figure out its "position" within its month for recurrence purposes —
-// e.g. Aug 3, 2026 (a Monday) is the 1st Monday of August. If it's the last occurrence
-// of that weekday in its month, prefer "last" so recurrence doesn't skip shorter months.
-function computeNthWeekday(dateISO) {
-  const [y, m, d] = dateISO.split("-").map(Number);
-  const dt = new Date(y, m - 1, d);
-  const weekday = dt.getDay();
-  const nthNum = Math.ceil(d / 7);
-  const next = new Date(y, m - 1, d + 7);
-  const isLast = next.getMonth() !== (m - 1);
-  return { weekday, nth: isLast ? "last" : nthNum };
-}
-// Find the date of the nth (or "last") occurrence of a weekday within a given month.
-// Returns null if that nth occurrence doesn't exist in this particular month.
-function nthWeekdayOfMonth(year, monthIndex, weekday, nth) {
-  if (nth === "last") {
-    const lastOfMonth = new Date(year, monthIndex + 1, 0);
-    let day = lastOfMonth.getDate();
-    while (new Date(year, monthIndex, day).getDay() !== weekday) day--;
-    return new Date(year, monthIndex, day);
-  }
-  const first = new Date(year, monthIndex, 1);
-  const offset = (weekday - first.getDay() + 7) % 7;
-  const day = 1 + offset + (nth - 1) * 7;
-  const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-  if (day > daysInMonth) return null;
-  return new Date(year, monthIndex, day);
-}
-// All matching dates (inclusive) between startISO and untilISO for a given nth-weekday pattern.
-function getRecurrenceDates(startISO, untilISO, weekday, nth) {
-  const [sy, sm] = startISO.split("-").map(Number);
-  let year = sy, month = sm - 1;
-  const dates = [];
-  let guard = 0;
-  while (guard++ < 600) {
-    const monthStartISO = `${year}-${String(month+1).padStart(2,"0")}-01`;
-    if (monthStartISO > untilISO) break;
-    const occ = nthWeekdayOfMonth(year, month, weekday, nth);
-    if (occ) {
-      const occISO = toISO(occ);
-      if (occISO >= startISO && occISO <= untilISO) dates.push(occISO);
-    }
-    month++;
-    if (month > 11) { month = 0; year++; }
-  }
-  return dates;
+if(window.pdfjsLib){
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 }
 
-// ---------- .ics calendar file generation ----------
-function icsNowUTC() {
+/* =========================================================
+   Device identity (so "who added it" can edit/delete)
+   Falls back gracefully if storage is unavailable (e.g. in-preview).
+   ========================================================= */
+function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
+function safeSet(key, val){ try{ localStorage.setItem(key, val); }catch(e){ /* ignore */ } }
+
+function uuid(){
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c=>{
+    const r = Math.random()*16|0, v = c==='x'?r:(r&0x3|0x8);
+    return v.toString(16);
+  });
+}
+let deviceId = safeGet('deviceId');
+if(!deviceId){ deviceId = uuid(); safeSet('deviceId', deviceId); }
+let isAdmin = safeGet('isAdmin') === 'true';
+
+/* =========================================================
+   State
+   ========================================================= */
+let allEvents = [];       // live from Firestore
+let currentView = 'list'; // 'list' | 'calendar'
+let editingId = null;     // event currently being edited, or null for "new"
+let calMonth = new Date(); calMonth.setDate(1);
+let calSelectedDate = null;
+let pendingImportRows = []; // parsed rows awaiting confirmation
+let levelFilter = new Set(); // empty = show all levels; otherwise only levels in the set
+
+function passesLevelFilter(e){
+  return levelFilter.size === 0 || levelFilter.has(e.level);
+}
+
+/* =========================================================
+   Firestore sync
+   ========================================================= */
+let hasLoadedOnce = false;
+function markLoaded(){
+  if(hasLoadedOnce) return;
+  hasLoadedOnce = true;
+  const ls = $('#loadingState');
+  if(ls) ls.style.display = 'none';
+}
+
+eventsRef.orderBy("dateStr").onSnapshot(snap => {
+  allEvents = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  markLoaded();
+  render();
+}, err => {
+  console.error(err);
+  markLoaded();
+  const ls = $('#loadingState');
+  if(ls){
+    ls.querySelector('.spinner').style.display = 'none';
+    ls.querySelector('p').textContent = "Couldn't connect — check your internet connection and try again.";
+    ls.style.display = 'block';
+  }
+  showToast("Couldn't connect — check the Firebase setup.");
+});
+
+/* =========================================================
+   Helpers
+   ========================================================= */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+function showToast(msg){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function normalizeUrl(str){
+  if(!str) return '';
+  if(/^https?:\/\//i.test(str)) return str;
+  return 'https://' + str;
+}
+
+function toDateStr(y,m,d){ return `${y}-${pad(m)}-${pad(d)}`; }
+
+function parseDateStr(str){
+  // 'YYYY-MM-DD' -> local Date at midnight
+  const [y,m,d] = str.split('-').map(Number);
+  return new Date(y, m-1, d);
+}
+
+function formatTime12(t){
+  if(!t) return '';
+  const [h,m] = t.split(':').map(Number);
+  const ampm = h>=12?'pm':'am';
+  const h12 = ((h+11)%12)+1;
+  return `${h12}:${pad(m)}${ampm}`;
+}
+
+/* =========================================================
+   Calendar export (.ics)
+   ========================================================= */
+function icsEscape(str){
+  if(!str) return '';
+  return String(str).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+}
+
+function icsDateRange(dateStr, timeStr){
+  const [y,m,d] = dateStr.split('-').map(Number);
+  if(timeStr){
+    const [hh,mm] = timeStr.split(':').map(Number);
+    const start = new Date(y, m-1, d, hh, mm);
+    const end = new Date(start.getTime() + 2*60*60*1000); // default 2-hour block
+    const fmt = dt => `${dt.getFullYear()}${pad(dt.getMonth()+1)}${pad(dt.getDate())}T${pad(dt.getHours())}${pad(dt.getMinutes())}00`;
+    return { allDay:false, dtstart: fmt(start), dtend: fmt(end) };
+  }
+  const start = new Date(y, m-1, d);
+  const end = new Date(start.getTime() + 24*60*60*1000);
+  const fmtDate = dt => `${dt.getFullYear()}${pad(dt.getMonth()+1)}${pad(dt.getDate())}`;
+  return { allDay:true, dtstart: fmtDate(start), dtend: fmtDate(end) };
+}
+
+function eventToVEVENT(e){
+  const dt = icsDateRange(e.dateStr, e.time);
+  const uid = `${e.id || uuid()}@cbcjoy-betheresite`;
   const now = new Date();
-  const p = n => String(n).padStart(2, "0");
-  return `${now.getUTCFullYear()}${p(now.getUTCMonth()+1)}${p(now.getUTCDate())}T${p(now.getUTCHours())}${p(now.getUTCMinutes())}${p(now.getUTCSeconds())}Z`;
-}
-function escapeICS(text) {
-  return String(text || "").replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
-}
-function icsEventBlock(ev) {
-  let dtstartLine, dtendLine;
-  if (ev.time) {
-    const [h, m] = ev.time.split(":").map(Number);
-    const [y, mo, d] = ev.date.split("-");
-    const startDT = `${y}${mo}${d}T${String(h).padStart(2,"0")}${String(m).padStart(2,"0")}00`;
-    let endH = h + 1;
-    const endDT = `${y}${mo}${d}T${String(endH % 24).padStart(2,"0")}${String(m).padStart(2,"0")}00`;
-    dtstartLine = `DTSTART:${startDT}`;
-    dtendLine = `DTEND:${endDT}`;
+  const stamp = `${now.getUTCFullYear()}${pad(now.getUTCMonth()+1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}${pad(now.getUTCSeconds())}Z`;
+  const lines = ['BEGIN:VEVENT', `UID:${uid}`, `DTSTAMP:${stamp}`];
+  if(dt.allDay){
+    lines.push(`DTSTART;VALUE=DATE:${dt.dtstart}`);
+    lines.push(`DTEND;VALUE=DATE:${dt.dtend}`);
   } else {
-    const dateOnly = ev.date.replace(/-/g, "");
-    const [y, mo, d] = ev.date.split("-").map(Number);
-    const nextDateOnly = toISO(new Date(y, mo - 1, d + 1)).replace(/-/g, "");
-    dtstartLine = `DTSTART;VALUE=DATE:${dateOnly}`;
-    dtendLine = `DTEND;VALUE=DATE:${nextDateOnly}`;
+    lines.push(`DTSTART:${dt.dtstart}`);
+    lines.push(`DTEND:${dt.dtend}`);
   }
-  return [
-    "BEGIN:VEVENT",
-    `UID:${ev.uid}`,
-    `DTSTAMP:${icsNowUTC()}`,
-    dtstartLine,
-    dtendLine,
-    `SUMMARY:${escapeICS(ev.summary)}`,
-    ev.description ? `DESCRIPTION:${escapeICS(ev.description)}` : null,
-    "END:VEVENT",
-  ].filter(Boolean).join("\r\n");
+  const summary = e.student ? `${e.student} — ${e.eventName}` : e.eventName;
+  lines.push(`SUMMARY:${icsEscape(summary)}`);
+  if(e.location) lines.push(`LOCATION:${icsEscape(e.location)}`);
+  const descBits = [];
+  if(e.notes) descBits.push(e.notes);
+  if(e.link) descBits.push(e.link);
+  if(descBits.length) lines.push(`DESCRIPTION:${icsEscape(descBits.join(' — '))}`);
+  if(e.link) lines.push(`URL:${icsEscape(e.link)}`);
+  lines.push('END:VEVENT');
+  return lines.join('\r\n');
 }
-function buildICSFile(events) {
+
+function buildICS(events){
   return [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//CalvaryScheduler//EN",
-    "CALSCALE:GREGORIAN",
-    ...events.map(icsEventBlock),
-    "END:VCALENDAR",
-  ].join("\r\n");
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Calvary Students//Be There//EN',
+    'CALSCALE:GREGORIAN',
+    'X-WR-CALNAME:Calvary Students Be There',
+    'X-WR-TIMEZONE:America/Detroit',
+    events.map(eventToVEVENT).join('\r\n'),
+    'END:VCALENDAR'
+  ].join('\r\n');
 }
-function downloadICS(filename, content) {
-  const blob = new Blob([content], { type: "text/calendar;charset=utf-8" });
+
+function slugify(str){
+  return (str||'event').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'').slice(0,60) || 'event';
+}
+
+function downloadICS(filename, icsText){
+  const blob = new Blob([icsText], {type:'text/calendar;charset=utf-8'});
   const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
 }
 
-function buildReminderMessage(r) {
-  const roleText = r.role ? ` (${r.role})` : "";
-  const timeText = r.time ? ` at ${fmtTime(r.time)}` : "";
-  return `Hi ${r.volunteerName.split(" ")[0]}! Reminder: you're signed up to volunteer on ${fmtDate(r.date)}${timeText}${roleText}. Thanks for serving with Calvary Students!`;
-}
-async function copyToClipboard(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch (e) {
-    return false;
-  }
+function allUpcomingEvents(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  return allEvents.filter(e => parseDateStr(e.dateStr) >= today)
+    .sort((a,b) => (a.dateStr+(a.time||'99:99')).localeCompare(b.dateStr+(b.time||'99:99')));
 }
 
-// ---------- small UI atoms ----------
-function Button({ children, onClick, variant = "default", disabled, style }) {
-  const base = {
-    padding: "8px 14px",
-    borderRadius: 8,
-    fontSize: 17,
-    fontWeight: 600,
-    border: "1px solid var(--border)",
-    background: "var(--panel-2)",
-    color: "var(--text)",
-    transition: "background 120ms, border-color 120ms",
-  };
-  const variants = {
-    default: {},
-    accent: { background: "var(--accent)", borderColor: "var(--accent)", color: "#1c1d21" },
-    ghost: { background: "transparent" },
-    danger: { color: "var(--bad)", borderColor: "var(--bad)55" },
-  };
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      style={{ ...base, ...variants[variant], opacity: disabled ? 0.5 : 1, cursor: disabled ? "not-allowed" : "pointer", ...style }}
-    >
-      {children}
-    </button>
-  );
+const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+const MON = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const MON_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function dateHeadingLabel(dateStr){
+  const d = parseDateStr(dateStr);
+  const today = new Date(); today.setHours(0,0,0,0);
+  const diffDays = Math.round((d - today) / 86400000);
+  if(diffDays === 0) return "Today";
+  if(diffDays === 1) return "Tomorrow";
+  if(diffDays > 1 && diffDays < 7) return DOW[d.getDay()].charAt(0)+DOW[d.getDay()].slice(1).toLowerCase();
+  return `${MON_FULL[d.getMonth()]} ${d.getDate()}`;
 }
 
-function Field({ label, children }) {
-  return (
-    <label style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 16, color: "var(--muted)", minWidth: 0 }}>
-      {label}
-      {children}
-    </label>
-  );
+/* =========================================================
+   Rendering — List view
+   ========================================================= */
+function currentFilteredSorted(){
+  const q = ($('#searchInput').value || '').trim().toLowerCase();
+  const today = new Date(); today.setHours(0,0,0,0);
+  let list = allEvents.filter(e => {
+    const d = parseDateStr(e.dateStr);
+    if(d < today) return false; // upcoming only on the board
+    if(!passesLevelFilter(e)) return false;
+    if(!q) return true;
+    const hay = `${e.student} ${e.eventName} ${e.location} ${e.notes}`.toLowerCase();
+    return hay.includes(q);
+  });
+  list.sort((a,b) => (a.dateStr+  (a.time||'99:99')).localeCompare(b.dateStr + (b.time||'99:99')));
+  return list;
 }
 
-const inputStyle = {
-  background: "var(--panel)",
-  border: "1px solid var(--border)",
-  borderRadius: 8,
-  padding: "9px 10px",
-  color: "var(--text)",
-  fontSize: 18,
-  fontFamily: "inherit",
-  width: "100%",
-  maxWidth: "100%",
-  minWidth: 0,
-  boxSizing: "border-box",
-  display: "block",
+function render(){
+  if(currentView === 'list') renderList(); else renderCalendar();
+  const adminBtn = $('#adminToggle');
+  adminBtn.classList.toggle('active', isAdmin);
+  adminBtn.title = isAdmin ? 'Signed in as admin — tap to sign out' : 'Admin sign-in';
+}
+
+function renderList(){
+  const container = $('#eventsContainer');
+  const list = currentFilteredSorted();
+  const isFiltered = levelFilter.size > 0 || !!($('#searchInput').value || '').trim();
+  $('#emptyState').style.display = list.length ? 'none' : 'block';
+  $('#emptyState .big').textContent = list.length ? '' : (isFiltered ? 'Nothing matches yet' : 'Nothing on the board yet');
+  $('#emptyState p').textContent = list.length ? '' : (isFiltered
+    ? 'Try clearing the filter or search to see more.'
+    : 'Be the first to add a game, play, or recital — tap the gold button to get started.');
+  container.innerHTML = '';
+  let lastDateStr = null;
+
+  list.forEach(e => {
+    if(e.dateStr !== lastDateStr){
+      const h = document.createElement('div');
+      h.className = 'date-heading';
+      h.textContent = dateHeadingLabel(e.dateStr);
+      container.appendChild(h);
+      lastDateStr = e.dateStr;
+    }
+    container.appendChild(renderTicket(e));
+  });
+}
+
+const ICONS = {
+  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.2v5l3.3 2"/>',
+  pin: '<path d="M12 21s7-7.2 7-12.5A7 7 0 0 0 5 8.5C5 13.8 12 21 12 21z"/><circle cx="12" cy="8.5" r="2.3"/>',
+  link: '<path d="M9.3 14.7l5.4-5.4"/><path d="M7.8 12.6a3.6 3.6 0 0 1 0-5.1l2-2a3.6 3.6 0 1 1 5.1 5.1l-.9.9"/><path d="M16.2 11.4a3.6 3.6 0 0 1 0 5.1l-2 2a3.6 3.6 0 1 1-5.1-5.1l.9-.9"/>',
+  calendar: '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M16 3v4M8 3v4M3.5 9.7h17"/>',
+  share: '<circle cx="18" cy="5.5" r="2.1"/><circle cx="6" cy="12" r="2.1"/><circle cx="18" cy="18.5" r="2.1"/><path d="M8 10.8l7.7-4.2M8 13.2l7.7 4.2"/>'
 };
+function icon(name){
+  return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
+}
 
-// Native date/time pickers (especially iOS Safari) can render slightly
-// wider than the box they're given. Instead of fighting that, the border
-// and background live on this wrapper (overflow: hidden clips anything
-// that tries to spill past it), and the input itself is transparent/borderless.
-const nativePickerWrapStyle = {
-  border: "1px solid var(--border)",
-  borderRadius: 8,
-  background: "var(--panel)",
-  overflow: "hidden",
-  width: "100%",
-  boxSizing: "border-box",
-};
-const nativePickerInputStyle = {
-  background: "transparent",
-  border: "none",
-  padding: "9px 10px",
-  color: "var(--text)",
-  fontSize: 18,
-  fontFamily: "inherit",
-  width: "100%",
-  minWidth: 0,
-  boxSizing: "border-box",
-  display: "block",
-};
+function renderTicket(e){
+  const d = parseDateStr(e.dateStr);
+  const canEdit = isAdmin || e.ownerId === deviceId;
+  const el = document.createElement('div');
+  el.className = 'ticket';
 
-// ---------- App ----------
-function App() {
-  const ministryKey = useMemo(() => getMinistryKey(), []);
-  const ministryLabel = getMinistryLabel(ministryKey);
-  const volunteersCollectionName = `volunteers_${ministryKey}`;
-  const slotsCollectionName = `slots_${ministryKey}`;
-  const adminDocId = `admin_${ministryKey}`;
+  const metaBits = [];
+  if(e.time) metaBits.push(`<span class="mono">${icon('clock')} ${formatTime12(e.time)}</span>`);
+  if(e.location) metaBits.push(`<span>${icon('pin')} ${escapeHtml(e.location)}</span>`);
+  if(e.link) metaBits.push(`<span><a class="event-link" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">${icon('link')} Details / tickets</a></span>`);
 
-  const [fbReady, setFbReady] = useState(!!window.__fb);
-  const [tab, setTab] = useState("schedule");
-  const [isAdmin, setIsAdmin] = useState(sessionStorage.getItem("vs_admin") === "1");
-  const [volunteers, setVolunteers] = useState([]);
-  const [slots, setSlots] = useState([]);
-  const [passcode, setPasscode] = useState(null); // stored admin passcode from config doc
-  const [toast, setToast] = useState(null);
+  el.innerHTML = `
+    <div class="ticket-date${e.level==='ms' ? ' level-ms' : ''}">
+      <span class="dow">${DOW[d.getDay()]}</span>
+      <span class="day">${d.getDate()}</span>
+      <span class="mon">${MON[d.getMonth()]}</span>
+    </div>
+    <div class="perf"></div>
+    <div class="ticket-body">
+      <div class="ticket-top">
+        <div>
+          <p class="who">${escapeHtml(e.student)}</p>
+          <p class="what">${escapeHtml(e.eventName)}</p>
+        </div>
+      </div>
+      ${metaBits.length ? `<div class="meta-row">${metaBits.join('')}</div>` : ''}
+      ${e.notes ? `<div class="notes">${escapeHtml(e.notes)}</div>` : ''}
+      <div class="ticket-footer">
+        <button class="link-btn" data-id="${e.id}" data-action="addcal">${icon('calendar')} Add to my calendar</button>
+        <button class="link-btn" data-id="${e.id}" data-action="share">${icon('share')} Share</button>
+        ${canEdit ? `
+          <button class="link-btn" data-id="${e.id}" data-action="edit">Edit</button>
+          <button class="link-btn" data-id="${e.id}" data-action="duplicate">Duplicate</button>
+          <button class="link-btn danger" data-id="${e.id}" data-action="delete">Remove</button>
+        ` : ''}
+      </div>
+    </div>
+  `;
+  return el;
+}
 
-  useEffect(() => {
-    if (fbReady) return;
-    const onReady = () => setFbReady(true);
-    window.addEventListener("fb-ready", onReady);
-    return () => window.removeEventListener("fb-ready", onReady);
-  }, [fbReady]);
+function escapeHtml(str){
+  if(!str) return '';
+  return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
 
-  useEffect(() => {
-    if (!fbReady) return;
-    const { db, collection, onSnapshot, query, orderBy, doc, getDoc } = window.__fb;
-
-    const unsubVol = onSnapshot(
-      collection(db, volunteersCollectionName),
-      snap => setVolunteers(snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a,b) => lastNameOf(a.name).localeCompare(lastNameOf(b.name)) || a.name.localeCompare(b.name))),
-      err => window.showFatal && window.showFatal("Volunteers listener error: " + err.code + " — " + err.message)
-    );
-    const unsubSlots = onSnapshot(
-      query(collection(db, slotsCollectionName), orderBy("date")),
-      snap => setSlots(snap.docs.map(d => ({ id: d.id, ...d.data() }))),
-      err => window.showFatal && window.showFatal("Slots listener error: " + err.code + " — " + err.message)
-    );
-    getDoc(doc(db, "config", adminDocId)).then(snap => {
-      if (snap.exists()) setPasscode(snap.data().passcode);
-      else setPasscode(null);
-    }).catch(err => window.showFatal && window.showFatal("Config read error: " + err.code + " — " + err.message));
-    return () => { unsubVol(); unsubSlots(); };
-  }, [fbReady, volunteersCollectionName, slotsCollectionName, adminDocId]);
-
-  function showToast(msg, kind = "good") {
-    setToast({ msg, kind });
-    setTimeout(() => setToast(null), 2800);
-  }
-
-  function tryUnlock(code) {
-    if (passcode && code === passcode) {
-      sessionStorage.setItem("vs_admin", "1");
-      setIsAdmin(true);
-      showToast("Admin unlocked");
-    } else if (!passcode && code) {
-      // first-run: no passcode set yet, whatever they type becomes it
-      window.__fb.setDoc(window.__fb.doc(window.__fb.db, "config", adminDocId), { passcode: code });
-      setPasscode(code);
-      sessionStorage.setItem("vs_admin", "1");
-      setIsAdmin(true);
-      showToast("Admin passcode set — remember it!");
+/* =========================================================
+   Multi-name fields (student names) — reusable rows
+   ========================================================= */
+function createNameRow(wrapEl, value){
+  const row = document.createElement('div');
+  row.className = 'name-row';
+  row.innerHTML = `
+    <input type="text" class="name-input" placeholder="e.g. Beth Elliot" maxlength="80">
+    <button type="button" class="name-remove" aria-label="Remove this name">✕</button>
+  `;
+  row.querySelector('.name-input').value = value || '';
+  row.querySelector('.name-remove').onclick = () => {
+    if(wrapEl.querySelectorAll('.name-row').length > 1){
+      row.remove();
     } else {
-      showToast("Wrong passcode", "bad");
+      row.querySelector('.name-input').value = '';
+    }
+  };
+  wrapEl.appendChild(row);
+  return row;
+}
+function setNameRows(wrapEl, namesStr){
+  wrapEl.innerHTML = '';
+  const names = (namesStr || '').split(',').map(s => s.trim()).filter(Boolean);
+  if(!names.length) names.push('');
+  names.forEach(n => createNameRow(wrapEl, n));
+}
+function getNamesValue(wrapEl){
+  return Array.from(wrapEl.querySelectorAll('.name-input'))
+    .map(i => i.value.trim())
+    .filter(Boolean)
+    .join(', ');
+}
+
+document.addEventListener('click', e => {
+  const lbtn = e.target.closest('.level-btn');
+  if(lbtn){
+    const group = lbtn.closest('.level-toggle');
+    group.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+    lbtn.classList.add('selected');
+    group.dataset.selected = lbtn.dataset.level;
+    const errEl = group.parentElement.querySelector('.level-field-err');
+    if(errEl) errEl.classList.remove('show');
+  }
+});
+
+function levelLabel(level){
+  return level === 'ms' ? 'Middle School' : 'High School';
+}
+
+document.addEventListener('click', e => {
+  const link = e.target.closest('.event-link');
+  if(link){
+    e.preventDefault();
+    window.open(link.getAttribute('href'), '_blank', 'noopener,noreferrer');
+    return;
+  }
+  const btn = e.target.closest('[data-action]');
+  if(!btn) return;
+  const id = btn.dataset.id;
+  const action = btn.dataset.action;
+  const ev = allEvents.find(x => x.id === id);
+  if(!ev) return;
+
+  if(action === 'edit'){
+    openEventSheet(ev);
+  } else if(action === 'duplicate'){
+    openEventSheet(ev, { duplicate:true });
+  } else if(action === 'delete'){
+    if(confirm(`Remove "${ev.eventName}" from the board?`)){
+      eventsRef.doc(id).delete();
+      showToast('Removed from the board');
+    }
+  } else if(action === 'addcal'){
+    downloadICS(`${slugify(ev.eventName)}.ics`, buildICS([ev]));
+    showToast('Downloaded — open the file to add it to your calendar');
+  } else if(action === 'share'){
+    const bits = [];
+    if(ev.student) bits.push(ev.student);
+    bits.push(ev.eventName);
+    let when = dateHeadingLabel(ev.dateStr);
+    if(ev.time) when += ` at ${formatTime12(ev.time)}`;
+    bits.push(when);
+    if(ev.location) bits.push(ev.location);
+    if(ev.link) bits.push(ev.link);
+    const text = bits.join(' — ');
+    if(navigator.share){
+      navigator.share({ title: ev.eventName, text }).catch(()=>{});
+    } else if(navigator.clipboard){
+      navigator.clipboard.writeText(text)
+        .then(()=>showToast('Copied — paste it anywhere'))
+        .catch(()=>showToast("Couldn't copy — try again"));
+    } else {
+      showToast("Sharing isn't supported on this browser");
     }
   }
+});
 
-  function logout() {
-    sessionStorage.removeItem("vs_admin");
-    setIsAdmin(false);
-    if (tab !== "schedule") setTab("schedule");
-    showToast("Logged out");
+/* =========================================================
+   Rendering — Calendar view
+   ========================================================= */
+function renderCalendar(){
+  const wrap = $('#calendarView');
+  const y = calMonth.getFullYear(), m = calMonth.getMonth();
+  const firstDow = new Date(y,m,1).getDay();
+  const daysInMonth = new Date(y,m+1,0).getDate();
+  const todayStr = toDateStr(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
+
+  const eventsByDate = {};
+  allEvents.filter(passesLevelFilter).forEach(e => { (eventsByDate[e.dateStr] = eventsByDate[e.dateStr] || []).push(e); });
+
+  let cells = '';
+  for(let i=0;i<firstDow;i++) cells += `<div class="cal-cell"></div>`;
+  for(let day=1; day<=daysInMonth; day++){
+    const ds = toDateStr(y, m+1, day);
+    const has = !!eventsByDate[ds];
+    const classes = ['cal-cell'];
+    if(has) classes.push('has-events');
+    if(ds === todayStr) classes.push('today');
+    if(ds === calSelectedDate) classes.push('selected');
+    cells += `<div class="${classes.join(' ')}" data-date="${ds}">
+      <span>${day}</span>
+      ${has ? `<span class="cal-dot"></span>` : ''}
+    </div>`;
   }
 
-  if (!fbReady) {
-    return <Centered>Loading…</Centered>;
+  let selectedListHtml = '';
+  if(calSelectedDate && eventsByDate[calSelectedDate]){
+    const evs = eventsByDate[calSelectedDate].slice().sort((a,b)=>(a.time||'99:99').localeCompare(b.time||'99:99'));
+    selectedListHtml = `<div class="date-heading">${dateHeadingLabel(calSelectedDate)}</div>` +
+      `<div id="calDayEvents"></div>`;
   }
 
-  return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      <Header tab={tab} setTab={setTab} isAdmin={isAdmin} ministryLabel={ministryLabel} onLogout={logout} />
-      <main style={{ flex: 1, maxWidth: 880, margin: "0 auto", width: "100%", padding: "20px 26px 60px", boxSizing: "border-box" }}>
-        {tab === "schedule" && <ScheduleView slots={slots} isAdmin={isAdmin} ministryLabel={ministryLabel} />}
-        {tab === "manage" && (isAdmin
-          ? <ManageView volunteers={volunteers} slots={slots} showToast={showToast} volunteersCollectionName={volunteersCollectionName} slotsCollectionName={slotsCollectionName} />
-          : <AdminGate onSubmit={tryUnlock} firstRun={passcode === null} />)}
-        {tab === "reminders" && (isAdmin
-          ? <RemindersView volunteers={volunteers} slots={slots} showToast={showToast} slotsCollectionName={slotsCollectionName} ministryKey={ministryKey} />
-          : <AdminGate onSubmit={tryUnlock} firstRun={passcode === null} />)}
-      </main>
-      {toast && (
-        <div style={{
-          position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)",
-          background: "var(--panel-2)", border: `1px solid ${toast.kind === "bad" ? "var(--bad)" : "var(--good)"}`,
-          color: "var(--text)", padding: "10px 18px", borderRadius: 10, fontSize: 17, zIndex: 50,
-        }}>
-          {toast.msg}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function Centered({ children }) {
-  return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--muted)" }}>{children}</div>;
-}
-
-function Header({ tab, setTab, isAdmin, ministryLabel, onLogout }) {
-  const tabs = [
-    { id: "schedule", label: "Schedule" },
-    { id: "manage", label: "Manage" },
-    { id: "reminders", label: "Reminders" },
-  ];
-  return (
-    <header style={{ borderBottom: "1px solid var(--border)", position: "sticky", top: 0, background: "var(--bg)", zIndex: 10 }}>
-      <div style={{ maxWidth: 880, margin: "0 auto", padding: "16px 26px 0", boxSizing: "border-box", position: "relative" }}>
-        {isAdmin && (
-          <button
-            onClick={onLogout}
-            className="mono"
-            style={{
-              position: "absolute", top: 16, right: 26,
-              fontSize: 14, color: "var(--accent)", border: "1px solid var(--accent)55", padding: "3px 8px", borderRadius: 20,
-              background: "transparent", cursor: "pointer", touchAction: "manipulation", WebkitTapHighlightColor: "transparent",
-            }}
-          >Log out</button>
-        )}
-        <div style={{ textAlign: "center", marginBottom: 14 }}>
-          <div style={{ fontSize: 15, letterSpacing: "0.08em", color: "var(--accent)", fontWeight: 700, textTransform: "uppercase" }}>{ministryLabel}</div>
-          <h1 style={{ margin: "2px 0 0", fontSize: 26, fontWeight: 700 }}>Volunteer Schedule</h1>
-        </div>
-        <nav style={{ display: "flex", justifyContent: "center", gap: 24 }}>
-          {tabs.map(t => (
-            <button key={t.id} onClick={() => setTab(t.id)} style={{
-              background: "transparent", border: "none", color: tab === t.id ? "var(--text)" : "var(--muted)",
-              padding: "10px 4px", fontSize: 17, fontWeight: 600,
-              borderBottom: tab === t.id ? "2px solid var(--accent)" : "2px solid transparent",
-            }}>
-              {t.label}
-            </button>
-          ))}
-        </nav>
+  wrap.innerHTML = `
+    <div class="cal-wrap">
+      <div class="cal-head">
+        <button class="cal-nav" id="calPrev" aria-label="Previous month">‹</button>
+        <span class="lab">${MON_FULL[m]} ${y}</span>
+        <button class="cal-nav" id="calNext" aria-label="Next month">›</button>
       </div>
-    </header>
-  );
-}
-
-function AdminGate({ onSubmit, firstRun }) {
-  const [code, setCode] = useState("");
-  return (
-    <div style={{ maxWidth: 320, margin: "60px auto", display: "flex", flexDirection: "column", gap: 12, textAlign: "center" }}>
-      <div style={{ fontSize: 17, color: "var(--muted)" }}>
-        {firstRun ? "Set an admin passcode for this schedule." : "Enter the admin passcode to manage the schedule."}
+      <div class="cal-grid">
+        ${DOW.map(d=>`<div class="cal-dow">${d.slice(0,1)}</div>`).join('')}
+        ${cells}
       </div>
-      <input
-        style={inputStyle}
-        type="password"
-        value={code}
-        onChange={e => setCode(e.target.value)}
-        onKeyDown={e => e.key === "Enter" && onSubmit(code)}
-        placeholder="Passcode"
-      />
-      <Button variant="accent" onClick={() => onSubmit(code)}>{firstRun ? "Set passcode" : "Unlock"}</Button>
     </div>
-  );
+    ${selectedListHtml}
+  `;
+
+  $('#calPrev').onclick = () => { calMonth.setMonth(calMonth.getMonth()-1); renderCalendar(); };
+  $('#calNext').onclick = () => { calMonth.setMonth(calMonth.getMonth()+1); renderCalendar(); };
+  $$('.cal-cell.has-events').forEach(c => {
+    c.onclick = () => { calSelectedDate = c.dataset.date === calSelectedDate ? null : c.dataset.date; renderCalendar(); };
+  });
+
+  if(calSelectedDate && eventsByDate[calSelectedDate]){
+    const container = $('#calDayEvents');
+    eventsByDate[calSelectedDate]
+      .slice().sort((a,b)=>(a.time||'99:99').localeCompare(b.time||'99:99'))
+      .forEach(e => container.appendChild(renderTicket(e)));
+  }
 }
 
-// ---------- Schedule (public) ----------
-function ScheduleView({ slots, ministryLabel }) {
-  const grouped = useMemo(() => {
-    const byDate = {};
-    for (const s of slots) {
-      if (!byDate[s.date]) byDate[s.date] = {};
-      if (!byDate[s.date][s.time]) byDate[s.date][s.time] = [];
-      byDate[s.date][s.time].push(s);
+/* =========================================================
+   View toggle
+   ========================================================= */
+$('#viewListBtn').onclick = () => {
+  currentView = 'list';
+  $('#viewListBtn').classList.add('active');
+  $('#viewCalBtn').classList.remove('active');
+  $('#listView').style.display = 'block';
+  $('#calendarView').style.display = 'none';
+  render();
+};
+$('#viewCalBtn').onclick = () => {
+  currentView = 'calendar';
+  $('#viewCalBtn').classList.add('active');
+  $('#viewListBtn').classList.remove('active');
+  $('#listView').style.display = 'none';
+  $('#calendarView').style.display = 'block';
+  render();
+};
+$('#searchInput').addEventListener('input', () => { if(currentView==='list') renderList(); });
+
+$('#filterHSBtn').onclick = () => {
+  if(levelFilter.has('hs')) levelFilter.delete('hs'); else levelFilter.add('hs');
+  $('#filterHSBtn').classList.toggle('active', levelFilter.has('hs'));
+  render();
+};
+$('#filterMSBtn').onclick = () => {
+  if(levelFilter.has('ms')) levelFilter.delete('ms'); else levelFilter.add('ms');
+  $('#filterMSBtn').classList.toggle('active', levelFilter.has('ms'));
+  render();
+};
+
+/* =========================================================
+   Add / Edit sheet
+   ========================================================= */
+function openEventSheet(ev, opts){
+  opts = opts || {};
+  const isDup = !!opts.duplicate;
+  editingId = (ev && !isDup) ? ev.id : null;
+  $('#eventSheetTitle').textContent = isDup ? 'Duplicate event' : (editingId ? 'Edit event' : 'Add an event');
+  $('#saveEventBtn').textContent = editingId ? 'Save changes' : 'Add to the board';
+  setNameRows($('#studentNameRows'), ev ? ev.student : '');
+  $('#in_event').value = ev ? ev.eventName : '';
+  $('#in_date').value = ev ? ev.dateStr : '';
+  $('#in_time').value = ev ? (ev.time||'') : '';
+  $('#in_location').value = ev ? (ev.location||'') : '';
+  $('#in_link').value = ev ? (ev.link||'') : '';
+  $('#in_notes').value = ev ? (ev.notes||'') : '';
+  const levelGroup = $('#levelToggle');
+  levelGroup.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+  levelGroup.dataset.selected = '';
+  if(ev && ev.level){
+    const match = levelGroup.querySelector(`[data-level="${ev.level}"]`);
+    if(match){ match.classList.add('selected'); levelGroup.dataset.selected = ev.level; }
+  }
+  $('#f_level .level-field-err').classList.remove('show');
+  $$('.field').forEach(f => f.classList.remove('err'));
+  $('#hp_field').value = '';
+  $('#eventScrim').classList.add('open');
+  setTimeout(()=>{ const first = $('#studentNameRows .name-input'); if(first) first.focus(); }, 50);
+}
+function closeEventSheet(){
+  $('#eventScrim').classList.remove('open');
+  editingId = null;
+}
+$('#fabAdd').onclick = () => openEventSheet(null);
+$('#addEventTopBtn').onclick = () => openEventSheet(null);
+$('#cancelEventBtn').onclick = closeEventSheet;
+$('#closeEventBtn').onclick = closeEventSheet;
+$('#addStudentNameBtn').onclick = () => {
+  const row = createNameRow($('#studentNameRows'), '');
+  row.querySelector('.name-input').focus();
+};
+$('#eventScrim').addEventListener('click', e => { if(e.target.id==='eventScrim') closeEventSheet(); });
+
+let isSavingEvent = false;
+$('#saveEventBtn').onclick = () => {
+  if(isSavingEvent) return;
+  if($('#hp_field').value.trim()){
+    // honeypot tripped — silently drop, no error shown to whatever filled it
+    closeEventSheet();
+    showToast('Added to the board 🎟️');
+    return;
+  }
+  const student = getNamesValue($('#studentNameRows'));
+  const eventName = $('#in_event').value.trim();
+  const dateStr = $('#in_date').value;
+  const level = $('#levelToggle').dataset.selected;
+  let ok = true;
+  $('#f_student').classList.toggle('err', !student); if(!student) ok=false;
+  $('#f_event').classList.toggle('err', !eventName); if(!eventName) ok=false;
+  $('#f_date').classList.toggle('err', !dateStr); if(!dateStr) ok=false;
+  $('#f_level .level-field-err').classList.toggle('show', !level); if(!level) ok=false;
+  if(!ok) return;
+
+  const payload = {
+    student, eventName, dateStr, level,
+    time: $('#in_time').value || '',
+    location: $('#in_location').value.trim(),
+    link: normalizeUrl($('#in_link').value.trim()),
+    notes: $('#in_notes').value.trim(),
+  };
+
+  isSavingEvent = true;
+  $('#saveEventBtn').disabled = true;
+  const finish = () => {
+    isSavingEvent = false;
+    $('#saveEventBtn').disabled = false;
+  };
+
+  if(editingId){
+    eventsRef.doc(editingId).update(payload).then(()=>showToast('Changes saved')).finally(finish);
+  } else {
+    payload.ownerId = deviceId;
+    payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+    eventsRef.add(payload).then(()=>showToast('Added to the board 🎟️')).finally(finish);
+  }
+  closeEventSheet();
+};
+
+/* =========================================================
+   Admin sign-in
+   ========================================================= */
+$('#adminToggle').onclick = () => {
+  if(isAdmin){
+    isAdmin = false; safeSet('isAdmin','false');
+    showToast('Signed out');
+  } else {
+    const code = prompt('Admin passcode:');
+    if(code === null) return;
+    if(code === ADMIN_PASSCODE){
+      isAdmin = true; safeSet('isAdmin','true');
+      showToast('Signed in as admin');
+    } else {
+      showToast('That passcode isn\'t right');
     }
-    return Object.entries(byDate)
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([date, byTime]) => ({
-        date,
-        times: Object.entries(byTime)
-          .sort(([a], [b]) => a.localeCompare(b))
-          .map(([time, items]) => [
-            time,
-            [...items].sort((a, b) => lastNameOf(a.volunteerName).localeCompare(lastNameOf(b.volunteerName)) || (a.volunteerName || "").localeCompare(b.volunteerName || "")),
-          ]),
-      }));
-  }, [slots]);
-
-  const [calendarChoiceKey, setCalendarChoiceKey] = useState(null);
-
-  function cardKey(date, time) { return date + "|" + time; }
-
-  function buildSummary(items) {
-    const names = items.map(s => s.volunteerName).filter(Boolean);
-    const role = items.find(s => s.role)?.role;
-    let summary = ministryLabel ? `${ministryLabel} Volunteer Shift` : "Volunteer Shift";
-    if (role) summary += ` — ${role}`;
-    return summary;
   }
-  function buildDescription(items) {
-    const names = items.map(s => s.volunteerName).filter(Boolean);
-    return names.length ? `Volunteers: ${names.join(", ")}` : "Open shift";
-  }
+  render();
+};
 
-  function downloadJustThis(date, time, items) {
-    const ics = buildICSFile([{
-      uid: `${items[0]?.id || `${date}-${time}`}@calvaryscheduler`,
-      date, time, summary: buildSummary(items), description: buildDescription(items),
-    }]);
-    downloadICS(`shift-${date}.ics`, ics);
-    setCalendarChoiceKey(null);
-  }
+/* =========================================================
+   Import a season — .ics / .csv
+   ========================================================= */
+$('#importBtn').onclick = () => {
+  pendingImportRows = [];
+  $('#importStep1').style.display = 'block';
+  $('#importStep2').style.display = 'none';
+  setNameRows($('#bulkNameRows'), '');
+  $('#in_bulk_link').value = '';
+  $('#fileInput').value = '';
+  const bulkGroup = $('#bulkLevelToggle');
+  bulkGroup.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+  bulkGroup.dataset.selected = '';
+  $('#f_bulk_level .level-field-err').classList.remove('show');
+  $('#importScrim').classList.add('open');
+};
+$('#addBulkNameBtn').onclick = () => {
+  const row = createNameRow($('#bulkNameRows'), '');
+  row.querySelector('.name-input').focus();
+};
+$('#cancelImportBtn').onclick = () => $('#importScrim').classList.remove('open');
+$('#importScrim').addEventListener('click', e => { if(e.target.id==='importScrim') $('#importScrim').classList.remove('open'); });
+$('#backImportBtn').onclick = () => {
+  $('#importStep1').style.display = 'block';
+  $('#importStep2').style.display = 'none';
+};
 
-  function downloadAllFuture(date, time, items) {
-    const seriesId = items.find(it => it.seriesId)?.seriesId;
-    const seriesItemsByDate = {};
-    for (const s of slots) {
-      if (s.seriesId === seriesId && s.date >= date) {
-        const key = s.date + "|" + s.time;
-        if (!seriesItemsByDate[key]) seriesItemsByDate[key] = [];
-        seriesItemsByDate[key].push(s);
+const dropZone = $('#dropZone');
+dropZone.onclick = () => $('#fileInput').click();
+dropZone.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') $('#fileInput').click(); });
+['dragenter','dragover'].forEach(evt => dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.add('drag'); }));
+['dragleave','drop'].forEach(evt => dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.remove('drag'); }));
+dropZone.addEventListener('drop', e => {
+  const file = e.dataTransfer.files[0];
+  if(file) handleImportFile(file);
+});
+$('#fileInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if(file) handleImportFile(file);
+});
+
+function handleImportFile(file){
+  const bulkLevel = $('#bulkLevelToggle').dataset.selected;
+  if(!bulkLevel){
+    $('#f_bulk_level .level-field-err').classList.add('show');
+    showToast('Pick High School or Middle School first');
+    return;
+  }
+  const bulkStudent = getNamesValue($('#bulkNameRows'));
+  const bulkLink = normalizeUrl($('#in_bulk_link').value.trim());
+  const name = file.name.toLowerCase();
+
+  const finish = (rows, errMsg) => {
+    if(errMsg){ showToast(errMsg); return; }
+    if(!rows || !rows.length){ showToast("Couldn't find any events in that file."); return; }
+    pendingImportRows = rows;
+    showImportPreview();
+  };
+
+  if(name.endsWith('.xlsx') || name.endsWith('.xls')){
+    const reader = new FileReader();
+    reader.onload = () => {
+      try{
+        if(!window.XLSX) throw new Error('XLSX library not loaded');
+        const wb = XLSX.read(reader.result, { type:'array' });
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+        const rows2D = XLSX.utils.sheet_to_json(sheet, { header:1, raw:false, defval:'' });
+        finish(parseTableRows(rows2D, bulkStudent, bulkLevel, bulkLink));
+      }catch(err){
+        console.error(err);
+        finish(null, "Couldn't read that spreadsheet — check the format and try again.");
       }
-    }
-    const events = Object.entries(seriesItemsByDate).map(([key, its]) => {
-      const [d, t] = key.split("|");
-      return {
-        uid: `${its[0]?.id || key}@calvaryscheduler`,
-        date: d, time: t, summary: buildSummary(its), description: buildDescription(its),
-      };
-    });
-    const ics = buildICSFile(events);
-    downloadICS(`shifts-${date}-and-future.ics`, ics);
-    setCalendarChoiceKey(null);
-  }
+    };
+    reader.onerror = () => finish(null, "Couldn't read that file.");
+    reader.readAsArrayBuffer(file);
 
-  if (grouped.length === 0) {
-    return <Empty text="No shifts scheduled yet." />;
-  }
+  } else if(name.endsWith('.pdf')){
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try{
+        if(!window.pdfjsLib) throw new Error('pdf.js not loaded');
+        const pdf = await pdfjsLib.getDocument({ data: reader.result }).promise;
+        let lines = [];
+        for(let p = 1; p <= pdf.numPages; p++){
+          const page = await pdf.getPage(p);
+          const textContent = await page.getTextContent();
+          lines = lines.concat(pdfLinesFromTextContent(textContent));
+        }
+        const rows = parsePDFLines(lines, bulkStudent, bulkLevel, bulkLink);
+        finish(rows, rows.length ? null : "Couldn't find any dated rows in that PDF — a .csv or .xlsx export usually works better.");
+      }catch(err){
+        console.error(err);
+        finish(null, "Couldn't read that PDF — a .csv or .xlsx export usually works better.");
+      }
+    };
+    reader.onerror = () => finish(null, "Couldn't read that file.");
+    reader.readAsArrayBuffer(file);
 
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
-      {grouped.map(({ date, times }) => (
-        <div key={date} style={{ display: "flex", gap: 14 }}>
-          <div style={{ width: 3, background: "var(--border)", borderRadius: 2 }} />
-          <div style={{ flex: 1 }}>
-            <div className="stub-font" style={{ fontSize: 30, color: "var(--text)", fontWeight: 700, marginBottom: 12 }}>{fmtDate(date)}</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              {times.map(([time, items]) => {
-                const key = cardKey(date, time);
-                const hasSeries = items.some(it => it.seriesId);
-                const isChoosing = calendarChoiceKey === key;
-                return (
-                <div key={time} className="ticket">
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
-                    <div className="ticket-hero-time">{time ? fmtTime(time) : "All Day"}</div>
-                    <button
-                      onClick={() => hasSeries ? setCalendarChoiceKey(isChoosing ? null : key) : downloadJustThis(date, time, items)}
-                      style={{
-                        background: "var(--panel-2)", border: "1px solid var(--border)", borderRadius: 20,
-                        padding: "6px 12px", fontSize: 13, color: "var(--muted)", fontWeight: 600,
-                        cursor: "pointer", touchAction: "manipulation", WebkitTapHighlightColor: "transparent",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      📅 Add to calendar
-                    </button>
-                  </div>
-                  {isChoosing && (
-                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "10px 0" }}>
-                      <Button onClick={() => downloadJustThis(date, time, items)}>Just this shift</Button>
-                      <Button onClick={() => downloadAllFuture(date, time, items)}>All future instances</Button>
-                      <Button variant="ghost" onClick={() => setCalendarChoiceKey(null)}>Cancel</Button>
-                    </div>
-                  )}
-                  <div className="ticket-divider" />
-                  <div className="ticket-names">
-                    {items.map(s => (
-                      <div key={s.id} className="ticket-name-row">
-                        <span style={{ fontSize: 15, color: "var(--muted)", fontWeight: 500 }}>
-                          {s.volunteerName || <span style={{ fontStyle: "italic" }}>Open</span>}
-                        </span>
-                        {s.role && <span style={{ fontSize: 13, color: "var(--muted)" }}>{s.role}</span>}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function Empty({ text }) {
-  return <div style={{ textAlign: "center", color: "var(--muted)", padding: "60px 0", fontSize: 17 }}>{text}</div>;
-}
-
-// ---------- Manage (admin) ----------
-function ManageNav({ manageSection, setManageSection }) {
-  return (
-    <div style={{ display: "flex", justifyContent: "center", gap: 8, flexWrap: "wrap" }}>
-      {[
-        { id: "shifts", label: "All Shifts" },
-        { id: "add", label: "Add a Shift" },
-        { id: "volunteers", label: "Volunteers" },
-      ].map(t => (
-        <button
-          key={t.id}
-          onClick={() => setManageSection(t.id)}
-          style={{
-            padding: "9px 16px", borderRadius: 20, fontSize: 15, fontWeight: 600,
-            border: `1px solid ${manageSection === t.id ? "var(--accent)" : "var(--border)"}`,
-            background: manageSection === t.id ? "var(--accent-dim)" : "var(--panel-2)",
-            color: manageSection === t.id ? "var(--accent)" : "var(--muted)",
-            cursor: "pointer", touchAction: "manipulation", WebkitTapHighlightColor: "transparent",
-          }}
-        >
-          {t.label}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function ManageView({ volunteers, slots, showToast, volunteersCollectionName, slotsCollectionName }) {
-  const { db, collection, addDoc, updateDoc, deleteDoc, doc } = window.__fb;
-  const [manageSection, setManageSection] = useState("add"); // "shifts" | "add" | "volunteers"
-  const [vName, setVName] = useState("");
-  const [vPhone, setVPhone] = useState("");
-  const [vEmail, setVEmail] = useState("");
-
-  const [sDate, setSDate] = useState(todayISO());
-  const [sTime, setSTime] = useState("09:00");
-  const [sAllDay, setSAllDay] = useState(false);
-  const [sRole, setSRole] = useState("");
-  const [sSelectedVolIds, setSSelectedVolIds] = useState([]);
-  const [sRepeat, setSRepeat] = useState(false);
-  const [sRepeatUntil, setSRepeatUntil] = useState("");
-
-  const repeatPattern = useMemo(() => computeNthWeekday(sDate), [sDate]);
-  const repeatLabel = `Repeats on the ${ordinal(repeatPattern.nth)} ${WEEKDAY_NAMES[repeatPattern.weekday]} of every month`;
-
-  function toggleSelectedVol(id) {
-    setSSelectedVolIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
-  }
-
-  async function addVolunteer() {
-    if (!vName.trim()) return;
-    await addDoc(collection(db, volunteersCollectionName), { name: vName.trim(), phone: vPhone.trim(), email: vEmail.trim() });
-    setVName(""); setVPhone(""); setVEmail("");
-    showToast("Volunteer added");
-  }
-
-  const [csvImporting, setCsvImporting] = useState(false);
-
-  async function handleCSVFile(e) {
-    const file = e.target.files && e.target.files[0];
-    e.target.value = ""; // allow re-selecting the same file later
-    if (!file) return;
-
-    setCsvImporting(true);
-    try {
-      const text = await file.text();
-      const rows = parseCSV(text);
-      if (rows.length === 0) {
-        showToast("No rows found in that file", "bad");
+  } else {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const text = reader.result;
+      let rows = [];
+      try{
+        if(name.endsWith('.ics') || text.includes('BEGIN:VCALENDAR')){
+          rows = parseICS(text, bulkStudent, bulkLevel, bulkLink);
+        } else {
+          rows = parseCSV(text, bulkStudent, bulkLevel, bulkLink);
+        }
+      }catch(err){
+        console.error(err);
+        finish(null, "Couldn't read that file — check the format and try again.");
         return;
       }
-
-      const headerCells = rows[0].map(h => h.trim().toLowerCase());
-      let nameIdx = headerCells.findIndex(h => h.includes("name"));
-      let phoneIdx = headerCells.findIndex(h => h.includes("phone"));
-      let emailIdx = headerCells.findIndex(h => h.includes("email"));
-      let dataRows;
-      if (nameIdx !== -1) {
-        dataRows = rows.slice(1);
-      } else {
-        nameIdx = 0; phoneIdx = 1; emailIdx = 2;
-        dataRows = rows;
-      }
-
-      const existingNames = new Set(volunteers.map(v => (v.name || "").trim().toLowerCase()));
-      let added = 0, skipped = 0;
-
-      for (const r of dataRows) {
-        const name = (r[nameIdx] || "").trim();
-        if (!name) continue;
-        if (existingNames.has(name.toLowerCase())) { skipped++; continue; }
-        const phone = phoneIdx >= 0 ? (r[phoneIdx] || "").trim() : "";
-        const email = emailIdx >= 0 ? (r[emailIdx] || "").trim() : "";
-        await addDoc(collection(db, volunteersCollectionName), { name, phone, email });
-        existingNames.add(name.toLowerCase());
-        added++;
-      }
-
-      showToast(
-        skipped > 0 ? `Imported ${added} (skipped ${skipped} duplicate${skipped > 1 ? "s" : ""})` : `Imported ${added} volunteer${added === 1 ? "" : "s"}`
-      );
-    } catch (err) {
-      showToast("Couldn't read that file", "bad");
-    } finally {
-      setCsvImporting(false);
-    }
+      finish(rows);
+    };
+    reader.onerror = () => finish(null, "Couldn't read that file.");
+    reader.readAsText(file);
   }
-
-  async function removeVolunteer(id, name) {
-    if (!window.confirm(`Remove ${name || "this volunteer"}? This can't be undone.`)) return;
-    await deleteDoc(doc(db, volunteersCollectionName, id));
-    showToast("Volunteer removed");
-  }
-
-  const [editingVolId, setEditingVolId] = useState(null);
-  const [evName, setEvName] = useState("");
-  const [evPhone, setEvPhone] = useState("");
-  const [evEmail, setEvEmail] = useState("");
-
-  function startEditVolunteer(v) {
-    setEditingVolId(v.id);
-    setEvName(v.name || "");
-    setEvPhone(v.phone || "");
-    setEvEmail(v.email || "");
-  }
-
-  function cancelEditVolunteer() {
-    setEditingVolId(null);
-  }
-
-  async function saveVolunteerEdit() {
-    if (!evName.trim()) return;
-    await updateDoc(doc(db, volunteersCollectionName, editingVolId), {
-      name: evName.trim(), phone: evPhone.trim(), email: evEmail.trim(),
-    });
-    setEditingVolId(null);
-    showToast("Volunteer updated");
-  }
-
-  async function addSlot() {
-    const effectiveTime = sAllDay ? "" : sTime;
-    if (!sDate || (!sAllDay && !sTime)) return;
-    if (sRepeat && !sRepeatUntil) {
-      showToast("Pick an end date for the repeat", "bad");
-      return;
-    }
-    if (sRepeat && sRepeatUntil < sDate) {
-      showToast("End date must be after the start date", "bad");
-      return;
-    }
-
-    const dates = sRepeat
-      ? getRecurrenceDates(sDate, sRepeatUntil, repeatPattern.weekday, repeatPattern.nth)
-      : [sDate];
-    const seriesId = sRepeat ? (crypto.randomUUID ? crypto.randomUUID() : `series_${Date.now()}_${Math.random().toString(36).slice(2)}`) : null;
-
-    const jobs = [];
-    for (const date of dates) {
-      if (sSelectedVolIds.length === 0) {
-        jobs.push(addDoc(collection(db, slotsCollectionName), {
-          date, time: effectiveTime, role: sRole.trim(),
-          volunteerId: null, volunteerName: null,
-          reminderSentAt: null, seriesId,
-        }));
-      } else {
-        for (const id of sSelectedVolIds) {
-          const vol = volunteers.find(v => v.id === id);
-          jobs.push(addDoc(collection(db, slotsCollectionName), {
-            date, time: effectiveTime, role: sRole.trim(),
-            volunteerId: vol.id, volunteerName: vol.name,
-            reminderSentAt: null, seriesId,
-          }));
-        }
-      }
-    }
-    await Promise.all(jobs);
-
-    if (sRepeat) {
-      showToast(`Created ${dates.length} occurrence${dates.length > 1 ? "s" : ""}${sSelectedVolIds.length ? ` for ${sSelectedVolIds.length} volunteer${sSelectedVolIds.length > 1 ? "s" : ""}` : ""}`);
-    } else if (sSelectedVolIds.length === 0) {
-      showToast("Open shift added");
-    } else {
-      showToast(`Added ${sSelectedVolIds.length} volunteer${sSelectedVolIds.length > 1 ? "s" : ""}`);
-    }
-    setSRole("");
-    setSSelectedVolIds([]);
-    setSRepeat(false);
-    setSRepeatUntil("");
-  }
-
-  async function removeSlot(id) {
-    await deleteDoc(doc(db, slotsCollectionName, id));
-    showToast("Shift removed");
-  }
-
-  const manageDateGroups = useMemo(() => {
-    const byDate = {};
-    for (const s of slots) {
-      if (!byDate[s.date]) byDate[s.date] = {};
-      if (!byDate[s.date][s.time]) byDate[s.date][s.time] = [];
-      byDate[s.date][s.time].push(s);
-    }
-    return Object.entries(byDate)
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([date, byTime]) => ({
-        date,
-        shifts: Object.entries(byTime)
-          .sort(([a], [b]) => a.localeCompare(b))
-          .map(([time, items]) => ({
-            key: date + "|" + time,
-            date, time,
-            items: [...items].sort((a, b) => lastNameOf(a.volunteerName).localeCompare(lastNameOf(b.volunteerName)) || (a.volunteerName || "").localeCompare(b.volunteerName || "")),
-          })),
-      }));
-  }, [slots]);
-
-  const [roleDrafts, setRoleDrafts] = useState({});
-
-  async function saveRoleForGroup(items, key) {
-    const draft = roleDrafts[key];
-    if (draft === undefined) return;
-    const newRole = draft.trim();
-    if (items.every(it => (it.role || "") === newRole)) {
-      setRoleDrafts(prev => { const next = { ...prev }; delete next[key]; return next; });
-      return;
-    }
-    await Promise.all(items.map(it => updateDoc(doc(db, slotsCollectionName, it.id), { role: newRole })));
-    setRoleDrafts(prev => { const next = { ...prev }; delete next[key]; return next; });
-    showToast("Note updated");
-  }
-
-  async function addVolunteerToShift(group, volunteerId) {
-    if (!volunteerId) return;
-    const vol = volunteers.find(v => v.id === volunteerId);
-    if (!vol) return;
-    const role = roleDrafts[group.key] !== undefined ? roleDrafts[group.key].trim() : (group.items[0]?.role || "");
-    await addDoc(collection(db, slotsCollectionName), {
-      date: group.date, time: group.time, role,
-      volunteerId: vol.id, volunteerName: vol.name,
-      reminderSentAt: null,
-    });
-    showToast(`Added ${vol.name}`);
-  }
-
-  const [duplicatingKey, setDuplicatingKey] = useState(null);
-  const [duplicateDate, setDuplicateDate] = useState("");
-
-  function closeAllPanels() {
-    setDuplicatingKey(null);
-    setEditingKey(null);
-    setDeletingKey(null);
-  }
-
-  function startDuplicate(group) {
-    closeAllPanels();
-    setDuplicatingKey(group.key);
-    setDuplicateDate(addDaysISO(group.date, 7));
-  }
-
-  function cancelDuplicate() {
-    setDuplicatingKey(null);
-  }
-
-  async function confirmDuplicate(group) {
-    if (!duplicateDate) return;
-    const role = roleDrafts[group.key] !== undefined ? roleDrafts[group.key].trim() : (group.items[0]?.role || "");
-    const jobs = group.items.map(it => addDoc(collection(db, slotsCollectionName), {
-      date: duplicateDate, time: group.time, role,
-      volunteerId: it.volunteerId || null, volunteerName: it.volunteerName || null,
-      reminderSentAt: null,
-    }));
-    await Promise.all(jobs);
-    showToast(`Duplicated to ${fmtDate(duplicateDate)}`);
-    setDuplicatingKey(null);
-  }
-
-  // ---- Edit shift (date/time/role), series-aware ----
-  const [editingKey, setEditingKey] = useState(null);
-  const [editDraft, setEditDraft] = useState({ date: "", time: "09:00", allDay: false, role: "" });
-
-  function startEdit(group) {
-    closeAllPanels();
-    setEditingKey(group.key);
-    setEditDraft({
-      date: group.date,
-      time: group.time || "09:00",
-      allDay: !group.time,
-      role: group.items[0]?.role || "",
-    });
-  }
-
-  function cancelEdit() {
-    setEditingKey(null);
-  }
-
-  async function saveEditJustThis(group) {
-    const effectiveTime = editDraft.allDay ? "" : editDraft.time;
-    const hasSeries = group.items.some(it => it.seriesId);
-    await Promise.all(group.items.map(it => updateDoc(doc(db, slotsCollectionName, it.id), {
-      date: editDraft.date, time: effectiveTime, role: editDraft.role.trim(),
-      ...(hasSeries ? { seriesId: null } : {}),
-    })));
-    setEditingKey(null);
-    showToast("Shift updated");
-  }
-
-  async function saveEditThisAndFuture(group) {
-    const effectiveTime = editDraft.allDay ? "" : editDraft.time;
-    const seriesId = group.items.find(it => it.seriesId)?.seriesId;
-    const dateChanged = editDraft.date !== group.date;
-
-    // Update "this" occurrence
-    await Promise.all(group.items.map(it => updateDoc(doc(db, slotsCollectionName, it.id), {
-      date: editDraft.date, time: effectiveTime, role: editDraft.role.trim(),
-    })));
-
-    if (seriesId) {
-      const oldFutureItems = slots.filter(s => s.seriesId === seriesId && s.date > group.date);
-
-      if (!dateChanged) {
-        // Same pattern — just propagate time/role, each occurrence keeps its own date
-        await Promise.all(oldFutureItems.map(it => updateDoc(doc(db, slotsCollectionName, it.id), {
-          time: effectiveTime, role: editDraft.role.trim(),
-        })));
-      } else if (oldFutureItems.length > 0) {
-        // Date/pattern changed (e.g. 1st Monday -> 2nd Monday) — regenerate future
-        // occurrences under the new pattern instead of leaving them on the old dates.
-        const latestOldDate = oldFutureItems.reduce((max, it) => it.date > max ? it.date : max, group.date);
-        const newPattern = computeNthWeekday(editDraft.date);
-        const newDates = getRecurrenceDates(editDraft.date, latestOldDate, newPattern.weekday, newPattern.nth)
-          .filter(d => d > editDraft.date);
-
-        await Promise.all(oldFutureItems.map(it => deleteDoc(doc(db, slotsCollectionName, it.id))));
-
-        const templatePeople = group.items.map(it => ({ volunteerId: it.volunteerId || null, volunteerName: it.volunteerName || null }));
-        const jobs = [];
-        for (const d of newDates) {
-          for (const p of templatePeople) {
-            jobs.push(addDoc(collection(db, slotsCollectionName), {
-              date: d, time: effectiveTime, role: editDraft.role.trim(),
-              volunteerId: p.volunteerId, volunteerName: p.volunteerName,
-              reminderSentAt: null, seriesId,
-            }));
-          }
-        }
-        await Promise.all(jobs);
-      }
-    }
-    setEditingKey(null);
-    showToast(dateChanged && seriesId ? "Updated the pattern for this and future shifts" : "Updated this and future shifts");
-  }
-
-  // ---- Delete shift, series-aware ----
-  const [deletingKey, setDeletingKey] = useState(null);
-
-  function startDelete(group) {
-    closeAllPanels();
-    setDeletingKey(group.key);
-  }
-
-  function cancelDelete() {
-    setDeletingKey(null);
-  }
-
-  async function deleteJustThis(group) {
-    await Promise.all(group.items.map(it => deleteDoc(doc(db, slotsCollectionName, it.id))));
-    setDeletingKey(null);
-    showToast("Shift deleted");
-  }
-
-  async function deleteThisAndFuture(group) {
-    const seriesId = group.items.find(it => it.seriesId)?.seriesId;
-    const toDelete = slots.filter(s => s.seriesId === seriesId && s.date >= group.date);
-    await Promise.all(toDelete.map(it => deleteDoc(doc(db, slotsCollectionName, it.id))));
-    setDeletingKey(null);
-    showToast(`Deleted ${toDelete.length} shift${toDelete.length === 1 ? "" : "s"}`);
-  }
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      <ManageNav manageSection={manageSection} setManageSection={setManageSection} />
-
-      {manageSection === "add" && (
-      <>
-      <section>
-        <SectionTitle>Add a shift</SectionTitle>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 14, background: "var(--panel)", border: "1px solid var(--border)", borderRadius: 12, padding: 16, width: "100%", boxSizing: "border-box" }}>
-          <Field label="Date">
-            <div style={nativePickerWrapStyle}>
-              <input style={nativePickerInputStyle} type="date" value={sDate} onChange={e => setSDate(e.target.value)} />
-            </div>
-          </Field>
-          <Field label="Time">
-            <div style={{ ...nativePickerWrapStyle, opacity: sAllDay ? 0.4 : 1 }}>
-              <input
-                style={nativePickerInputStyle}
-                type="time"
-                step="900"
-                value={sTime}
-                onChange={e => setSTime(e.target.value)}
-                disabled={sAllDay}
-              />
-            </div>
-          </Field>
-          <div>
-            <label style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 16, cursor: "pointer" }}>
-              <input
-                type="checkbox"
-                checked={sAllDay}
-                onChange={e => setSAllDay(e.target.checked)}
-                style={{ width: 20, height: 20, accentColor: "var(--accent)", flexShrink: 0 }}
-              />
-              All day
-            </label>
-          </div>
-          <div>
-            <label style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 16, cursor: "pointer" }}>
-              <input
-                type="checkbox"
-                checked={sRepeat}
-                onChange={e => setSRepeat(e.target.checked)}
-                style={{ width: 20, height: 20, accentColor: "var(--accent)", flexShrink: 0 }}
-              />
-              Repeat monthly
-            </label>
-            {sRepeat && (
-              <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 10, paddingLeft: 30 }}>
-                <div style={{ fontSize: 14, color: "var(--accent)" }}>{repeatLabel}</div>
-                <Field label="Until">
-                  <div style={nativePickerWrapStyle}>
-                    <input
-                      style={nativePickerInputStyle}
-                      type="date"
-                      value={sRepeatUntil}
-                      min={sDate}
-                      onChange={e => setSRepeatUntil(e.target.value)}
-                    />
-                  </div>
-                </Field>
-              </div>
-            )}
-          </div>
-          <div>
-            <Field label="Role / notes (optional — applies to everyone added below)">
-              <input style={inputStyle} value={sRole} onChange={e => setSRole(e.target.value)} placeholder="e.g. Check-in table" />
-            </Field>
-          </div>
-          <div>
-            <Field label="Assign volunteers (tap all that apply)">
-              <div style={{ display: "flex", flexDirection: "column", gap: 4, background: "var(--panel-2)", border: "1px solid var(--border)", borderRadius: 8, padding: 8 }}>
-                {volunteers.length === 0 && <div style={{ fontSize: 15, color: "var(--muted)", padding: 6 }}>No volunteers yet — add some below first.</div>}
-                {volunteers.map(v => {
-                  const isChecked = sSelectedVolIds.includes(v.id);
-                  return (
-                    <div
-                      key={v.id}
-                      onClick={() => toggleSelectedVol(v.id)}
-                      style={{
-                        display: "flex", alignItems: "center", gap: 10, fontSize: 16,
-                        padding: "10px 6px", borderRadius: 6, cursor: "pointer", color: "var(--text)",
-                        touchAction: "manipulation", WebkitTapHighlightColor: "transparent", userSelect: "none",
-                      }}
-                    >
-                      <div style={{
-                        width: 22, height: 22, borderRadius: 5, flexShrink: 0,
-                        border: `2px solid ${isChecked ? "var(--accent)" : "var(--border)"}`,
-                        background: isChecked ? "var(--accent)" : "transparent",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                      }}>
-                        {isChecked && <span style={{ color: "#1c1d21", fontSize: 14, fontWeight: 700, lineHeight: 1 }}>✓</span>}
-                      </div>
-                      {v.name}
-                    </div>
-                  );
-                })}
-              </div>
-            </Field>
-            <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 6 }}>Leave everyone unchecked to add an open (unassigned) shift instead.</div>
-          </div>
-          <div style={{ gridColumn: "1 / -1" }}>
-            <Button variant="accent" onClick={addSlot}>
-              {sRepeat
-                ? "Create recurring shift"
-                : sSelectedVolIds.length > 0
-                ? `Add ${sSelectedVolIds.length} volunteer${sSelectedVolIds.length > 1 ? "s" : ""} to this shift`
-                : "Add open shift"}
-            </Button>
-          </div>
-        </div>
-      </section>
-      <ManageNav manageSection={manageSection} setManageSection={setManageSection} />
-      </>
-      )}
-
-      {manageSection === "shifts" && (
-      <>
-      <section>
-        <SectionTitle>All shifts</SectionTitle>
-        {manageDateGroups.length === 0 && <Empty text="No shifts yet." />}
-        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          {manageDateGroups.map(({ date, shifts }) => (
-            <div key={date}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-                <div className="stub-font" style={{ fontSize: 20, color: "var(--text)", fontWeight: 700, whiteSpace: "nowrap" }}>
-                  {fmtDate(date)}
-                </div>
-                <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                {shifts.map(g => {
-                  const roleValue = roleDrafts[g.key] !== undefined ? roleDrafts[g.key] : (g.items[0]?.role || "");
-                  const availableToAdd = volunteers.filter(v => !g.items.some(it => it.volunteerId === v.id));
-                  const isDuplicating = duplicatingKey === g.key;
-                  const isEditing = editingKey === g.key;
-                  const isDeleting = deletingKey === g.key;
-                  const hasSeries = g.items.some(it => it.seriesId);
-                  return (
-                    <div key={g.key} style={{ background: "var(--panel)", border: "1px solid var(--border)", borderRadius: 12, overflow: "hidden" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", background: "var(--panel-2)", flexWrap: "wrap" }}>
-                        <div className="stub-font" style={{ fontSize: 17, color: "var(--accent)", fontWeight: 700 }}>
-                          {g.time ? fmtTime(g.time) : "All day"}
-                        </div>
-                        <div style={{ fontSize: 14, color: "var(--muted)" }}>
-                          {g.items.length} {g.items.length === 1 ? "person" : "people"}
-                          {hasSeries && <span title="Part of a recurring series"> · ↻ recurring</span>}
-                        </div>
-                        <div style={{ marginLeft: "auto", display: "flex", gap: 6 }}>
-                          <Button onClick={() => startEdit(g)}>Edit</Button>
-                          <Button onClick={() => startDuplicate(g)}>Duplicate</Button>
-                          <Button variant="danger" onClick={() => startDelete(g)}>Delete</Button>
-                        </div>
-                      </div>
-
-                      <div style={{ padding: "12px 14px", display: "flex", flexDirection: "column", gap: 12 }}>
-                        {isDeleting && (
-                          <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: 12, background: "var(--panel-2)", border: "1px solid var(--bad)", borderRadius: 8 }}>
-                            <div style={{ fontSize: 15 }}>
-                              {hasSeries
-                                ? "This shift is part of a recurring series. Delete just this occurrence, or this and every future one too?"
-                                : "Delete this shift? This can't be undone."}
-                            </div>
-                            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                              <Button variant="danger" onClick={() => deleteJustThis(g)}>
-                                {hasSeries ? "Delete just this one" : "Delete"}
-                              </Button>
-                              {hasSeries && (
-                                <Button variant="danger" onClick={() => deleteThisAndFuture(g)}>Delete this + future</Button>
-                              )}
-                              <Button variant="ghost" onClick={cancelDelete}>Cancel</Button>
-                            </div>
-                          </div>
-                        )}
-                        {isEditing && (
-                          <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: 12, background: "var(--panel-2)", border: "1px solid var(--accent)", borderRadius: 8 }}>
-                            <Field label="Date">
-                              <div style={nativePickerWrapStyle}>
-                                <input
-                                  style={nativePickerInputStyle}
-                                  type="date"
-                                  value={editDraft.date}
-                                  onChange={e => setEditDraft(prev => ({ ...prev, date: e.target.value }))}
-                                />
-                              </div>
-                            </Field>
-                            <Field label="Time">
-                              <div style={{ ...nativePickerWrapStyle, opacity: editDraft.allDay ? 0.4 : 1 }}>
-                                <input
-                                  style={nativePickerInputStyle}
-                                  type="time"
-                                  step="900"
-                                  value={editDraft.time}
-                                  disabled={editDraft.allDay}
-                                  onChange={e => setEditDraft(prev => ({ ...prev, time: e.target.value }))}
-                                />
-                              </div>
-                            </Field>
-                            <label style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 16, cursor: "pointer" }}>
-                              <input
-                                type="checkbox"
-                                checked={editDraft.allDay}
-                                onChange={e => setEditDraft(prev => ({ ...prev, allDay: e.target.checked }))}
-                                style={{ width: 20, height: 20, accentColor: "var(--accent)", flexShrink: 0 }}
-                              />
-                              All day
-                            </label>
-                            <Field label="Role / notes">
-                              <input
-                                style={inputStyle}
-                                value={editDraft.role}
-                                onChange={e => setEditDraft(prev => ({ ...prev, role: e.target.value }))}
-                              />
-                            </Field>
-                            {hasSeries && (
-                              <div style={{ fontSize: 13, color: "var(--muted)" }}>
-                                This is part of a recurring series. "This + future" applies time/role changes to every future occurrence. If you change the date, future occurrences are regenerated to follow the new pattern (e.g. switching this from the 1st Monday to the 2nd Monday will move all future ones to the 2nd Monday too).
-                              </div>
-                            )}
-                            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                              <Button variant="accent" onClick={() => saveEditJustThis(g)}>
-                                {hasSeries ? "Save just this one" : "Save"}
-                              </Button>
-                              {hasSeries && (
-                                <Button variant="accent" onClick={() => saveEditThisAndFuture(g)}>Save this + future</Button>
-                              )}
-                              <Button variant="ghost" onClick={cancelEdit}>Cancel</Button>
-                            </div>
-                          </div>
-                        )}
-                        {isDuplicating && (
-                          <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: 12, background: "var(--panel-2)", border: "1px solid var(--accent)", borderRadius: 8 }}>
-                            <Field label="Duplicate this shift to">
-                              <div style={nativePickerWrapStyle}>
-                                <input
-                                  style={nativePickerInputStyle}
-                                  type="date"
-                                  value={duplicateDate}
-                                  onChange={e => setDuplicateDate(e.target.value)}
-                                />
-                              </div>
-                            </Field>
-                            <div style={{ display: "flex", gap: 8 }}>
-                              <Button variant="accent" onClick={() => confirmDuplicate(g)}>Duplicate</Button>
-                              <Button variant="ghost" onClick={cancelDuplicate}>Cancel</Button>
-                            </div>
-                          </div>
-                        )}
-                        <Field label="Role / notes">
-                          <input
-                            style={inputStyle}
-                            value={roleValue}
-                            placeholder="e.g. Check-in table"
-                            onChange={e => setRoleDrafts(prev => ({ ...prev, [g.key]: e.target.value }))}
-                            onBlur={() => saveRoleForGroup(g.items, g.key)}
-                          />
-                        </Field>
-
-                        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                          {g.items.map(it => (
-                            <div key={it.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: "var(--panel-2)", border: "1px solid var(--border)", borderRadius: 8 }}>
-                              <div style={{ fontSize: 16, flex: 1 }}>
-                                {it.volunteerName || <span style={{ color: "var(--muted)", fontStyle: "italic" }}>Open</span>}
-                              </div>
-                              <Button variant="danger" onClick={() => removeSlot(it.id)}>Remove</Button>
-                            </div>
-                          ))}
-                        </div>
-
-                        <Field label="Add someone to this shift">
-                          <select
-                            style={inputStyle}
-                            value=""
-                            onChange={e => addVolunteerToShift(g, e.target.value)}
-                          >
-                            <option value="">— Choose a volunteer —</option>
-                            {availableToAdd.map(v => <option key={v.id} value={v.id}>{v.name}</option>)}
-                          </select>
-                        </Field>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      <ManageNav manageSection={manageSection} setManageSection={setManageSection} />
-      </>
-      )}
-
-      {manageSection === "volunteers" && (
-      <>
-      <section>
-        <SectionTitle>Volunteers</SectionTitle>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 }}>
-          <label style={{
-            padding: "8px 14px", borderRadius: 8, fontSize: 17, fontWeight: 600,
-            border: "1px solid var(--border)", background: "var(--panel-2)", color: "var(--text)",
-            display: "inline-flex", alignItems: "center", justifyContent: "center",
-            width: "fit-content", cursor: csvImporting ? "not-allowed" : "pointer",
-            opacity: csvImporting ? 0.6 : 1,
-          }}>
-            {csvImporting ? "Importing…" : "Import from CSV"}
-            <input
-              type="file"
-              accept=".csv,text/csv"
-              onChange={handleCSVFile}
-              disabled={csvImporting}
-              style={{ display: "none" }}
-            />
-          </label>
-          <div style={{ fontSize: 13, color: "var(--muted)" }}>
-            CSV should have a header row with Name, Phone, Email columns (any order) — or just three plain columns in that order. Rows matching an existing name are skipped.
-          </div>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, background: "var(--panel)", border: "1px solid var(--border)", borderRadius: 12, padding: 16, marginBottom: 12 }}>
-          <Field label="Name"><input style={inputStyle} value={vName} onChange={e => setVName(e.target.value)} /></Field>
-          <Field label="Phone"><input style={inputStyle} value={vPhone} onChange={e => setVPhone(e.target.value)} placeholder="313-555-0100" /></Field>
-          <Field label="Email"><input style={inputStyle} value={vEmail} onChange={e => setVEmail(e.target.value)} /></Field>
-          <div style={{ gridColumn: "1 / -1" }}>
-            <Button variant="accent" onClick={addVolunteer}>Add volunteer</Button>
-          </div>
-        </div>
-        <SectionTitle>Volunteer list ({volunteers.length})</SectionTitle>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          {volunteers.map(v => (
-            <div key={v.id} style={{ padding: "12px 14px", background: "var(--panel)", border: "1px solid var(--border)", borderRadius: 10 }}>
-              {editingVolId === v.id ? (
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <Field label="Name"><input style={inputStyle} value={evName} onChange={e => setEvName(e.target.value)} /></Field>
-                  <Field label="Phone"><input style={inputStyle} value={evPhone} onChange={e => setEvPhone(e.target.value)} placeholder="313-555-0100" /></Field>
-                  <Field label="Email"><input style={inputStyle} value={evEmail} onChange={e => setEvEmail(e.target.value)} /></Field>
-                  <div style={{ display: "flex", gap: 8 }}>
-                    <Button variant="accent" onClick={saveVolunteerEdit}>Save</Button>
-                    <Button variant="ghost" onClick={cancelEditVolunteer}>Cancel</Button>
-                  </div>
-                </div>
-              ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  <div style={{ fontWeight: 600, fontSize: 17 }}>{v.name}</div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "2px 10px", fontSize: 15, color: "var(--muted)" }}>
-                    {v.phone && <span className="mono">{v.phone}</span>}
-                    {v.email && <span style={{ overflowWrap: "anywhere" }}>{v.email}</span>}
-                  </div>
-                  <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
-                    <Button onClick={() => startEditVolunteer(v)}>Edit</Button>
-                    <Button variant="danger" onClick={() => removeVolunteer(v.id, v.name)}>Remove</Button>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-      <ManageNav manageSection={manageSection} setManageSection={setManageSection} />
-      </>
-      )}
-    </div>
-  );
 }
 
-function SectionTitle({ children }) {
-  return <div style={{ fontSize: 16, fontWeight: 700, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 10 }}>{children}</div>;
+function parseICS(text, bulkStudent, bulkLevel, bulkLink){
+  const lines = text.split(/\r\n|\n|\r/);
+  const events = [];
+  let cur = null;
+  lines.forEach(rawLine => {
+    const line = rawLine;
+    if(line.startsWith('BEGIN:VEVENT')){ cur = {}; }
+    else if(line.startsWith('END:VEVENT')){ if(cur) events.push(cur); cur=null; }
+    else if(cur){
+      const idx = line.indexOf(':');
+      if(idx === -1) return;
+      let key = line.slice(0, idx);
+      const val = line.slice(idx+1);
+      key = key.split(';')[0];
+      if(key === 'SUMMARY') cur.summary = val;
+      else if(key === 'LOCATION') cur.location = val.replace(/\\,/g, ',');
+      else if(key === 'DESCRIPTION') cur.description = val.replace(/\\n/g, ' ').replace(/\\,/g, ',');
+      else if(key === 'URL') cur.url = val;
+      else if(key === 'DTSTART'){ const p = parseICSDate(val); cur.dateStr = p.dateStr; cur.time = p.time; }
+    }
+  });
+  return events.map(e => ({
+    student: bulkStudent,
+    eventName: e.summary || 'Untitled event',
+    dateStr: e.dateStr || '',
+    time: e.time || '',
+    location: e.location || '',
+    link: normalizeUrl(e.url || '') || bulkLink || '',
+    notes: e.description || '',
+    level: bulkLevel,
+    include: !!e.dateStr,
+  })).filter(e => e.dateStr);
 }
 
-// ---------- Reminders (admin) ----------
-function RemindersView({ volunteers, slots, showToast, slotsCollectionName, ministryKey }) {
-  const { db, doc, updateDoc } = window.__fb;
-  const [sending, setSending] = useState(false);
-  const [emailStatus, setEmailStatus] = useState({}); // slotId -> "sent" | "error"
-  const [selectedKeys, setSelectedKeys] = useState(() => new Set());
+function parseICSDate(val){
+  // formats: 20260815T180000Z or 20260815T180000 or 20260815
+  const m = val.match(/^(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2}))?/);
+  if(!m) return { dateStr:'', time:'' };
+  const dateStr = `${m[1]}-${m[2]}-${m[3]}`;
+  const time = m[5] ? `${m[5]}:${m[6]}` : '';
+  return { dateStr, time };
+}
 
-  const upcoming = useMemo(() => {
-    const today = todayISO();
-    return slots
-      .filter(s => s.volunteerId && s.date >= today)
-      .map(s => {
-        const vol = volunteers.find(v => v.id === s.volunteerId);
-        return { ...s, phone: vol?.phone, email: vol?.email };
-      })
-      .sort((a,b) => (a.date + a.time).localeCompare(b.date + b.time));
-  }, [slots, volunteers]);
+/* =========================================================
+   Shared table parsing (used by CSV and XLSX imports)
+   ========================================================= */
+function findTableCol(header, includes, excludes){
+  excludes = excludes || [];
+  for(let i=0;i<header.length;i++){
+    const h = header[i];
+    if(includes.some(n => h.includes(n)) && !excludes.some(x => h.includes(x))) return i;
+  }
+  return -1;
+}
+function findTimeCol(header){
+  let idx = header.findIndex(h => h.includes('start') && h.includes('time'));
+  if(idx === -1) idx = header.findIndex(h => h.includes('time') && !/bus|depart|arrival|end|return/.test(h));
+  if(idx === -1) idx = header.findIndex(h => h.includes('time'));
+  return idx;
+}
+function parseTableRows(rows2D, bulkStudent, bulkLevel, bulkLink){
+  if(!rows2D || !rows2D.length) return [];
+  const header = rows2D[0].map(h => String(h==null ? '' : h).toLowerCase().trim());
 
-  const shiftGroups = useMemo(() => {
-    const map = {};
-    for (const s of upcoming) {
-      const key = s.date + "|" + s.time;
-      if (!map[key]) map[key] = { key, date: s.date, time: s.time, items: [] };
-      map[key].items.push(s);
-    }
-    for (const g of Object.values(map)) {
-      g.items.sort((a, b) => lastNameOf(a.volunteerName).localeCompare(lastNameOf(b.volunteerName)) || (a.volunteerName || "").localeCompare(b.volunteerName || ""));
-    }
-    return Object.values(map).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
-  }, [upcoming]);
+  const iStudent = findTableCol(header, ['student','name','who']);
+  const iEvent = findTableCol(header, ['event','title','summary','meet','match','game','opponent']);
+  const iDate = findTableCol(header, ['date']);
+  const iTime = findTimeCol(header);
+  const iLoc = findTableCol(header, ['location','place','where','venue']);
+  const iCity = findTableCol(header, ['city','town']);
+  const iNotes = findTableCol(header, ['note','description']);
+  const iLink = findTableCol(header, ['link','url','ticket']);
 
-  const dateGroups = useMemo(() => {
-    const map = {};
-    for (const g of shiftGroups) {
-      if (!map[g.date]) map[g.date] = [];
-      map[g.date].push(g);
-    }
-    return Object.entries(map)
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([date, shifts]) => ({ date, shifts }));
-  }, [shiftGroups]);
+  const rows = [];
+  for(let r = 1; r < rows2D.length; r++){
+    const raw = rows2D[r] || [];
+    const cols = raw.map(c => (c==null ? '' : String(c).trim()));
+    if(!cols.some(Boolean)) continue; // skip blank rows
 
-  // Drop selections for shifts that are no longer in view
-  useEffect(() => {
-    const validKeys = new Set(shiftGroups.map(g => g.key));
-    setSelectedKeys(prev => {
-      const next = new Set([...prev].filter(k => validKeys.has(k)));
-      return next.size === prev.size ? prev : next;
+    const eventName = iEvent>=0 ? cols[iEvent] : '';
+    const dateStr = iDate>=0 ? normalizeCSVDate(cols[iDate]) : '';
+    if(!eventName || !dateStr) continue;
+
+    const locParts = [];
+    if(iLoc>=0 && cols[iLoc]) locParts.push(cols[iLoc]);
+    if(iCity>=0 && cols[iCity]) locParts.push(cols[iCity]);
+
+    rows.push({
+      student: (iStudent>=0 && cols[iStudent]) ? cols[iStudent] : bulkStudent,
+      eventName,
+      dateStr,
+      time: iTime>=0 ? normalizeCSVTime(cols[iTime]) : '',
+      location: locParts.join(', '),
+      link: (iLink>=0 && cols[iLink]) ? normalizeUrl(cols[iLink]) : (bulkLink || ''),
+      notes: iNotes>=0 ? cols[iNotes] : '',
+      level: bulkLevel,
+      include: true,
     });
-  }, [shiftGroups]);
+  }
+  return rows;
+}
 
-  function toggleShift(key) {
-    setSelectedKeys(prev => {
-      const next = new Set(prev);
-      next.has(key) ? next.delete(key) : next.add(key);
-      return next;
+function parseCSV(text, bulkStudent, bulkLevel, bulkLink){
+  const lines = text.split(/\r\n|\n|\r/).filter(l => l.trim().length);
+  if(!lines.length) return [];
+  const splitLine = l => {
+    // basic CSV split respecting quoted fields
+    const out = []; let cur=''; let inQ=false;
+    for(let i=0;i<l.length;i++){
+      const c = l[i];
+      if(c === '"'){ inQ = !inQ; }
+      else if(c === ',' && !inQ){ out.push(cur); cur=''; }
+      else cur += c;
+    }
+    out.push(cur);
+    return out.map(s=>s.trim().replace(/^"|"$/g,''));
+  };
+  const rows2D = lines.map(splitLine);
+  return parseTableRows(rows2D, bulkStudent, bulkLevel, bulkLink);
+}
+
+/* =========================================================
+   PDF schedule parsing — reconstruct lines from text
+   positions, then pull out date/time/location by pattern
+   since PDFs don't preserve real table columns
+   ========================================================= */
+function pdfLinesFromTextContent(textContent){
+  const items = (textContent.items || []).filter(it => it.str && it.str.trim());
+  items.sort((a,b) => b.transform[5] - a.transform[5] || a.transform[4] - b.transform[4]);
+  const groups = [];
+  let current = null;
+  let currentY = null;
+  const tolerance = 3;
+  items.forEach(it => {
+    const y = it.transform[5];
+    if(current === null || Math.abs(y - currentY) > tolerance){
+      current = [];
+      groups.push(current);
+      currentY = y;
+    }
+    current.push(it);
+  });
+  return groups
+    .map(g => g.sort((a,b) => a.transform[4]-b.transform[4]).map(it => it.str).join(' ').replace(/\s+/g,' ').trim())
+    .filter(Boolean);
+}
+
+function parsePDFLine(line){
+  const dayRe = /\b(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)\b/i;
+  const dateRe = /\b(\d{1,2})\/(\d{1,2})\/(\d{2,4})\b/;
+  const timeRe = /\b(\d{1,2}:\d{2}\s*[APap][Mm]|TBA)\b/g;
+
+  const dateMatch = dateRe.exec(line);
+  if(!dateMatch) return null;
+
+  const dayMatch = dayRe.exec(line);
+
+  const times = [];
+  let tm;
+  timeRe.lastIndex = 0;
+  while((tm = timeRe.exec(line))) times.push({ text: tm[0], index: tm.index });
+
+  let nameEndIdx = dateMatch.index;
+  if(dayMatch && dayMatch.index < nameEndIdx) nameEndIdx = dayMatch.index;
+  const eventName = line.slice(0, nameEndIdx).trim().replace(/[-–—,]+$/,'').trim();
+  if(!eventName) return null;
+
+  let time = '';
+  if(times.length && !/tba/i.test(times[0].text)){
+    const t = times[0].text.match(/(\d{1,2}):(\d{2})\s*([APap][Mm])/);
+    if(t){
+      let hh = parseInt(t[1],10);
+      const mm = t[2];
+      const ap = t[3].toLowerCase();
+      if(ap==='pm' && hh!==12) hh += 12;
+      if(ap==='am' && hh===12) hh = 0;
+      time = `${pad(hh)}:${mm}`;
+    }
+  }
+
+  const locStartIdx = times.length
+    ? times[times.length-1].index + times[times.length-1].text.length
+    : dateMatch.index + dateMatch[0].length;
+  const location = line.slice(locStartIdx).trim().replace(/^[-–—,\s]+/, '');
+
+  let [, mo, da, yr] = dateMatch;
+  if(yr.length===2) yr = '20'+yr;
+  const dateStr = `${yr}-${pad(+mo)}-${pad(+da)}`;
+
+  return { eventName, dateStr, time, location };
+}
+
+function parsePDFLines(lines, bulkStudent, bulkLevel, bulkLink){
+  const rows = [];
+  lines.forEach(line => {
+    const parsed = parsePDFLine(line);
+    if(!parsed) return;
+    rows.push({
+      student: bulkStudent,
+      eventName: parsed.eventName,
+      dateStr: parsed.dateStr,
+      time: parsed.time,
+      location: parsed.location,
+      link: bulkLink || '',
+      notes: '',
+      level: bulkLevel,
+      include: true,
     });
+  });
+  return rows;
+}
+
+function normalizeCSVDate(raw){
+  if(!raw) return '';
+  raw = raw.trim();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  const m = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+  if(m){
+    let [_, mo, da, yr] = m;
+    if(yr.length===2) yr = '20'+yr;
+    return `${yr}-${pad(+mo)}-${pad(+da)}`;
   }
-
-  function selectAll() {
-    setSelectedKeys(new Set(shiftGroups.map(g => g.key)));
+  const d = new Date(raw);
+  if(!isNaN(d)) return toDateStr(d.getFullYear(), d.getMonth()+1, d.getDate());
+  return '';
+}
+function normalizeCSVTime(raw){
+  if(!raw) return '';
+  raw = raw.trim();
+  if(/^\d{1,2}:\d{2}$/.test(raw)) return raw.length===4?'0'+raw:raw;
+  const m = raw.match(/^(\d{1,2}):(\d{2})\s*(am|pm)$/i);
+  if(m){
+    let h = +m[1]; const min = m[2]; const ap = m[3].toLowerCase();
+    if(ap==='pm' && h!==12) h+=12;
+    if(ap==='am' && h===12) h=0;
+    return `${pad(h)}:${min}`;
   }
-  function clearSelection() {
-    setSelectedKeys(new Set());
-  }
+  return '';
+}
 
-  const selectedPeople = useMemo(
-    () => shiftGroups.filter(g => selectedKeys.has(g.key)).flatMap(g => g.items),
-    [shiftGroups, selectedKeys]
-  );
-  const withPhones = selectedPeople.filter(s => s.phone);
-  const withEmails = selectedPeople.filter(s => s.email);
-  const pendingEmailCount = selectedPeople.filter(s => s.email && !s.reminderSentAt).length;
+function showImportPreview(){
+  $('#importStep1').style.display = 'none';
+  $('#importStep2').style.display = 'block';
+  $('#importCount').textContent = `Found ${pendingImportRows.length} event${pendingImportRows.length===1?'':'s'}. Uncheck any you don't want to add.`;
+  renderPreviewList();
+}
 
-  async function copyAllNumbers() {
-    const nums = withPhones.map(s => s.phone).join(", ");
-    const ok = await copyToClipboard(nums);
-    showToast(ok ? `Copied ${withPhones.length} number(s)` : "Couldn't copy — select manually", ok ? "good" : "bad");
-  }
-
-  async function copyAllEmails() {
-    const emails = withEmails.map(s => s.email).join(", ");
-    const ok = await copyToClipboard(emails);
-    showToast(ok ? `Copied ${withEmails.length} email(s)` : "Couldn't copy — select manually", ok ? "good" : "bad");
-  }
-
-  async function copyMessages() {
-    const selectedGroups = shiftGroups.filter(g => selectedKeys.has(g.key));
-    if (selectedGroups.length === 0) {
-      showToast("Nothing selected", "bad");
-      return;
-    }
-    const lines = selectedGroups.map(g => `• ${fmtDate(g.date)}${g.time ? ` at ${fmtTime(g.time)}` : " (All day)"}`);
-    const msg = selectedGroups.length === 1
-      ? `Hi! Just a reminder you're scheduled to volunteer on ${fmtDate(selectedGroups[0].date)}${selectedGroups[0].time ? ` at ${fmtTime(selectedGroups[0].time)}` : " (all day)"}.\n\nThanks for serving with us!`
-      : `Hi! Just a reminder you're scheduled to volunteer:\n${lines.join("\n")}\n\nThanks for serving with us!`;
-    const ok = await copyToClipboard(msg);
-    showToast(ok ? "Message copied" : "Couldn't copy", ok ? "good" : "bad");
-  }
-
-  async function sendEmails() {
-    const toSend = selectedPeople.filter(s => s.email && !s.reminderSentAt);
-    if (toSend.length === 0) {
-      showToast("No emails to send", "bad");
-      return;
-    }
-    setSending(true);
-    try {
-      const res = await fetch("/send-reminders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ministryKey,
-          reminders: toSend.map(s => ({
-            slotId: s.id, email: s.email, volunteerName: s.volunteerName,
-            date: s.date, time: s.time, role: s.role,
-          })),
-        }),
-      });
-      const data = await res.json();
-      const nextStatus = {};
-      for (const r of data.results || []) {
-        nextStatus[r.slotId] = r.ok ? "sent" : "error";
-        if (r.ok) {
-          await updateDoc(doc(db, slotsCollectionName, r.slotId), { reminderSentAt: new Date().toISOString() });
-        }
-      }
-      setEmailStatus(prev => ({ ...prev, ...nextStatus }));
-      const sentCount = Object.values(nextStatus).filter(v => v === "sent").length;
-      showToast(`Sent ${sentCount}/${toSend.length} email(s)`, sentCount === toSend.length ? "good" : "bad");
-    } catch (e) {
-      showToast("Send failed — check the function is deployed", "bad");
-    } finally {
-      setSending(false);
-    }
-  }
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-      {shiftGroups.length === 0 && <Empty text="No upcoming assigned shifts." />}
-
-      {shiftGroups.length > 0 && (
-        <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
-          <div style={{ display: "flex", gap: 10 }}>
-            <button onClick={selectAll} style={{ background: "none", border: "none", color: "var(--accent)", fontSize: 15, fontWeight: 600, padding: 0 }}>Select all</button>
-            <button onClick={clearSelection} style={{ background: "none", border: "none", color: "var(--muted)", fontSize: 15, fontWeight: 600, padding: 0 }}>Clear</button>
-          </div>
-          <div style={{ fontSize: 14, color: "var(--muted)" }}>
-            {selectedKeys.size === 0 ? "Nothing selected" : `${selectedKeys.size} shift${selectedKeys.size > 1 ? "s" : ""} selected · ${selectedPeople.length} ${selectedPeople.length === 1 ? "person" : "people"}`}
-          </div>
-        </div>
-      )}
-
-      {shiftGroups.length > 0 && (
-        <div style={{
-          position: "sticky", top: 0, zIndex: 5, display: "flex", gap: 8, flexWrap: "wrap",
-          background: "var(--bg)", padding: "8px 0",
-        }}>
-          <Button onClick={copyAllNumbers} disabled={withPhones.length === 0}>
-            Copy {withPhones.length || ""} number{withPhones.length === 1 ? "" : "s"}
-          </Button>
-          <Button onClick={copyAllEmails} disabled={withEmails.length === 0}>
-            Copy {withEmails.length || ""} email{withEmails.length === 1 ? "" : "s"}
-          </Button>
-          <Button onClick={copyMessages} disabled={selectedKeys.size === 0}>
-            Copy message
-          </Button>
-        </div>
-      )}
-
-      <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-        {dateGroups.map(({ date, shifts }) => (
-          <div key={date}>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-              <div className="stub-font" style={{ fontSize: 20, color: "var(--text)", fontWeight: 700, whiteSpace: "nowrap" }}>
-                {fmtDate(date)}
-              </div>
-              <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              {shifts.map(g => {
-                const isSelected = selectedKeys.has(g.key);
-                return (
-                  <div
-                    key={g.key}
-                    style={{
-                      background: "var(--panel)", border: `1px solid ${isSelected ? "var(--accent)" : "var(--border)"}`,
-                      borderRadius: 12, overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      onClick={() => toggleShift(g.key)}
-                      style={{
-                        display: "flex", alignItems: "center", gap: 12, padding: "12px 14px",
-                        background: isSelected ? "var(--accent-dim)" : "var(--panel-2)",
-                        cursor: "pointer", touchAction: "manipulation", WebkitTapHighlightColor: "transparent", userSelect: "none",
-                      }}
-                    >
-                      <div style={{
-                        width: 22, height: 22, borderRadius: 5, flexShrink: 0,
-                        border: `2px solid ${isSelected ? "var(--accent)" : "var(--border)"}`,
-                        background: isSelected ? "var(--accent)" : "transparent",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                      }}>
-                        {isSelected && <span style={{ color: "#1c1d21", fontSize: 14, fontWeight: 700, lineHeight: 1 }}>✓</span>}
-                      </div>
-                      <div className="stub-font" style={{ fontSize: 17, color: "var(--accent)", fontWeight: 700 }}>
-                        {g.time ? fmtTime(g.time) : "All day"}
-                      </div>
-                      <div style={{ marginLeft: "auto", fontSize: 14, color: "var(--muted)" }}>
-                        {g.items.length} {g.items.length === 1 ? "person" : "people"}
-                      </div>
-                    </div>
-
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      {g.items.map(s => {
-                        const status = s.reminderSentAt ? "sent" : emailStatus[s.id];
-                        return (
-                          <div key={s.id} style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", padding: "10px 14px", borderTop: "1px solid var(--border)" }}>
-                            <div style={{ minWidth: 140 }}>
-                              <div style={{ fontWeight: 600, fontSize: 17 }}>{s.volunteerName}</div>
-                              {s.role && <div style={{ fontSize: 14, color: "var(--muted)" }}>{s.role}</div>}
-                            </div>
-                            <div style={{ fontSize: 14, color: "var(--muted)", flex: 1, minWidth: 100 }}>
-                              {s.phone || <span style={{ color: "var(--bad)" }}>no phone</span>}
-                              {s.email ? ` · ${s.email}` : <span style={{ color: "var(--bad)" }}> · no email</span>}
-                            </div>
-                            {status === "sent" && <span style={{ fontSize: 14, color: "var(--good)" }}>✓ emailed</span>}
-                            {status === "error" && <span style={{ fontSize: 14, color: "var(--bad)" }}>✗ failed</span>}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        ))}
+function renderPreviewList(){
+  const container = $('#previewList');
+  container.innerHTML = '';
+  pendingImportRows.forEach((row, i) => {
+    const el = document.createElement('div');
+    el.className = 'preview-row';
+    const d = row.dateStr ? parseDateStr(row.dateStr) : null;
+    const dateLabel = d ? `${MON[d.getMonth()]} ${d.getDate()}` : '—';
+    el.innerHTML = `
+      <input type="checkbox" ${row.include?'checked':''} data-i="${i}" data-role="inc">
+      <div class="pr-main">
+        <div class="pr-title">${escapeHtml(row.eventName)}</div>
+        <div class="pr-meta">${dateLabel}${row.time?' · '+formatTime12(row.time):''}${row.location?' · '+escapeHtml(row.location):''} · ${levelLabel(row.level)}</div>
       </div>
-    </div>
-  );
+    `;
+    container.appendChild(el);
+  });
 }
+$('#previewList').addEventListener('change', e => {
+  if(e.target.dataset.role === 'inc'){
+    pendingImportRows[+e.target.dataset.i].include = e.target.checked;
+  }
+});
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+$('#confirmImportBtn').onclick = async () => {
+  const toAdd = pendingImportRows.filter(r => r.include);
+  if(!toAdd.length){ showToast('Nothing selected to add'); return; }
+  $('#confirmImportBtn').disabled = true;
+  $('#confirmImportBtn').textContent = 'Adding…';
+  try{
+    const batch = db.batch();
+    toAdd.forEach(row => {
+      const ref = eventsRef.doc();
+      batch.set(ref, {
+        student: row.student || '',
+        eventName: row.eventName,
+        dateStr: row.dateStr,
+        time: row.time || '',
+        location: row.location || '',
+        link: row.link || '',
+        notes: row.notes || '',
+        level: row.level,
+        ownerId: deviceId,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+    });
+    await batch.commit();
+    showToast(`Added ${toAdd.length} events 🎟️`);
+    $('#importScrim').classList.remove('open');
+  }catch(err){
+    console.error(err);
+    showToast("Something went wrong adding those — try again.");
+  }
+  $('#confirmImportBtn').disabled = false;
+  $('#confirmImportBtn').textContent = 'Add these to the board';
+};
+
+/* =========================================================
+   Pull to refresh (standalone/home-screen apps don't get
+   Safari's native gesture, so we provide our own)
+   ========================================================= */
+(function(){
+  const isStandalone = window.navigator.standalone === true ||
+    (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  if(!isStandalone) return; // regular browser tab already has its own native gesture
+
+  const indicator = $('#pullIndicator');
+  const threshold = 70;
+  const maxPull = 100;
+  let startY = 0;
+  let pulling = false;
+  let triggered = false;
+
+  function anySheetOpen(){
+    return !!document.querySelector('.scrim.open');
+  }
+
+  document.addEventListener('touchstart', e => {
+    if(window.scrollY <= 0 && !anySheetOpen()){
+      startY = e.touches[0].clientY;
+      pulling = true;
+      triggered = false;
+    } else {
+      pulling = false;
+    }
+  }, { passive:true });
+
+  document.addEventListener('touchmove', e => {
+    if(!pulling || triggered) return;
+    const dy = e.touches[0].clientY - startY;
+    if(dy > 0 && window.scrollY <= 0){
+      const pull = Math.min(dy, maxPull);
+      indicator.style.transform = `translateX(-50%) translateY(${pull - 50}px)`;
+      indicator.style.opacity = Math.min(pull / threshold, 1);
+      indicator.classList.toggle('ready', pull >= threshold);
+    }
+  }, { passive:true });
+
+  document.addEventListener('touchend', () => {
+    if(!pulling) return;
+    pulling = false;
+    if(indicator.classList.contains('ready') && !triggered){
+      triggered = true;
+      indicator.classList.add('spinning');
+      indicator.style.transform = 'translateX(-50%) translateY(20px)';
+      indicator.style.opacity = '1';
+      setTimeout(() => location.reload(), 350);
+    } else {
+      indicator.style.transform = 'translateX(-50%) translateY(-50px)';
+      indicator.style.opacity = '0';
+      indicator.classList.remove('ready');
+    }
+  }, { passive:true });
+})();
+
+/* initial paint */
+setNameRows($('#studentNameRows'), '');
+setNameRows($('#bulkNameRows'), '');
+render();
 </script>
 </body>
 </html>
